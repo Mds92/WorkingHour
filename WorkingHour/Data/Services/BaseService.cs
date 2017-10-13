@@ -12,11 +12,25 @@ namespace WorkingHour.Data.Services
             get
             {
                 if (!string.IsNullOrWhiteSpace(_dataBasePath)) return _dataBasePath;
-                _dataBasePath = ZlpPathHelper.Combine(Application.ExecutablePath, "/Data/WorkingHourDb.xml");
+                _dataBasePath = ZlpPathHelper.Combine(ZlpPathHelper.GetDirectory(Application.ExecutablePath), "/Data/WorkingHourDb.xml");
                 return _dataBasePath;
             }
         }
 
-        protected XDocument GetDataBaseXDocumentInstance => XDocument.Load(DataBasePath);
+        private XDocument _xDocument;
+        protected XDocument GetDataBaseXDocumentInstance
+        {
+            get
+            {
+                if (_xDocument != null) return _xDocument;
+                _xDocument = XDocument.Load(DataBasePath);
+                return _xDocument;
+            }
+        }
+
+        protected void SaveChanges()
+        {
+            GetDataBaseXDocumentInstance.Save(DataBasePath);
+        }
     }
 }
