@@ -15,6 +15,8 @@ namespace WorkingHour
             LoadProjectComboBox();
         }
 
+        // باید از ایکس داکیومنت یه اینستنس داشته باشیم
+
         #region Utility
 
         private void CheckCursorPosition()
