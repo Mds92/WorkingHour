@@ -60,9 +60,10 @@
             this.tabControl.Controls.Add(this.tabPageProjects);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(553, 411);
+            this.tabControl.Size = new System.Drawing.Size(702, 385);
             this.tabControl.TabIndex = 0;
             // 
             // tabPageProjects
@@ -75,30 +76,33 @@
             this.tabPageProjects.Controls.Add(this.listViewProjects);
             this.tabPageProjects.Controls.Add(this.buttonSubmitProject);
             this.tabPageProjects.Controls.Add(this.textBoxTitle);
-            this.tabPageProjects.Location = new System.Drawing.Point(4, 22);
+            this.tabPageProjects.Location = new System.Drawing.Point(4, 29);
+            this.tabPageProjects.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPageProjects.Name = "tabPageProjects";
-            this.tabPageProjects.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProjects.Size = new System.Drawing.Size(545, 385);
+            this.tabPageProjects.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPageProjects.Size = new System.Drawing.Size(694, 352);
             this.tabPageProjects.TabIndex = 0;
             this.tabPageProjects.Text = "Projects";
             this.tabPageProjects.UseVisualStyleBackColor = true;
-            this.tabPageProjects.Enter += new System.EventHandler(this.tabPageProjects_Enter);
+            this.tabPageProjects.Enter += new System.EventHandler(this.TabPageProjects_Enter);
             // 
             // maskedTextBoxTimeDuration
             // 
-            this.maskedTextBoxTimeDuration.Location = new System.Drawing.Point(387, 8);
+            this.maskedTextBoxTimeDuration.Location = new System.Drawing.Point(580, 12);
+            this.maskedTextBoxTimeDuration.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.maskedTextBoxTimeDuration.Mask = "00:00:00";
             this.maskedTextBoxTimeDuration.Name = "maskedTextBoxTimeDuration";
-            this.maskedTextBoxTimeDuration.Size = new System.Drawing.Size(56, 20);
+            this.maskedTextBoxTimeDuration.Size = new System.Drawing.Size(82, 26);
             this.maskedTextBoxTimeDuration.TabIndex = 5;
             this.maskedTextBoxTimeDuration.ValidatingType = typeof(int);
             // 
             // maskedTextBoxId
             // 
-            this.maskedTextBoxId.Location = new System.Drawing.Point(30, 8);
+            this.maskedTextBoxId.Location = new System.Drawing.Point(45, 12);
+            this.maskedTextBoxId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.maskedTextBoxId.Mask = "00000";
             this.maskedTextBoxId.Name = "maskedTextBoxId";
-            this.maskedTextBoxId.Size = new System.Drawing.Size(41, 20);
+            this.maskedTextBoxId.Size = new System.Drawing.Size(60, 26);
             this.maskedTextBoxId.TabIndex = 1;
             this.maskedTextBoxId.ValidatingType = typeof(int);
             // 
@@ -115,14 +119,15 @@
             this.listViewProjects.GridLines = true;
             this.listViewProjects.HideSelection = false;
             this.listViewProjects.LargeImageList = this.imageList1;
-            this.listViewProjects.Location = new System.Drawing.Point(3, 60);
+            this.listViewProjects.Location = new System.Drawing.Point(4, 92);
+            this.listViewProjects.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listViewProjects.Name = "listViewProjects";
-            this.listViewProjects.Size = new System.Drawing.Size(539, 322);
+            this.listViewProjects.Size = new System.Drawing.Size(686, 255);
             this.listViewProjects.SmallImageList = this.imageList1;
             this.listViewProjects.TabIndex = 4;
             this.listViewProjects.UseCompatibleStateImageBehavior = false;
             this.listViewProjects.View = System.Windows.Forms.View.Details;
-            this.listViewProjects.SelectedIndexChanged += new System.EventHandler(this.listViewProjects_SelectedIndexChanged);
+            this.listViewProjects.SelectedIndexChanged += new System.EventHandler(this.ListViewProjects_SelectedIndexChanged);
             // 
             // columnHeaderId
             // 
@@ -153,9 +158,10 @@
             // 
             // buttonSubmitProject
             // 
-            this.buttonSubmitProject.Location = new System.Drawing.Point(487, 8);
+            this.buttonSubmitProject.Location = new System.Drawing.Point(311, 48);
+            this.buttonSubmitProject.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonSubmitProject.Name = "buttonSubmitProject";
-            this.buttonSubmitProject.Size = new System.Drawing.Size(48, 23);
+            this.buttonSubmitProject.Size = new System.Drawing.Size(72, 35);
             this.buttonSubmitProject.TabIndex = 3;
             this.buttonSubmitProject.Text = "Submit";
             this.buttonSubmitProject.UseVisualStyleBackColor = true;
@@ -163,44 +169,50 @@
             // 
             // textBoxTitle
             // 
-            this.textBoxTitle.Location = new System.Drawing.Point(130, 9);
+            this.textBoxTitle.Location = new System.Drawing.Point(195, 14);
+            this.textBoxTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.Size = new System.Drawing.Size(154, 20);
+            this.textBoxTitle.Size = new System.Drawing.Size(229, 26);
             this.textBoxTitle.TabIndex = 2;
             // 
             // labelId
             // 
             this.labelId.AutoSize = true;
-            this.labelId.Location = new System.Drawing.Point(8, 12);
+            this.labelId.Location = new System.Drawing.Point(12, 18);
+            this.labelId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelId.Name = "labelId";
-            this.labelId.Size = new System.Drawing.Size(19, 13);
+            this.labelId.Size = new System.Drawing.Size(27, 20);
             this.labelId.TabIndex = 0;
             this.labelId.Text = "Id:";
             // 
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(94, 12);
+            this.labelTitle.Location = new System.Drawing.Point(141, 18);
+            this.labelTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(30, 13);
+            this.labelTitle.Size = new System.Drawing.Size(42, 20);
             this.labelTitle.TabIndex = 6;
             this.labelTitle.Text = "Title:";
             // 
             // labelTimeDuration
             // 
             this.labelTimeDuration.AutoSize = true;
-            this.labelTimeDuration.Location = new System.Drawing.Point(307, 12);
+            this.labelTimeDuration.Location = new System.Drawing.Point(460, 18);
+            this.labelTimeDuration.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTimeDuration.Name = "labelTimeDuration";
-            this.labelTimeDuration.Size = new System.Drawing.Size(76, 13);
+            this.labelTimeDuration.Size = new System.Drawing.Size(112, 20);
             this.labelTimeDuration.TabIndex = 0;
             this.labelTimeDuration.Text = "Time Duration:";
             // 
             // FormProjects
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(553, 411);
+            this.ClientSize = new System.Drawing.Size(702, 385);
             this.Controls.Add(this.tabControl);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormProjects";
             this.Text = "FormProjects";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

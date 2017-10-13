@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Constants.cs" />
+    <Compile Include="Data\Models\ComboboxItem.cs" />
     <Compile Include="Data\Models\TimeModel.cs" />
     <Compile Include="Data\Models\ProjectModel.cs" />
     <Compile Include="Data\Services\ProjectService.cs" />

@@ -39,6 +39,8 @@
             this.labelStartFrom = new System.Windows.Forms.Label();
             this.labelIdle = new System.Windows.Forms.Label();
             this.timerIdle = new System.Windows.Forms.Timer(this.components);
+            this.comboBoxProjects = new System.Windows.Forms.ComboBox();
+            this.buttonSaveTime = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelTime
@@ -140,11 +142,35 @@
             this.timerIdle.Interval = 1000;
             this.timerIdle.Tick += new System.EventHandler(this.TimerIdleTick);
             // 
+            // comboBoxProjects
+            // 
+            this.comboBoxProjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxProjects.FormattingEnabled = true;
+            this.comboBoxProjects.Location = new System.Drawing.Point(309, 71);
+            this.comboBoxProjects.Name = "comboBoxProjects";
+            this.comboBoxProjects.Size = new System.Drawing.Size(96, 21);
+            this.comboBoxProjects.TabIndex = 7;
+            // 
+            // buttonSaveTime
+            // 
+            this.buttonSaveTime.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonSaveTime.Enabled = false;
+            this.buttonSaveTime.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonSaveTime.Location = new System.Drawing.Point(411, 70);
+            this.buttonSaveTime.Name = "buttonSaveTime";
+            this.buttonSaveTime.Size = new System.Drawing.Size(45, 23);
+            this.buttonSaveTime.TabIndex = 8;
+            this.buttonSaveTime.Text = "Save";
+            this.buttonSaveTime.UseVisualStyleBackColor = false;
+            this.buttonSaveTime.Click += new System.EventHandler(this.ButtonSaveTime_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(468, 131);
+            this.Controls.Add(this.buttonSaveTime);
+            this.Controls.Add(this.comboBoxProjects);
             this.Controls.Add(this.labelIdle);
             this.Controls.Add(this.labelStartFrom);
             this.Controls.Add(this.buttonReset);
@@ -172,6 +198,8 @@
         private System.Windows.Forms.Label labelStartFrom;
         private System.Windows.Forms.Label labelIdle;
         private System.Windows.Forms.Timer timerIdle;
+        private System.Windows.Forms.ComboBox comboBoxProjects;
+        private System.Windows.Forms.Button buttonSaveTime;
     }
 }
 

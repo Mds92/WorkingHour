@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using WorkingHour.Assets;
+using WorkingHour.Data.Models;
 using WorkingHour.Forms;
 
 namespace WorkingHour
@@ -10,6 +11,8 @@ namespace WorkingHour
         public FormMain()
         {
             InitializeComponent();
+
+            LoadProjectComboBox();
         }
 
         #region Utility
@@ -70,6 +73,24 @@ namespace WorkingHour
 
         #endregion
 
+        #region Dropdown
+
+        private void LoadProjectComboBox()
+        {
+            comboBoxProjects.Items.Clear();
+            var projects = ProjectService.SelectAll();
+            foreach (var project in projects)
+            {
+                comboBoxProjects.Items.Add(new ComboBoxItem
+                {
+                    Text = project.Title,
+                    Value = project.Id
+                });
+            }
+        }
+
+        #endregion
+
         #region Buttons
 
         private void ChangeButtonStatus()
@@ -101,12 +122,21 @@ namespace WorkingHour
             StaticAssets.Duration = new TimeSpan(0, 0, 0, 0);
         }
 
-        private FormProjects _formProjects;
         private void ButtonSettings_Click(object sender, EventArgs e)
         {
-            if (_formProjects == null)
-                _formProjects = new FormProjects();
-            _formProjects.ShowDialog(this);
+            var formProjects = new FormProjects();
+            formProjects.Closed += FormProjects_Closed;
+            formProjects.ShowDialog(this);
+        }
+
+        private void FormProjects_Closed(object sender, EventArgs e)
+        {
+            LoadProjectComboBox();
+        }
+
+        private void ButtonSaveTime_Click(object sender, EventArgs e)
+        {
+
         }
 
         #endregion

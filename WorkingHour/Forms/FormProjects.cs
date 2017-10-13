@@ -71,12 +71,12 @@ namespace WorkingHour.Forms
             }
         }
 
-        private void tabPageProjects_Enter(object sender, EventArgs e)
+        private void TabPageProjects_Enter(object sender, EventArgs e)
         {
             LoadListViewProjects();
         }
 
-        private void listViewProjects_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListViewProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listViewProjects.SelectedItems.Count <= 0) return;
             var selectedItem = listViewProjects.SelectedItems[0];
