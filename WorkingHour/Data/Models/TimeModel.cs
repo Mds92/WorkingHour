@@ -4,9 +4,10 @@ namespace WorkingHour.Data.Models
 {
     public class TimeModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
+        public int ProjectId { get; set; }
         public DateTime StartDateTime { get; set; }
-        public DateTime EndDateTime { get; set; }
+        public DateTime StopDateTime { get; set; }
         public TimeSpan Duration { get; set; }
         public DateTime RegisterDateTime { get; set; }
     }

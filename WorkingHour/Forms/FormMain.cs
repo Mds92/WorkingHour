@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using WorkingHour.Assets;
 using WorkingHour.Data.Models;
+using WorkingHour.Data.Services;
 using WorkingHour.Forms;
 
 namespace WorkingHour
@@ -14,8 +15,6 @@ namespace WorkingHour
 
             LoadProjectComboBox();
         }
-
-        // باید از ایکس داکیومنت یه اینستنس داشته باشیم
 
         #region Utility
 
@@ -44,19 +43,19 @@ namespace WorkingHour
 
         private void StartTimers()
         {
-            StaticAssets.Start = DateTime.Now;
-            labelStartFrom.Text = $@"{StaticAssets.Start:yyyy/MM/dd hh:mm:ss}";
+            StaticAssets.StartDateTime = DateTime.Now;
+            labelStartFrom.Text = $@"{StaticAssets.StartDateTime:yyyy/MM/dd hh:mm:ss}";
             timerWorking.Start();
             timerIdle.Start();
             _isTimerStarted = true;
             ChangeButtonStatus();
         }
-        private void StopTimers(bool pause)
+        private void StopTimers()
         {
+            StaticAssets.StopDateTime = DateTime.Now;
             timerWorking.Stop();
             _isTimerStarted = false;
-            if (pause)
-                timerIdle.Stop();
+            timerIdle.Stop();
             ChangeButtonStatus();
         }
 
@@ -98,7 +97,8 @@ namespace WorkingHour
         private void ChangeButtonStatus()
         {
             buttonSettings.Enabled = buttonStart.Enabled = !_isTimerStarted;
-            buttonPause.Enabled = buttonStop.Enabled = _isTimerStarted;
+            buttonStop.Enabled = _isTimerStarted;
+            comboBoxProjects.Enabled = buttonSaveTime.Enabled = !_isTimerStarted;
         }
 
         private void ButtonStart_Click(object sender, EventArgs e)
@@ -109,13 +109,7 @@ namespace WorkingHour
         private void ButtonStop_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show(this, @"Are you sure to stop timer?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
-            StopTimers(false);
-        }
-
-        private void ButtonPause_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show(this, @"Are you sure to pause timer?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
-            StopTimers(true);
+            StopTimers();
         }
 
         private void ButtonReset_Click(object sender, EventArgs e)
@@ -138,7 +132,22 @@ namespace WorkingHour
 
         private void ButtonSaveTime_Click(object sender, EventArgs e)
         {
-
+            var project = comboBoxProjects.SelectedItem as ComboBoxItem;
+            if (project == null) return;
+            try
+            {
+                TimeService.Save(new TimeModel
+                {
+                    ProjectId = int.Parse(project.Value.ToString()),
+                    Duration = StaticAssets.Duration,
+                    StopDateTime = StaticAssets.StopDateTime,
+                    StartDateTime = StaticAssets.StartDateTime
+                });
+            }
+            catch (Exception exception)
+            {
+                ShowErrorMessage(exception.Message);
+            }
         }
 
         #endregion

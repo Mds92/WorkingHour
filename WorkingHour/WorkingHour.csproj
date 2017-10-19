@@ -55,9 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Constants.cs" />
+    <Compile Include="Assets\ExtensionMethods.cs" />
     <Compile Include="Data\Models\ComboboxItem.cs" />
     <Compile Include="Data\Models\TimeModel.cs" />
     <Compile Include="Data\Models\ProjectModel.cs" />
+    <Compile Include="Data\Services\TimeService.cs" />
     <Compile Include="Data\Services\ProjectService.cs" />
     <Compile Include="Data\Services\BaseService.cs" />
     <Compile Include="Forms\FormBase.cs">

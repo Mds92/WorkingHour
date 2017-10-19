@@ -8,7 +8,8 @@ namespace WorkingHour.Assets
         /// <summary>
         /// زمان شروع
         /// </summary>
-        public static DateTime Start { get; set; }
+        public static DateTime StartDateTime { get; set; }
+        public static DateTime StopDateTime { get; set; }
 
         public static bool AddSecondToDuration { get; set; }
         public static TimeSpan Duration { get; set; }

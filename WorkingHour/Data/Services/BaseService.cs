@@ -6,8 +6,8 @@ namespace WorkingHour.Data.Services
 {
     public class BaseService
     {
-        private string _dataBasePath;
-        protected string DataBasePath
+        private static string _dataBasePath;
+        protected static string DataBasePath
         {
             get
             {
@@ -17,8 +17,8 @@ namespace WorkingHour.Data.Services
             }
         }
 
-        private XDocument _xDocument;
-        protected XDocument GetDataBaseXDocumentInstance
+        private static XDocument _xDocument;
+        protected static XDocument GetDataBaseXDocumentInstance
         {
             get
             {
@@ -28,7 +28,7 @@ namespace WorkingHour.Data.Services
             }
         }
 
-        protected void SaveChanges()
+        protected static void SaveChanges()
         {
             GetDataBaseXDocumentInstance.Save(DataBasePath);
             _xDocument = null;

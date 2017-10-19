@@ -3,9 +3,8 @@
 
 <Database>
   <Projects>
-    <Project Id="01" Title="تست 1" TotalDuration="0:0:0" RegisterDateTime="2017-03-20"></Project>
+    <Project Id="1" Title="تست 1" TotalDuration="0:0:0" RegisterDateTime="2017-03-20"></Project>
   </Projects>
   <Times>
-    <Time Id="" StartDateTime="" EndDateTime="" Duration="" RegisterDateTime=""></Time>
   </Times>
 </Database>

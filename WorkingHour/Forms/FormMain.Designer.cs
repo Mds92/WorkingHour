@@ -33,7 +33,6 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
             this.timerWorking = new System.Windows.Forms.Timer(this.components);
-            this.buttonPause = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
             this.labelStartFrom = new System.Windows.Forms.Label();
@@ -82,19 +81,6 @@
             this.timerWorking.Interval = 1000;
             this.timerWorking.Tick += new System.EventHandler(this.TimerWorkingTick);
             // 
-            // buttonPause
-            // 
-            this.buttonPause.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonPause.Enabled = false;
-            this.buttonPause.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buttonPause.Location = new System.Drawing.Point(309, 105);
-            this.buttonPause.Name = "buttonPause";
-            this.buttonPause.Size = new System.Drawing.Size(45, 23);
-            this.buttonPause.TabIndex = 3;
-            this.buttonPause.Text = "Pause";
-            this.buttonPause.UseVisualStyleBackColor = false;
-            this.buttonPause.Click += new System.EventHandler(this.ButtonPause_Click);
-            // 
             // buttonSettings
             // 
             this.buttonSettings.BackgroundImage = global::WorkingHour.Properties.Resources.cogwheel_outline_24;
@@ -131,6 +117,7 @@
             // labelIdle
             // 
             this.labelIdle.AutoSize = true;
+            this.labelIdle.ForeColor = System.Drawing.Color.DarkRed;
             this.labelIdle.Location = new System.Drawing.Point(184, 73);
             this.labelIdle.Name = "labelIdle";
             this.labelIdle.Size = new System.Drawing.Size(49, 13);
@@ -175,7 +162,6 @@
             this.Controls.Add(this.labelStartFrom);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.buttonSettings);
-            this.Controls.Add(this.buttonPause);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.labelTime);
@@ -192,7 +178,6 @@
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Timer timerWorking;
-        private System.Windows.Forms.Button buttonPause;
         private System.Windows.Forms.Button buttonSettings;
         private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.Label labelStartFrom;
