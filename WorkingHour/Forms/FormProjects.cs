@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using WorkingHour.Assets;
 using WorkingHour.Data.Models;
 using WorkingHour.Data.Services;
 
@@ -23,7 +24,8 @@ namespace WorkingHour.Forms
                     project.Id.ToString(),
                     project.Title,
                     project.RegisterPersianDateTime.ToString(),
-                    project.TotalDuration.ToString(),
+                    project.InitialDuration.ToStandardString(),
+                    project.TotalDuration.ToStandardString(),
                 })
                 {
                     Name = $@"Item_{project.Id}"
@@ -48,7 +50,7 @@ namespace WorkingHour.Forms
                 return;
             }
 
-            TimeSpan.TryParse(maskedTextBoxTimeDuration.Text.Trim(), out TimeSpan timeDuration);
+            TimeSpan.TryParse(maskedTextBoxInitialTimeDuration.Text.Trim(), out TimeSpan timeDuration);
             if (timeDuration <= TimeSpan.MinValue)
             {
                 errorProvider1.SetError(textBoxTitle, "Enter valid Time duration");
@@ -59,7 +61,7 @@ namespace WorkingHour.Forms
             {
                 Id = id,
                 Title = title,
-                TotalDuration = timeDuration
+                InitialDuration = timeDuration
             };
             try
             {
@@ -84,7 +86,7 @@ namespace WorkingHour.Forms
             if(selectedItem == null) return;
             maskedTextBoxId.Text = selectedItem.SubItems[0].Text;
             textBoxTitle.Text = selectedItem.SubItems[1].Text;
-            maskedTextBoxTimeDuration.Text = selectedItem.SubItems[3].Text;
+            maskedTextBoxInitialTimeDuration.Text = selectedItem.SubItems[3].Text;
         }
     }
 }

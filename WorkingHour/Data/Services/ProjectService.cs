@@ -12,19 +12,34 @@ namespace WorkingHour.Data.Services
         public static List<ProjectModel> SelectAll()
         {
             var xdocument = GetDataBaseXDocumentInstance;
-            var projectNodes = xdocument.Descendants("Project")
+            var projectNodes = xdocument.Descendants(Constants.ProjectNodeName)
                 .Where(q => q.HasAttributes &&
-                    q.Attribute("Id") != null &&
-                    q.Attribute("Title") != null &&
-                    q.Attribute("TotalDuration") != null &&
-                    q.Attribute("RegisterDateTime") != null).ToList();
-            return projectNodes.Select(q => new ProjectModel
+                    q.Attribute(nameof(ProjectModel.Id)) != null &&
+                    q.Attribute(nameof(ProjectModel.Title)) != null &&
+                    q.Attribute(nameof(ProjectModel.InitialDuration)) != null &&
+                    q.Attribute(nameof(ProjectModel.TotalDuration)) != null &&
+                    q.Attribute(nameof(ProjectModel.RegisterDateTime)) != null).ToList();
+
+            var projects = new List<ProjectModel>();
+            foreach (var projectNode in projectNodes)
             {
-                Id = int.Parse(q.Attribute("Id").Value),
-                Title = q.Attribute("Title").Value,
-                TotalDuration = TimeSpan.Parse(q.Attribute("TotalDuration").Value),
-                RegisterDateTime = DateTime.Parse(q.Attribute("RegisterDateTime").Value)
-            }).ToList();
+                int.TryParse(projectNode.Attribute(nameof(ProjectModel.Id))?.Value, out int id);
+                var title = projectNode.Attribute(nameof(ProjectModel.Title))?.Value;
+                TimeSpan.TryParse(projectNode.Attribute(nameof(ProjectModel.InitialDuration))?.Value, out TimeSpan initialDuration);
+                TimeSpan.TryParse(projectNode.Attribute(nameof(ProjectModel.TotalDuration))?.Value, out TimeSpan totalDuration);
+                DateTime.TryParse(projectNode.Attribute(nameof(ProjectModel.RegisterDateTime))?.Value, out DateTime registerDateTime);
+
+                projects.Add(new ProjectModel
+                {
+                    Id = id,
+                    Title = title ?? "",
+                    InitialDuration = initialDuration,
+                    TotalDuration = totalDuration,
+                    RegisterDateTime = registerDateTime
+                });
+            }
+
+            return projects;
         }
 
         public static ProjectModel SelectById(string projectId)
@@ -44,22 +59,19 @@ namespace WorkingHour.Data.Services
         {
             var xelement = GetElement(projectId);
             if (xelement == null) return;
+            TimeSpan.TryParse(xelement.Attribute(nameof(ProjectModel.InitialDuration))?.Value, out TimeSpan totalTimeSpan);
             var xdocument = GetDataBaseXDocumentInstance;
-            var allProjectsTimes = xdocument.Descendants("Time")
+            var allProjectsTimes = xdocument.Descendants(Constants.TimeNodeName)
                 .Where(q => q.HasAttributes && 
-                    q.Attribute("Duration") != null && 
-                    q.Attribute("ProjectId") != null && 
-                    q.Attribute("ProjectId").Value.Equals(projectId.ToString(), StringComparison.InvariantCultureIgnoreCase));
-            var totalTimeSpan = new TimeSpan(0, 0, 0, 0);
+                    q.Attribute(nameof(TimeModel.Duration)) != null && 
+                    q.Attribute(nameof(TimeModel.ProjectId)) != null && 
+                    q.Attribute(nameof(TimeModel.ProjectId)).Value.Equals(projectId.ToString(), StringComparison.InvariantCultureIgnoreCase));
             foreach (var timeElement in allProjectsTimes)
             {
-                var duration = timeElement.Attribute("Duration").Value;
-                if (string.IsNullOrWhiteSpace(duration)) continue;
-                TimeSpan.TryParse(duration, out TimeSpan timeSpan);
-                if (timeSpan <= TimeSpan.MinValue) continue;
-                totalTimeSpan = totalTimeSpan.Add(timeSpan);
+                TimeSpan.TryParse(timeElement.Attribute(nameof(TimeModel.Duration))?.Value, out TimeSpan duration);
+                totalTimeSpan = totalTimeSpan.Add(duration);
             }
-            xelement.SetAttributeValue("TotalDuration", totalTimeSpan.ToStandardString());
+            xelement.SetAttributeValue(nameof(ProjectModel.TotalDuration), totalTimeSpan.ToStandardString());
             SaveChanges();
         }
 
@@ -69,28 +81,33 @@ namespace WorkingHour.Data.Services
             var xElement = GetElement(projectModel.Id.ToString());
             if (xElement == null)
             {
-                xElement = new XElement("Project",
-                                new XAttribute("Id", projectModel.Id),
-                                new XAttribute("Title", projectModel.Title),
-                                new XAttribute("TotalDuration", projectModel.TotalDuration.ToStandardString()),
-                                new XAttribute("RegisterDateTime", DateTime.Now.ToStandardString()));
-                xDocument.Descendants("Projects").First().Add(xElement);
+                xElement = new XElement(Constants.ProjectNodeName,
+                                new XAttribute(nameof(ProjectModel.Id), projectModel.Id),
+                                new XAttribute(nameof(ProjectModel.Title), projectModel.Title),
+                                new XAttribute(nameof(ProjectModel.InitialDuration), projectModel.InitialDuration.ToStandardString()),
+                                new XAttribute(nameof(ProjectModel.TotalDuration), "00:00:00"),
+                                new XAttribute(nameof(ProjectModel.RegisterDateTime), DateTime.Now.ToStandardString()));
+                xDocument.Descendants(Constants.ProjectsNodeName).First().Add(xElement);
             }
             else
             {
-                xElement.SetAttributeValue("Title", projectModel.Title);
-                xElement.SetAttributeValue("TotalDuration", projectModel.TotalDuration.ToStandardString());
+                xElement.SetAttributeValue(nameof(ProjectModel.Title), projectModel.Title);
+                xElement.SetAttributeValue(nameof(ProjectModel.InitialDuration), projectModel.InitialDuration.ToStandardString());
             }
+
+            // 
             SaveChanges();
+
             CalculateTotalDuration(projectModel.Id.ToString());
         }
 
         private static XElement GetElement(string projectId)
         {
             return GetDataBaseXDocumentInstance
-                .Descendants("Project")
-                .FirstOrDefault(q => q.HasAttributes && q.Attribute("Id") != null && q.Attribute("Id").Value
-                                .Equals(projectId, StringComparison.InvariantCultureIgnoreCase));
+                .Descendants(Constants.ProjectNodeName)
+                .FirstOrDefault(q => q.HasAttributes && 
+                    q.Attribute(nameof(ProjectModel.Id)) != null && 
+                    q.Attribute(nameof(ProjectModel.Id)).Value.Equals(projectId, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

@@ -33,7 +33,10 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageProjects = new System.Windows.Forms.TabPage();
-            this.maskedTextBoxTimeDuration = new System.Windows.Forms.MaskedTextBox();
+            this.labelTimeInitialDuration = new System.Windows.Forms.Label();
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.labelId = new System.Windows.Forms.Label();
+            this.maskedTextBoxInitialTimeDuration = new System.Windows.Forms.MaskedTextBox();
             this.maskedTextBoxId = new System.Windows.Forms.MaskedTextBox();
             this.listViewProjects = new System.Windows.Forms.ListView();
             this.columnHeaderId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -43,9 +46,7 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.buttonSubmitProject = new System.Windows.Forms.Button();
             this.textBoxTitle = new System.Windows.Forms.TextBox();
-            this.labelId = new System.Windows.Forms.Label();
-            this.labelTitle = new System.Windows.Forms.Label();
-            this.labelTimeDuration = new System.Windows.Forms.Label();
+            this.columnHeaderInitialDuration = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageProjects.SuspendLayout();
@@ -63,15 +64,15 @@
             this.tabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(702, 385);
+            this.tabControl.Size = new System.Drawing.Size(772, 385);
             this.tabControl.TabIndex = 0;
             // 
             // tabPageProjects
             // 
-            this.tabPageProjects.Controls.Add(this.labelTimeDuration);
+            this.tabPageProjects.Controls.Add(this.labelTimeInitialDuration);
             this.tabPageProjects.Controls.Add(this.labelTitle);
             this.tabPageProjects.Controls.Add(this.labelId);
-            this.tabPageProjects.Controls.Add(this.maskedTextBoxTimeDuration);
+            this.tabPageProjects.Controls.Add(this.maskedTextBoxInitialTimeDuration);
             this.tabPageProjects.Controls.Add(this.maskedTextBoxId);
             this.tabPageProjects.Controls.Add(this.listViewProjects);
             this.tabPageProjects.Controls.Add(this.buttonSubmitProject);
@@ -80,21 +81,52 @@
             this.tabPageProjects.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPageProjects.Name = "tabPageProjects";
             this.tabPageProjects.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPageProjects.Size = new System.Drawing.Size(694, 352);
+            this.tabPageProjects.Size = new System.Drawing.Size(764, 352);
             this.tabPageProjects.TabIndex = 0;
             this.tabPageProjects.Text = "Projects";
             this.tabPageProjects.UseVisualStyleBackColor = true;
             this.tabPageProjects.Enter += new System.EventHandler(this.TabPageProjects_Enter);
             // 
-            // maskedTextBoxTimeDuration
+            // labelTimeInitialDuration
             // 
-            this.maskedTextBoxTimeDuration.Location = new System.Drawing.Point(580, 12);
-            this.maskedTextBoxTimeDuration.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.maskedTextBoxTimeDuration.Mask = "00:00:00";
-            this.maskedTextBoxTimeDuration.Name = "maskedTextBoxTimeDuration";
-            this.maskedTextBoxTimeDuration.Size = new System.Drawing.Size(82, 26);
-            this.maskedTextBoxTimeDuration.TabIndex = 5;
-            this.maskedTextBoxTimeDuration.ValidatingType = typeof(int);
+            this.labelTimeInitialDuration.AutoSize = true;
+            this.labelTimeInitialDuration.Location = new System.Drawing.Point(460, 18);
+            this.labelTimeInitialDuration.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTimeInitialDuration.Name = "labelTimeInitialDuration";
+            this.labelTimeInitialDuration.Size = new System.Drawing.Size(153, 20);
+            this.labelTimeInitialDuration.TabIndex = 0;
+            this.labelTimeInitialDuration.Text = "Initial Time Duration:";
+            // 
+            // labelTitle
+            // 
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Location = new System.Drawing.Point(141, 18);
+            this.labelTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(42, 20);
+            this.labelTitle.TabIndex = 6;
+            this.labelTitle.Text = "Title:";
+            // 
+            // labelId
+            // 
+            this.labelId.AutoSize = true;
+            this.labelId.Location = new System.Drawing.Point(12, 18);
+            this.labelId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelId.Name = "labelId";
+            this.labelId.Size = new System.Drawing.Size(27, 20);
+            this.labelId.TabIndex = 0;
+            this.labelId.Text = "Id:";
+            // 
+            // maskedTextBoxInitialTimeDuration
+            // 
+            this.maskedTextBoxInitialTimeDuration.Location = new System.Drawing.Point(621, 15);
+            this.maskedTextBoxInitialTimeDuration.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.maskedTextBoxInitialTimeDuration.Mask = "00:00:00";
+            this.maskedTextBoxInitialTimeDuration.Name = "maskedTextBoxInitialTimeDuration";
+            this.maskedTextBoxInitialTimeDuration.Size = new System.Drawing.Size(82, 26);
+            this.maskedTextBoxInitialTimeDuration.TabIndex = 5;
+            this.maskedTextBoxInitialTimeDuration.Text = "000000";
+            this.maskedTextBoxInitialTimeDuration.ValidatingType = typeof(int);
             // 
             // maskedTextBoxId
             // 
@@ -112,6 +144,7 @@
             this.columnHeaderId,
             this.columnHeaderTitle,
             this.columnHeaderDate,
+            this.columnHeaderInitialDuration,
             this.columnHeaderTotalDuration});
             this.listViewProjects.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.listViewProjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -122,7 +155,7 @@
             this.listViewProjects.Location = new System.Drawing.Point(4, 92);
             this.listViewProjects.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listViewProjects.Name = "listViewProjects";
-            this.listViewProjects.Size = new System.Drawing.Size(686, 255);
+            this.listViewProjects.Size = new System.Drawing.Size(756, 255);
             this.listViewProjects.SmallImageList = this.imageList1;
             this.listViewProjects.TabIndex = 4;
             this.listViewProjects.UseCompatibleStateImageBehavior = false;
@@ -147,7 +180,7 @@
             // columnHeaderTotalDuration
             // 
             this.columnHeaderTotalDuration.Text = "Total Duration";
-            this.columnHeaderTotalDuration.Width = 171;
+            this.columnHeaderTotalDuration.Width = 204;
             // 
             // imageList1
             // 
@@ -175,41 +208,16 @@
             this.textBoxTitle.Size = new System.Drawing.Size(229, 26);
             this.textBoxTitle.TabIndex = 2;
             // 
-            // labelId
+            // columnHeaderInitialDuration
             // 
-            this.labelId.AutoSize = true;
-            this.labelId.Location = new System.Drawing.Point(12, 18);
-            this.labelId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelId.Name = "labelId";
-            this.labelId.Size = new System.Drawing.Size(27, 20);
-            this.labelId.TabIndex = 0;
-            this.labelId.Text = "Id:";
-            // 
-            // labelTitle
-            // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(141, 18);
-            this.labelTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(42, 20);
-            this.labelTitle.TabIndex = 6;
-            this.labelTitle.Text = "Title:";
-            // 
-            // labelTimeDuration
-            // 
-            this.labelTimeDuration.AutoSize = true;
-            this.labelTimeDuration.Location = new System.Drawing.Point(460, 18);
-            this.labelTimeDuration.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTimeDuration.Name = "labelTimeDuration";
-            this.labelTimeDuration.Size = new System.Drawing.Size(112, 20);
-            this.labelTimeDuration.TabIndex = 0;
-            this.labelTimeDuration.Text = "Time Duration:";
+            this.columnHeaderInitialDuration.Text = "Initial Duration";
+            this.columnHeaderInitialDuration.Width = 174;
             // 
             // FormProjects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 385);
+            this.ClientSize = new System.Drawing.Size(772, 385);
             this.Controls.Add(this.tabControl);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -237,9 +245,10 @@
         private System.Windows.Forms.MaskedTextBox maskedTextBoxId;
         private System.Windows.Forms.ColumnHeader columnHeaderDate;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.MaskedTextBox maskedTextBoxTimeDuration;
-        private System.Windows.Forms.Label labelTimeDuration;
+        private System.Windows.Forms.MaskedTextBox maskedTextBoxInitialTimeDuration;
+        private System.Windows.Forms.Label labelTimeInitialDuration;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Label labelId;
+        private System.Windows.Forms.ColumnHeader columnHeaderInitialDuration;
     }
 }
