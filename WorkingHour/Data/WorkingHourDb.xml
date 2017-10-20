@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- By Mohammad Dayyan, @mdssoft -->
+<!-- Don't edit manually -->
 
 <Database>
   <Projects>
     <Project Id="1" Title="تست 1" InitialDuration="0:0:0" TotalDuration="0:0:0" RegisterDateTime="2017-03-20"></Project>
   </Projects>
   <Times>
+    <Time Id="5bd72131-5a91-4a46-acb0-806957269b07" ProjectId="1" StartDateTime="2017-10-20 05:29:20" StopDateTime="2017-10-20 05:29:33" Duration="00:00:12" RegisterDateTime="2017-10-20 05:29:36" />
   </Times>
-  <Time Id="5bd72131-5a91-4a46-acb0-806957269b07" ProjectId="1" StartDateTime="2017-10-20 05:29:20" StopDateTime="2017-10-20 05:29:33" Duration="00:00:12" RegisterDateTime="2017-10-20 05:29:36" />
 </Database>
