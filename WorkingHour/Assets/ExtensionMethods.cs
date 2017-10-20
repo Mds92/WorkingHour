@@ -11,7 +11,7 @@ namespace WorkingHour.Assets
 
         public static string ToStandardString(this DateTime dateTime)
         {
-            return dateTime.ToString("yyyy-MM-dd  hh:mm:ss");
+            return dateTime.ToString("yyyy-MM-dd hh:mm:ss");
         }
     }
 }
