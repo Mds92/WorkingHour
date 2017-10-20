@@ -14,5 +14,10 @@ namespace WorkingHour
         {
             MessageBox.Show(errorMessage, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        protected void ShowSuccessMessage(string message)
+        {
+            MessageBox.Show(message, @"Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

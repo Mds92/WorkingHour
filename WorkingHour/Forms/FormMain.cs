@@ -143,6 +143,7 @@ namespace WorkingHour
                     StopDateTime = StaticAssets.StopDateTime,
                     StartDateTime = StaticAssets.StartDateTime
                 });
+                ShowSuccessMessage("Time saved successfully");
             }
             catch (Exception exception)
             {
