@@ -42,11 +42,11 @@
             this.columnHeaderId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderInitialDuration = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderTotalDuration = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.buttonSubmitProject = new System.Windows.Forms.Button();
             this.textBoxTitle = new System.Windows.Forms.TextBox();
-            this.columnHeaderInitialDuration = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageProjects.SuspendLayout();
@@ -121,11 +121,11 @@
             // 
             this.maskedTextBoxInitialTimeDuration.Location = new System.Drawing.Point(621, 15);
             this.maskedTextBoxInitialTimeDuration.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.maskedTextBoxInitialTimeDuration.Mask = "00:00:00";
+            this.maskedTextBoxInitialTimeDuration.Mask = "0000:00:00";
             this.maskedTextBoxInitialTimeDuration.Name = "maskedTextBoxInitialTimeDuration";
-            this.maskedTextBoxInitialTimeDuration.Size = new System.Drawing.Size(82, 26);
+            this.maskedTextBoxInitialTimeDuration.Size = new System.Drawing.Size(111, 26);
             this.maskedTextBoxInitialTimeDuration.TabIndex = 5;
-            this.maskedTextBoxInitialTimeDuration.Text = "000000";
+            this.maskedTextBoxInitialTimeDuration.Text = "00000000";
             this.maskedTextBoxInitialTimeDuration.ValidatingType = typeof(int);
             // 
             // maskedTextBoxId
@@ -177,6 +177,11 @@
             this.columnHeaderDate.Text = "Register Date";
             this.columnHeaderDate.Width = 166;
             // 
+            // columnHeaderInitialDuration
+            // 
+            this.columnHeaderInitialDuration.Text = "Initial Duration";
+            this.columnHeaderInitialDuration.Width = 174;
+            // 
             // columnHeaderTotalDuration
             // 
             this.columnHeaderTotalDuration.Text = "Total Duration";
@@ -207,11 +212,6 @@
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.Size = new System.Drawing.Size(229, 26);
             this.textBoxTitle.TabIndex = 2;
-            // 
-            // columnHeaderInitialDuration
-            // 
-            this.columnHeaderInitialDuration.Text = "Initial Duration";
-            this.columnHeaderInitialDuration.Width = 174;
             // 
             // FormProjects
             // 

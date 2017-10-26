@@ -25,8 +25,8 @@ namespace WorkingHour.Data.Services
             {
                 int.TryParse(projectNode.Attribute(nameof(ProjectModel.Id))?.Value, out int id);
                 var title = projectNode.Attribute(nameof(ProjectModel.Title))?.Value;
-                TimeSpan.TryParse(projectNode.Attribute(nameof(ProjectModel.InitialDuration))?.Value, out TimeSpan initialDuration);
-                TimeSpan.TryParse(projectNode.Attribute(nameof(ProjectModel.TotalDuration))?.Value, out TimeSpan totalDuration);
+                var initialDuration = projectNode.Attribute(nameof(ProjectModel.InitialDuration))?.Value.StandardTimeSpanParse() ?? new TimeSpan(0, 0, 0, 0);
+                var totalDuration = projectNode.Attribute(nameof(ProjectModel.TotalDuration))?.Value.StandardTimeSpanParse() ?? new TimeSpan(0, 0, 0, 0);
                 DateTime.TryParse(projectNode.Attribute(nameof(ProjectModel.RegisterDateTime))?.Value, out DateTime registerDateTime);
 
                 projects.Add(new ProjectModel
@@ -50,7 +50,7 @@ namespace WorkingHour.Data.Services
             {
                 Id = int.Parse(xelement.Attribute("Id").Value),
                 Title = xelement.Attribute("Title").Value,
-                TotalDuration = TimeSpan.Parse(xelement.Attribute("TotalDuration").Value),
+                TotalDuration = xelement.Attribute("TotalDuration").Value.StandardTimeSpanParse(),
                 RegisterDateTime = DateTime.Parse(xelement.Attribute("RegisterDateTime").Value)
             };
         }
@@ -59,16 +59,16 @@ namespace WorkingHour.Data.Services
         {
             var xelement = GetElement(projectId);
             if (xelement == null) return;
-            TimeSpan.TryParse(xelement.Attribute(nameof(ProjectModel.InitialDuration))?.Value, out TimeSpan totalTimeSpan);
+            var totalTimeSpan = xelement.Attribute(nameof(ProjectModel.InitialDuration))?.Value.StandardTimeSpanParse() ?? new TimeSpan(0, 0, 0, 0);
             var xdocument = GetDataBaseXDocumentInstance;
             var allProjectsTimes = xdocument.Descendants(Constants.TimeNodeName)
-                .Where(q => q.HasAttributes && 
-                    q.Attribute(nameof(TimeModel.Duration)) != null && 
-                    q.Attribute(nameof(TimeModel.ProjectId)) != null && 
+                .Where(q => q.HasAttributes &&
+                    q.Attribute(nameof(TimeModel.Duration)) != null &&
+                    q.Attribute(nameof(TimeModel.ProjectId)) != null &&
                     q.Attribute(nameof(TimeModel.ProjectId)).Value.Equals(projectId.ToString(), StringComparison.InvariantCultureIgnoreCase));
             foreach (var timeElement in allProjectsTimes)
             {
-                TimeSpan.TryParse(timeElement.Attribute(nameof(TimeModel.Duration))?.Value, out TimeSpan duration);
+                var duration = timeElement.Attribute(nameof(TimeModel.Duration))?.Value.StandardTimeSpanParse() ?? new TimeSpan(0, 0, 0, 0);
                 totalTimeSpan = totalTimeSpan.Add(duration);
             }
             xelement.SetAttributeValue(nameof(ProjectModel.TotalDuration), totalTimeSpan.ToStandardString());
@@ -105,8 +105,8 @@ namespace WorkingHour.Data.Services
         {
             return GetDataBaseXDocumentInstance
                 .Descendants(Constants.ProjectNodeName)
-                .FirstOrDefault(q => q.HasAttributes && 
-                    q.Attribute(nameof(ProjectModel.Id)) != null && 
+                .FirstOrDefault(q => q.HasAttributes &&
+                    q.Attribute(nameof(ProjectModel.Id)) != null &&
                     q.Attribute(nameof(ProjectModel.Id)).Value.Equals(projectId, StringComparison.InvariantCultureIgnoreCase));
         }
     }

@@ -50,7 +50,7 @@ namespace WorkingHour.Forms
                 return;
             }
 
-            TimeSpan.TryParse(maskedTextBoxInitialTimeDuration.Text.Trim(), out TimeSpan timeDuration);
+            var timeDuration = maskedTextBoxInitialTimeDuration.Text.Trim().StandardTimeSpanParse();
             if (timeDuration <= TimeSpan.MinValue)
             {
                 errorProvider1.SetError(textBoxTitle, "Enter valid Time duration");
