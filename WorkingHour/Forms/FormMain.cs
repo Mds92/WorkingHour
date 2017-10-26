@@ -116,6 +116,8 @@ namespace WorkingHour
         {
             if (MessageBox.Show(this, @"Are you sure to reset timer?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             StaticAssets.Duration = new TimeSpan(0, 0, 0, 0);
+            labelTime.Text = "00:00:00";
+            labelStartFrom.Text = "";
         }
 
         private void ButtonSettings_Click(object sender, EventArgs e)
