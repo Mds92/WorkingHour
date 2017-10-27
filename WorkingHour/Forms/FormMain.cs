@@ -62,7 +62,12 @@ namespace WorkingHour
         private void TimerWorkingTick(object sender, EventArgs e)
         {
             if (StaticAssets.AddSecondToDuration)
+            {
                 StaticAssets.Duration = StaticAssets.Duration.Add(new TimeSpan(0, 0, 0, 1));
+#if DEBUG
+                StaticAssets.Duration = StaticAssets.Duration.Add(new TimeSpan(0, 0, 25, 0));
+#endif
+            }
             buttonReset.Enabled = StaticAssets.Duration > TimeSpan.MinValue;
             labelTime.Text = $@"{StaticAssets.Duration.Hours:00}:{StaticAssets.Duration.Minutes:00}:{StaticAssets.Duration.Seconds:00}";
         }
