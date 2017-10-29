@@ -6,7 +6,7 @@ namespace WorkingHour.Assets
     {
         public static string ToStandardString(this TimeSpan timeSpan)
         {
-            var totalHours = timeSpan.TotalHours >= 1 ? timeSpan.TotalHours : 0;
+            var totalHours = Math.Floor(timeSpan.TotalHours);
             return $"{totalHours:0000}:{timeSpan.Minutes:00}:{timeSpan.Seconds:00}";
         }
 
