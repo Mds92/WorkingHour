@@ -43,7 +43,7 @@ namespace WorkingHour
 
         private void StartTimers()
         {
-            if(StaticAssets.Duration <= TimeSpan.MinValue) StaticAssets.StartDateTime = DateTime.Now;
+            if(StaticAssets.Duration <= new TimeSpan(0, 0, 0, 0)) StaticAssets.StartDateTime = DateTime.Now;
             labelStartFrom.Text = $@"{StaticAssets.StartDateTime:yyyy/MM/dd hh:mm:ss}";
             timerWorking.Start();
             timerIdle.Start();
