@@ -43,7 +43,7 @@ namespace WorkingHour
 
         private void StartTimers()
         {
-            StaticAssets.StartDateTime = DateTime.Now;
+            if(StaticAssets.Duration <= TimeSpan.MinValue) StaticAssets.StartDateTime = DateTime.Now;
             labelStartFrom.Text = $@"{StaticAssets.StartDateTime:yyyy/MM/dd hh:mm:ss}";
             timerWorking.Start();
             timerIdle.Start();
@@ -139,8 +139,7 @@ namespace WorkingHour
 
         private void ButtonSaveTime_Click(object sender, EventArgs e)
         {
-            var project = comboBoxProjects.SelectedItem as ComboBoxItem;
-            if (project == null) return;
+            if (!(comboBoxProjects.SelectedItem is ComboBoxItem project)) return;
             try
             {
                 TimeService.Save(new TimeModel
