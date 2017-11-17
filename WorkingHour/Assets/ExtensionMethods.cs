@@ -18,9 +18,9 @@ namespace WorkingHour.Assets
         public static TimeSpan StandardTimeSpanParse(this string inputString)
         {
             var arr = inputString.Split(':');
-            int.TryParse(arr[0], out int hour);
-            int.TryParse(arr[1], out int minute);
-            int.TryParse(arr[2], out int second);
+            int.TryParse(arr[0], out var hour);
+            int.TryParse(arr[1], out var minute);
+            int.TryParse(arr[2], out var second);
             return TimeSpan.FromSeconds(hour * 60 * 60 + minute * 60 + second);
         }
     }
