@@ -88,5 +88,25 @@ namespace WorkingHour.Forms
             textBoxTitle.Text = selectedItem.SubItems[1].Text;
             maskedTextBoxInitialTimeDuration.Text = selectedItem.SubItems[3].Text;
         }
+
+        private void ButtonDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(this, @"Are you sure to delete project?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            int.TryParse(maskedTextBoxId.Text, out var id);
+            if (id <= 0)
+            {
+                errorProvider1.SetError(maskedTextBoxId, "Enter valid Id");
+                return;
+            }
+            try
+            {
+                ProjectService.Delete(id);
+                LoadListViewProjects();
+            }
+            catch (Exception exception)
+            {
+                ShowErrorMessage(exception.Message);
+            }
+        }
     }
 }

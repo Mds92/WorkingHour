@@ -109,5 +109,13 @@ namespace WorkingHour.Data.Services
                     q.Attribute(nameof(ProjectModel.Id)) != null &&
                     q.Attribute(nameof(ProjectModel.Id)).Value.Equals(projectId, StringComparison.InvariantCultureIgnoreCase));
         }
+
+        public static void Delete(int id)
+        {
+            var projectElement = GetElement(id.ToString());
+            if(projectElement == null)
+                throw new Exception($"Project with {id} Id is not exist in DataBase");
+            projectElement.RemoveAll();
+        }
     }
 }

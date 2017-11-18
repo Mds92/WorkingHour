@@ -47,6 +47,7 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.buttonSubmitProject = new System.Windows.Forms.Button();
             this.textBoxTitle = new System.Windows.Forms.TextBox();
+            this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageProjects.SuspendLayout();
@@ -69,6 +70,7 @@
             // 
             // tabPageProjects
             // 
+            this.tabPageProjects.Controls.Add(this.buttonDelete);
             this.tabPageProjects.Controls.Add(this.labelTimeInitialDuration);
             this.tabPageProjects.Controls.Add(this.labelTitle);
             this.tabPageProjects.Controls.Add(this.labelId);
@@ -104,7 +106,7 @@
             this.labelTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(42, 20);
-            this.labelTitle.TabIndex = 6;
+            this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "Title:";
             // 
             // labelId
@@ -124,7 +126,7 @@
             this.maskedTextBoxInitialTimeDuration.Mask = "0000:00:00";
             this.maskedTextBoxInitialTimeDuration.Name = "maskedTextBoxInitialTimeDuration";
             this.maskedTextBoxInitialTimeDuration.Size = new System.Drawing.Size(111, 26);
-            this.maskedTextBoxInitialTimeDuration.TabIndex = 5;
+            this.maskedTextBoxInitialTimeDuration.TabIndex = 3;
             this.maskedTextBoxInitialTimeDuration.Text = "00000000";
             this.maskedTextBoxInitialTimeDuration.ValidatingType = typeof(int);
             // 
@@ -157,7 +159,7 @@
             this.listViewProjects.Name = "listViewProjects";
             this.listViewProjects.Size = new System.Drawing.Size(756, 255);
             this.listViewProjects.SmallImageList = this.imageList1;
-            this.listViewProjects.TabIndex = 4;
+            this.listViewProjects.TabIndex = 6;
             this.listViewProjects.UseCompatibleStateImageBehavior = false;
             this.listViewProjects.View = System.Windows.Forms.View.Details;
             this.listViewProjects.SelectedIndexChanged += new System.EventHandler(this.ListViewProjects_SelectedIndexChanged);
@@ -196,11 +198,11 @@
             // 
             // buttonSubmitProject
             // 
-            this.buttonSubmitProject.Location = new System.Drawing.Point(311, 48);
+            this.buttonSubmitProject.Location = new System.Drawing.Point(306, 47);
             this.buttonSubmitProject.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonSubmitProject.Name = "buttonSubmitProject";
             this.buttonSubmitProject.Size = new System.Drawing.Size(72, 35);
-            this.buttonSubmitProject.TabIndex = 3;
+            this.buttonSubmitProject.TabIndex = 4;
             this.buttonSubmitProject.Text = "Submit";
             this.buttonSubmitProject.UseVisualStyleBackColor = true;
             this.buttonSubmitProject.Click += new System.EventHandler(this.ButtonSubmit_Click);
@@ -212,6 +214,17 @@
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.Size = new System.Drawing.Size(229, 26);
             this.textBoxTitle.TabIndex = 2;
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(386, 47);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(72, 35);
+            this.buttonDelete.TabIndex = 5;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
             // FormProjects
             // 
@@ -250,5 +263,6 @@
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Label labelId;
         private System.Windows.Forms.ColumnHeader columnHeaderInitialDuration;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }
