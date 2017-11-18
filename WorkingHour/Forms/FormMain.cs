@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 using WorkingHour.Assets;
 using WorkingHour.Data.Models;
@@ -12,9 +14,22 @@ namespace WorkingHour
         public FormMain()
         {
             InitializeComponent();
-
             LoadProjectComboBox();
+
+            #region Form Events
+
+            StaticAssets.OriginalWindowSize = Size;
+            Deactivate += FormDeactivate;
+            Activated += FormActivated;
+
+            #endregion
         }
+
+        #region Variables
+
+        public bool DisableDeactivateOperation { get; set; }
+
+        #endregion
 
         #region Utility
 
@@ -106,6 +121,11 @@ namespace WorkingHour
             comboBoxProjects.Enabled = buttonSaveTime.Enabled = !_isTimerStarted;
         }
 
+        private void PublicActionsInButtonClick()
+        {
+            DisableDeactivateOperation = true;
+        }
+
         private void ButtonStart_Click(object sender, EventArgs e)
         {
             StartTimers();
@@ -113,12 +133,14 @@ namespace WorkingHour
 
         private void ButtonStop_Click(object sender, EventArgs e)
         {
+            PublicActionsInButtonClick();
             if (MessageBox.Show(this, @"Are you sure to stop timer?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             StopTimers();
         }
 
         private void ButtonReset_Click(object sender, EventArgs e)
         {
+            PublicActionsInButtonClick();
             if (MessageBox.Show(this, @"Are you sure to reset timer?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             StaticAssets.Duration = new TimeSpan(0, 0, 0, 0);
             labelTime.Text = "00:00:00";
@@ -127,6 +149,7 @@ namespace WorkingHour
 
         private void ButtonSettings_Click(object sender, EventArgs e)
         {
+            DisableDeactivateOperation = true;
             var formProjects = new FormProjects();
             formProjects.Closed += FormProjects_Closed;
             formProjects.ShowDialog(this);
@@ -140,6 +163,7 @@ namespace WorkingHour
         private void ButtonSaveTime_Click(object sender, EventArgs e)
         {
             if (!(comboBoxProjects.SelectedItem is ComboBoxItem project)) return;
+            PublicActionsInButtonClick();
             try
             {
                 TimeService.Save(new TimeModel
@@ -155,6 +179,28 @@ namespace WorkingHour
             {
                 ShowErrorMessage(exception.Message);
             }
+        }
+
+        #endregion
+
+        #region Form
+
+        private void FormDeactivate(object sender, EventArgs e)
+        {
+            if (DisableDeactivateOperation) return;
+            FormBorderStyle = FormBorderStyle.None;
+            Size = new Size(270, 70);
+        }
+
+        private void FormActivated(object sender, EventArgs e)
+        {
+            if (DisableDeactivateOperation)
+            {
+                DisableDeactivateOperation = false;
+                return;
+            }
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Size = StaticAssets.OriginalWindowSize;
         }
 
         #endregion

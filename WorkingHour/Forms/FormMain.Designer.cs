@@ -46,7 +46,7 @@
             // 
             this.labelTime.AutoSize = true;
             this.labelTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F);
-            this.labelTime.Location = new System.Drawing.Point(3, 2);
+            this.labelTime.Location = new System.Drawing.Point(-2, -3);
             this.labelTime.Name = "labelTime";
             this.labelTime.Size = new System.Drawing.Size(284, 73);
             this.labelTime.TabIndex = 0;
@@ -167,6 +167,7 @@
             this.Controls.Add(this.labelTime);
             this.Name = "FormMain";
             this.Text = "Working Hour";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -16,5 +16,7 @@ namespace WorkingHour.Assets
 
         public static Point LatestCursorPosition { get; set; }
         public static TimeSpan LatestCursorPositionChangeTime { get; set; }
+
+        public static Size OriginalWindowSize { get; set; }
     }
 }
