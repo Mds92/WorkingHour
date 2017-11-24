@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace WorkingHour.Assets
@@ -18,5 +19,19 @@ namespace WorkingHour.Assets
         public static TimeSpan LatestCursorPositionChangeTime { get; set; }
 
         public static Size OriginalWindowSize { get; set; }
+
+        public static List<string> ForbiddinApps = 
+            new List<string>
+            {
+                "Telegram",
+                "دیجی کالا",
+                "تابناک",
+                "تسنیم",
+                "فارس",
+                "presstv",
+                "باشگاه خبرنگاران",
+                "دنیای اقتصاد"
+            };
+
     }
 }

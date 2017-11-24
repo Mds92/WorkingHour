@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using WorkingHour.Assets;
 using WorkingHour.Data.Models;
 using WorkingHour.Data.Services;
 using WorkingHour.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WorkingHour
 {
@@ -50,6 +56,38 @@ namespace WorkingHour
             StaticAssets.LatestCursorPosition = Cursor.Position;
         }
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        static extern int GetWindowTextLength(IntPtr hWnd);
+
+        private string GetCaptionOfActiveWindow()
+        {
+            var strTitle = string.Empty;
+            var handle = GetForegroundWindow();
+            // Obtain the length of the text   
+            var intLength = GetWindowTextLength(handle) + 1;
+            var stringBuilder = new StringBuilder(intLength);
+            if (GetWindowText(handle, stringBuilder, intLength) > 0)
+            {
+                strTitle = stringBuilder.ToString();
+            }
+            return strTitle;
+        }
+
+        private bool IsForbiddinWindowActive()
+        {
+            var activeWindowTitle = GetCaptionOfActiveWindow();
+#if DEBUG
+            Trace.WriteLine(activeWindowTitle);
+#endif
+            return StaticAssets.ForbiddinApps.Any(q => activeWindowTitle.IndexOf(q, StringComparison.InvariantCultureIgnoreCase) > -1);
+        }
+
         #endregion
 
         #region Timer
@@ -58,7 +96,7 @@ namespace WorkingHour
 
         private void StartTimers()
         {
-            if(StaticAssets.Duration <= new TimeSpan(0, 0, 0, 0)) StaticAssets.StartDateTime = DateTime.Now;
+            if (StaticAssets.Duration <= new TimeSpan(0, 0, 0, 0)) StaticAssets.StartDateTime = DateTime.Now;
             labelStartFrom.Text = $@"{StaticAssets.StartDateTime:yyyy/MM/dd hh:mm:ss}";
             timerWorking.Start();
             timerIdle.Start();
@@ -76,14 +114,12 @@ namespace WorkingHour
 
         private void TimerWorkingTick(object sender, EventArgs e)
         {
-            if (StaticAssets.AddSecondToDuration)
-            {
-                StaticAssets.Duration = StaticAssets.Duration.Add(new TimeSpan(0, 0, 0, 1));
-#if DEBUG
-                StaticAssets.Duration = StaticAssets.Duration.Add(new TimeSpan(0, 0, 25, 0));
-#endif
-            }
             buttonReset.Enabled = StaticAssets.Duration > TimeSpan.MinValue;
+            if (!StaticAssets.AddSecondToDuration || IsForbiddinWindowActive()) return;
+            StaticAssets.Duration = StaticAssets.Duration.Add(new TimeSpan(0, 0, 0, 1));
+#if DEBUG
+            StaticAssets.Duration = StaticAssets.Duration.Add(new TimeSpan(0, 0, 5, 0));
+#endif
             labelTime.Text = $@"{StaticAssets.Duration.Hours:00}:{StaticAssets.Duration.Minutes:00}:{StaticAssets.Duration.Seconds:00}";
         }
 
