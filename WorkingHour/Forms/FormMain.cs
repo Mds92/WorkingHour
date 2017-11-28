@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using WorkingHour.Assets;
 using WorkingHour.Data.Models;
 using WorkingHour.Data.Services;
 using WorkingHour.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WorkingHour
 {
@@ -27,6 +24,7 @@ namespace WorkingHour
             StaticAssets.OriginalWindowSize = Size;
             Deactivate += FormDeactivate;
             Activated += FormActivated;
+            LoadSavedDraft();
 
             #endregion
         }
@@ -88,6 +86,15 @@ namespace WorkingHour
             return StaticAssets.ForbiddinApps.Any(q => activeWindowTitle.IndexOf(q, StringComparison.InvariantCultureIgnoreCase) > -1);
         }
 
+        private void SetLabelDurationText()
+        {
+            labelDuration.Text = $@"{StaticAssets.Duration.Hours:00}:{StaticAssets.Duration.Minutes:00}:{StaticAssets.Duration.Seconds:00}";
+        }
+        private void SetLabelStartFromText()
+        {
+            labelStartFrom.Text = $@"{StaticAssets.StartDateTime:yyyy/MM/dd hh:mm:ss}";
+        }
+
         #endregion
 
         #region Timer
@@ -97,7 +104,7 @@ namespace WorkingHour
         private void StartTimers()
         {
             if (StaticAssets.Duration <= new TimeSpan(0, 0, 0, 0)) StaticAssets.StartDateTime = DateTime.Now;
-            labelStartFrom.Text = $@"{StaticAssets.StartDateTime:yyyy/MM/dd hh:mm:ss}";
+            SetLabelStartFromText();
             timerWorking.Start();
             timerIdle.Start();
             _isTimerStarted = true;
@@ -110,6 +117,7 @@ namespace WorkingHour
             _isTimerStarted = false;
             timerIdle.Stop();
             ChangeButtonStatus();
+            DraftService.Clear();
         }
 
         private void TimerWorkingTick(object sender, EventArgs e)
@@ -120,7 +128,12 @@ namespace WorkingHour
 #if DEBUG
             StaticAssets.Duration = StaticAssets.Duration.Add(new TimeSpan(0, 0, 5, 0));
 #endif
-            labelTime.Text = $@"{StaticAssets.Duration.Hours:00}:{StaticAssets.Duration.Minutes:00}:{StaticAssets.Duration.Seconds:00}";
+            SetLabelDurationText();
+            DraftService.Save(new DraftModel
+            {
+                StartDateTime = StaticAssets.StartDateTime,
+                Duration = StaticAssets.Duration
+            });
         }
 
         private void TimerIdleTick(object sender, EventArgs e)
@@ -179,8 +192,9 @@ namespace WorkingHour
             PublicActionsInButtonClick();
             if (MessageBox.Show(this, @"Are you sure to reset timer?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             StaticAssets.Duration = new TimeSpan(0, 0, 0, 0);
-            labelTime.Text = "00:00:00";
+            labelDuration.Text = "00:00:00";
             labelStartFrom.Text = "";
+            DraftService.Clear();
         }
 
         private void ButtonSettings_Click(object sender, EventArgs e)
@@ -237,6 +251,22 @@ namespace WorkingHour
             }
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Size = StaticAssets.OriginalWindowSize;
+        }
+
+        private void LoadSavedDraft()
+        {
+            var draftModel = DraftService.GetDraftModel();
+            if (draftModel == null) return;
+            if (draftModel.StartDateTime > DateTime.MinValue)
+            {
+                StaticAssets.StartDateTime = draftModel.StartDateTime;
+                SetLabelStartFromText();
+            }
+            if (draftModel.Duration > TimeSpan.MinValue)
+            {
+                StaticAssets.Duration = draftModel.Duration;
+                SetLabelDurationText();
+            }
         }
 
         #endregion

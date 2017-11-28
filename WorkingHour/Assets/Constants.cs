@@ -5,9 +5,10 @@ namespace WorkingHour.Assets
     public static class Constants
     {
         public static TimeSpan MinTimeSpanToIdentifyIdle = new TimeSpan(0, 0, 2, 0);
-        public static string ProjectsNodeName = "Projects";
-        public static string ProjectNodeName = "Project";
-        public static string TimesNodeName = "Times";
-        public static string TimeNodeName = "Time";
+        public static readonly string RootNodeName = "Database";
+        public static readonly string ProjectsNodeName = "Projects";
+        public static readonly string ProjectNodeName = "Project";
+        public static readonly string TimesNodeName = "Times";
+        public static readonly string TimeNodeName = "Time";
     }
 }

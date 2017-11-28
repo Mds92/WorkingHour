@@ -2,7 +2,7 @@
 <!-- By Mohammad Dayyan, @mdssoft -->
 <!-- Don't edit manually -->
 
-<Database>
+<Database DraftStartDateTime="" DraftDuration="">
   <Projects>
     <Project Id="1" Title="VistaBest" InitialDuration="0015:04:00" TotalDuration="0037:20:57" RegisterDateTime="2017-03-20"></Project>
   </Projects>

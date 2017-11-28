@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.labelTime = new System.Windows.Forms.Label();
+            this.labelDuration = new System.Windows.Forms.Label();
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
             this.timerWorking = new System.Windows.Forms.Timer(this.components);
@@ -42,15 +42,15 @@
             this.buttonSaveTime = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // labelTime
+            // labelDuration
             // 
-            this.labelTime.AutoSize = true;
-            this.labelTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F);
-            this.labelTime.Location = new System.Drawing.Point(-2, -3);
-            this.labelTime.Name = "labelTime";
-            this.labelTime.Size = new System.Drawing.Size(284, 73);
-            this.labelTime.TabIndex = 0;
-            this.labelTime.Text = "00:00:00";
+            this.labelDuration.AutoSize = true;
+            this.labelDuration.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F);
+            this.labelDuration.Location = new System.Drawing.Point(-2, -3);
+            this.labelDuration.Name = "labelDuration";
+            this.labelDuration.Size = new System.Drawing.Size(284, 73);
+            this.labelDuration.TabIndex = 0;
+            this.labelDuration.Text = "00:00:00";
             // 
             // buttonStart
             // 
@@ -164,7 +164,7 @@
             this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonStart);
-            this.Controls.Add(this.labelTime);
+            this.Controls.Add(this.labelDuration);
             this.Name = "FormMain";
             this.Text = "Working Hour";
             this.TopMost = true;
@@ -175,7 +175,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label labelTime;
+        private System.Windows.Forms.Label labelDuration;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Timer timerWorking;

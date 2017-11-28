@@ -17,6 +17,7 @@ namespace WorkingHour.Assets
 
         public static TimeSpan StandardTimeSpanParse(this string inputString)
         {
+            if(string.IsNullOrWhiteSpace(inputString)) return TimeSpan.MinValue;
             var arr = inputString.Split(':');
             int.TryParse(arr[0], out var hour);
             int.TryParse(arr[1], out var minute);
