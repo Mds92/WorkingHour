@@ -168,6 +168,7 @@ namespace WorkingHour
             buttonSettings.Enabled = buttonStart.Enabled = !_isTimerStarted;
             buttonStop.Enabled = _isTimerStarted;
             comboBoxProjects.Enabled = buttonSaveTime.Enabled = !_isTimerStarted;
+            buttonReset.Enabled = StaticAssets.Duration > TimeSpan.MinValue;
         }
 
         private void PublicActionsInButtonClick()
@@ -267,6 +268,7 @@ namespace WorkingHour
                 StaticAssets.Duration = draftModel.Duration;
                 SetLabelDurationText();
             }
+            ChangeButtonStatus();
         }
 
         #endregion
