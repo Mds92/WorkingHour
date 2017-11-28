@@ -1,22 +1,44 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- By Mohammad Dayyan, @mdssoft -->
-<!-- Don't edit manually -->
-
-<Database DraftStartDateTime="" DraftDuration="">
+<!-- Don't edit manualy -->
+<Database>
   <Projects>
-    <Project Id="1" Title="VistaBest" InitialDuration="0015:04:00" TotalDuration="0037:20:57" RegisterDateTime="2017-03-20"></Project>
+    <Project />
+    <Project Id="2" Title="VistaBest2" InitialDuration="0004:00:00" TotalDuration="0011:27:32" RegisterDateTime="2017-11-27 07:27:31" />
+    <Project Id="1" Title="VistaBest1" InitialDuration="0004:00:00" TotalDuration="0011:27:32" RegisterDateTime="2017-11-27 07:27:31" />
   </Projects>
   <Times>
     <Time Id="45bf9cbd-1aa3-49c1-9799-3aa8776d91ff" ProjectId="1" StartDateTime="2017-10-20 06:42:33" StopDateTime="2017-10-20 01:41:15" Duration="0002:47:02" RegisterDateTime="2017-10-20 01:41:18" />
     <Time Id="f17b8a51-8f7e-4143-8d67-c5bfba83f6f0" ProjectId="1" StartDateTime="2017-10-20 02:58:08" StopDateTime="2017-10-20 04:58:37" Duration="0001:57:44" RegisterDateTime="2017-10-20 04:58:39" />
     <Time Id="142d1bbc-d51b-44df-86da-e312980192fd" ProjectId="1" StartDateTime="2017-10-20 09:24:15" StopDateTime="2017-10-20 10:46:33" Duration="0001:32:19" RegisterDateTime="2017-10-20 10:46:34" />
     <Time Id="09a7d359-9360-418c-92bb-8f69a95845f8" ProjectId="1" StartDateTime="2017-10-21 05:33:30" StopDateTime="2017-10-21 05:48:17" Duration="0000:14:46" RegisterDateTime="2017-10-21 06:17:33" />
-    <Time Id="ab5966c7-564d-4d94-8202-028723cee695" ProjectId="1" StartDateTime="2017-10-26 08:34:40" StopDateTime="2017-10-26 09:00:40" Duration="0001:24:36" RegisterDateTime="2017-10-26 09:00:44" />
+    <Time Id="ab5966c7-564d-4d94-8202-028723cee695" ProjectId="1" StartDateTime="2017-10-26 08:34:40" StopDateTime="2017-10-26 09:00:40" Duration="0000:24:36" RegisterDateTime="2017-10-26 09:00:44" />
     <Time Id="231284e0-e861-4f23-8162-3c8d28cb3f9d" ProjectId="1" StartDateTime="2017-10-26 09:16:12" StopDateTime="2017-10-26 09:37:08" Duration="0000:20:55" RegisterDateTime="2017-10-26 09:37:10" />
     <Time Id="ef22be00-8450-47d7-9c70-8fd6c63baddf" ProjectId="1" StartDateTime="2017-10-26 09:58:48" StopDateTime="2017-10-26 10:40:47" Duration="0000:41:59" RegisterDateTime="2017-10-26 10:40:50" />
     <Time Id="ccb109dd-b7eb-4588-9cff-d6afa935296d" ProjectId="1" StartDateTime="2017-10-27 10:10:58" StopDateTime="2017-10-27 12:05:49" Duration="0004:59:09" RegisterDateTime="2017-10-27 12:05:51" />
     <Time Id="fdb848ad-b5a9-485d-a1e0-0747e556f288" ProjectId="1" StartDateTime="2017-10-27 12:45:21" StopDateTime="2017-10-27 03:55:46" Duration="0003:41:24" RegisterDateTime="2017-10-27 03:55:47" />
     <Time Id="a6b342ec-372b-447d-b303-5cb1a80c761d" ProjectId="1" StartDateTime="2017-10-27 04:05:17" StopDateTime="2017-10-27 06:01:58" Duration="0002:56:40" RegisterDateTime="2017-10-27 06:02:06" />
-    <Time Id="5f1a4488-9b5c-40d3-99d2-22f13ba0ed68" ProjectId="1" StartDateTime="2017-10-27 07:22:47" StopDateTime="2017-10-27 08:03:10" Duration="0001:40:23" RegisterDateTime="2017-10-27 08:03:16" />
+    <Time Id="5f1a4488-9b5c-40d3-99d2-22f13ba0ed68" ProjectId="1" StartDateTime="2017-10-27 07:22:47" StopDateTime="2017-10-27 08:03:10" Duration="0000:40:23" RegisterDateTime="2017-10-27 08:03:16" />
+    <Time Id="bc0fd260-9ebb-4bfe-ae92-28efd75f5b35" ProjectId="1" StartDateTime="2017-10-27 09:36:41" StopDateTime="2017-10-27 10:05:43" Duration="0000:29:01" RegisterDateTime="2017-10-27 10:05:46" />
+    <Time Id="bf2e03c9-615f-47cd-942c-1034e1dff670" ProjectId="1" StartDateTime="2017-10-29 06:52:32" StopDateTime="2017-10-29 08:34:21" Duration="0001:40:11" RegisterDateTime="2017-10-29 08:34:24" />
+    <Time Id="ddce018b-1d49-4ba2-a1e8-98bb36a50233" ProjectId="1" StartDateTime="2017-11-10 11:17:51" StopDateTime="2017-11-10 11:53:23" Duration="0000:35:44" RegisterDateTime="2017-11-10 01:52:40" />
+    <Time Id="1a72d332-49ae-480b-ab9c-6838731045bf" ProjectId="1" StartDateTime="2017-11-10 05:55:21" StopDateTime="2017-11-10 06:02:04" Duration="0000:06:43" RegisterDateTime="2017-11-10 06:13:04" />
+    <Time Id="90b71220-8142-4857-8951-545f81101df3" ProjectId="1" StartDateTime="2017-11-10 06:17:47" StopDateTime="2017-11-10 06:24:14" Duration="0000:06:27" RegisterDateTime="2017-11-10 06:28:07" />
+    <Time Id="691824ef-cfd6-4dce-86a5-b7005c79f1bd" ProjectId="1" StartDateTime="2017-11-12 06:14:09" StopDateTime="2017-11-12 06:43:57" Duration="0000:29:47" RegisterDateTime="2017-11-12 06:43:59" />
+    <Time Id="2ad20ea4-cf59-4359-9cbd-d6a2a0dbcfe9" ProjectId="1" StartDateTime="2017-11-16 07:54:23" StopDateTime="2017-11-16 10:03:25" Duration="0001:39:02" RegisterDateTime="2017-11-16 10:03:34" />
+    <Time Id="4aef3256-d68c-431e-b30a-46062d742cbd" ProjectId="1" StartDateTime="2017-11-16 01:52:49" StopDateTime="2017-11-16 03:42:07" Duration="0001:18:56" RegisterDateTime="2017-11-16 03:42:10" />
+    <Time Id="29784a60-3e4d-4d1e-88cc-4cb64d98b49c" ProjectId="1" StartDateTime="2017-11-16 09:27:30" StopDateTime="2017-11-16 11:41:59" Duration="0002:23:25" RegisterDateTime="2017-11-16 11:42:00" />
+    <Time Id="32ea0670-3301-46c4-9ce6-000076dec178" ProjectId="1" StartDateTime="2017-11-17 11:34:59" StopDateTime="2017-11-17 12:02:31" Duration="0002:58:27" RegisterDateTime="2017-11-17 12:02:33" />
+    <Time Id="7115e60d-46b7-4ace-9146-1eef4b93d180" ProjectId="1" StartDateTime="2017-11-17 02:04:46" StopDateTime="2017-11-17 10:33:35" Duration="0004:22:07" RegisterDateTime="2017-11-17 10:33:37" />
+    <Time Id="5ccbb21a-c90a-4cb1-96e3-ffcee31f7ab3" ProjectId="1" StartDateTime="2017-11-19 06:24:43" StopDateTime="2017-11-19 09:57:30" Duration="0002:00:06" RegisterDateTime="2017-11-19 10:26:41" />
+    <Time Id="676482f9-4196-4dcf-b1d5-d245e4d420c0" ProjectId="1" StartDateTime="2017-11-20 09:44:08" StopDateTime="2017-11-20 09:58:14" Duration="0000:14:06" RegisterDateTime="2017-11-20 09:58:17" />
+    <Time Id="558a3a11-5e8f-41b4-9ff2-036c2d632f67" ProjectId="1" StartDateTime="2017-11-20 09:59:30" StopDateTime="2017-11-20 10:57:55" Duration="0000:58:24" RegisterDateTime="2017-11-20 10:57:57" />
+    <Time Id="a74b45f6-95cb-494c-a578-4f1e0c91c928" ProjectId="1" StartDateTime="2017-11-23 10:25:41" StopDateTime="2017-11-23 01:21:42" Duration="0001:50:38" RegisterDateTime="2017-11-23 01:21:44" />
+    <Time Id="caa9e5b7-ceac-47db-a39c-0368041f2f71" ProjectId="1" StartDateTime="2017-11-23 04:13:18" StopDateTime="2017-11-24 12:46:47" Duration="0003:01:06" RegisterDateTime="2017-11-24 12:46:49" />
+    <Time Id="850ce03b-041d-4b97-8b21-7e983e689bb4" ProjectId="1" StartDateTime="2017-11-24 08:14:31" StopDateTime="2017-11-24 10:12:07" Duration="0001:05:03" RegisterDateTime="2017-11-24 10:12:11" />
+    <Time Id="7eea6ead-f056-449f-96d2-fb96aae7dac7" ProjectId="1" StartDateTime="2017-11-24 01:39:39" StopDateTime="2017-11-24 03:22:48" Duration="0000:33:11" RegisterDateTime="2017-11-24 03:22:50" />
+    <Time Id="cf35c653-ffb5-409d-af43-c276f15d32b7" ProjectId="2" StartDateTime="2017-11-27 09:26:50" StopDateTime="2017-11-27 11:00:48" Duration="0001:15:01" RegisterDateTime="2017-11-27 11:00:51" />
+    <Time Id="a04550a9-e81e-422d-b24c-34f592ab6bdf" ProjectId="2" StartDateTime="2017-11-27 11:54:58" StopDateTime="2017-11-27 07:37:01" Duration="0004:56:02" RegisterDateTime="2017-11-27 07:37:03" />
+    <Time Id="817a7a14-4bc9-43f0-86c4-3583c83d52f2" ProjectId="2" StartDateTime="2017-11-27 09:51:39" StopDateTime="2017-11-27 11:31:46" Duration="0001:16:29" RegisterDateTime="2017-11-27 11:31:48" />
   </Times>
 </Database>

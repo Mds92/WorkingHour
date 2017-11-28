@@ -41,7 +41,6 @@ namespace WorkingHour.Data.Services
 
             return projects;
         }
-
         public static ProjectModel SelectById(string projectId)
         {
             var xelement = GetElement(projectId);
@@ -54,7 +53,6 @@ namespace WorkingHour.Data.Services
                 RegisterDateTime = DateTime.Parse(xelement.Attribute("RegisterDateTime").Value)
             };
         }
-
         public static void CalculateTotalDuration(string projectId)
         {
             var xelement = GetElement(projectId);
@@ -74,7 +72,6 @@ namespace WorkingHour.Data.Services
             xelement.SetAttributeValue(nameof(ProjectModel.TotalDuration), totalTimeSpan.ToStandardString());
             SaveChanges();
         }
-
         public static void Save(ProjectModel projectModel)
         {
             var xDocument = GetDataBaseXDocumentInstance;
@@ -100,7 +97,6 @@ namespace WorkingHour.Data.Services
 
             CalculateTotalDuration(projectModel.Id.ToString());
         }
-
         private static XElement GetElement(string projectId)
         {
             return GetDataBaseXDocumentInstance
@@ -109,13 +105,18 @@ namespace WorkingHour.Data.Services
                     q.Attribute(nameof(ProjectModel.Id)) != null &&
                     q.Attribute(nameof(ProjectModel.Id)).Value.Equals(projectId, StringComparison.InvariantCultureIgnoreCase));
         }
-
         public static void Delete(int id)
         {
-            var projectElement = GetElement(id.ToString());
+            var idString = id.ToString();
+            var projectElement = GetElement(idString);
             if(projectElement == null)
                 throw new Exception($"Project with {id} Id is not exist in DataBase");
             projectElement.RemoveAll();
+            var times = GetDataBaseXDocumentInstance.Descendants(Constants.TimeNodeName)
+                .Where(q => q.HasAttributes && q.Attribute(nameof(TimeModel.ProjectId)) != null &&
+                            q.Attribute(nameof(TimeModel.ProjectId)).Value.Equals(idString));
+            times.Remove();
+            SaveChanges();
         }
     }
 }
