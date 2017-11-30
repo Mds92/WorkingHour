@@ -20,7 +20,7 @@ namespace WorkingHour.Data.Services
                     q.Attribute(DraftDurationAttributeName) != null);
             if (rootNode == null) return null;
             var duration = rootNode.Attribute(DraftDurationAttributeName)?.Value.StandardTimeSpanParse() ?? TimeSpan.MinValue;
-            DateTime.TryParse(rootNode.Attribute(DraftStartDateTimeAttributeName)?.Value, out DateTime startDateTime);
+            DateTime.TryParse(rootNode.Attribute(DraftStartDateTimeAttributeName)?.Value, out var startDateTime);
             return new DraftModel
             {
                 StartDateTime = startDateTime,
@@ -30,7 +30,6 @@ namespace WorkingHour.Data.Services
 
         public static void Save(DraftModel model)
         {
-            var xdocument = GetDataBaseXDocumentInstance;
             var xElement = GetRootElement();
             if (model.StartDateTime != DateTime.MinValue)
                 xElement.SetAttributeValue(DraftStartDateTimeAttributeName, model.StartDateTime.ToStandardString());
@@ -41,7 +40,6 @@ namespace WorkingHour.Data.Services
 
         public static void Clear()
         {
-            var xdocument = GetDataBaseXDocumentInstance;
             var xElement = GetRootElement();
             xElement.SetAttributeValue(DraftStartDateTimeAttributeName, "");
             xElement.SetAttributeValue(DraftDurationAttributeName, "");
