@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Text;
 using System.Windows.Forms;
+using MD.PersianDateTime;
 using WorkingHour.Assets;
 using WorkingHour.Data.Models;
 using WorkingHour.Data.Services;
+using ZetaLongPaths;
 
 namespace WorkingHour.Forms
 {
@@ -87,17 +90,15 @@ namespace WorkingHour.Forms
 
         private void ListViewProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            buttonNewProject.Enabled = true;
-            buttonSubmitProject.Enabled = false;
             maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = false;
-            buttonEditProject.Enabled = buttonDeleteProject.Enabled = false;
+            buttonNewProject.Enabled = buttonSubmitProject.Enabled = buttonEditProject.Enabled = buttonDeleteProject.Enabled = false;
             if (listViewProjects.SelectedItems.Count <= 0) return;
             var selectedItem = listViewProjects.SelectedItems[0];
-            if(selectedItem == null) return;
+            if (selectedItem == null) return;
             maskedTextBoxId.Text = selectedItem.SubItems[0].Text;
             textBoxTitle.Text = selectedItem.SubItems[1].Text;
             maskedTextBoxInitialTimeDuration.Text = selectedItem.SubItems[3].Text;
-            buttonEditProject.Enabled = buttonDeleteProject.Enabled = true;
+            buttonEditProject.Enabled = buttonDeleteProject.Enabled = buttonExportData.Enabled = true;
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e)
@@ -133,6 +134,42 @@ namespace WorkingHour.Forms
             buttonSubmitProject.Enabled = true;
             maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = true;
             buttonNewProject.Enabled = buttonEditProject.Enabled = false;
+        }
+
+        private void buttonExportData_Click(object sender, EventArgs e)
+        {
+            int.TryParse(maskedTextBoxId.Text, out var projectId);
+
+            if (projectId <= 0) return;
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK) return;
+
+            var spacer1 = $"{new string('-', 50)}{Environment.NewLine}";
+
+            var fileName = saveFileDialog1.FileName;
+            var fileInfo = new ZlpFileInfo(fileName);
+
+            var project = ProjectService.SelectById(projectId.ToString());
+            var totalDurationString = project.TotalDuration.ToStandardString();
+            var initialDurationString = project.InitialDuration.ToStandardString();
+
+            var times = TimeService.SelectAllByProjectId(projectId.ToString());
+
+            var stringBuilder = new StringBuilder($"\t{project.Title}{Environment.NewLine}");
+            stringBuilder.Append(spacer1);
+
+            stringBuilder.Append($"\t{initialDurationString}\t<=>\tمتفرقه{Environment.NewLine}");
+
+            foreach (var timeModel in times)
+            {
+                var startPersianDateTime = new PersianDateTime(timeModel.StartDateTime);
+                var durationString = timeModel.Duration.ToStandardString();
+                stringBuilder.Append($"\t{durationString}\t<=>\t{startPersianDateTime.ToLongDateString()}{Environment.NewLine}");
+            }
+
+            stringBuilder.Append(spacer1);
+            stringBuilder.Append($"\t{totalDurationString}");
+
+            fileInfo.WriteAllText(stringBuilder.ToString(), Encoding.UTF8);
         }
     }
 }

@@ -50,6 +50,8 @@
             this.textBoxTitle = new System.Windows.Forms.TextBox();
             this.buttonEditProject = new System.Windows.Forms.Button();
             this.buttonNewProject = new System.Windows.Forms.Button();
+            this.buttonExportData = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageProjects.SuspendLayout();
@@ -72,6 +74,7 @@
             // 
             // tabPageProjects
             // 
+            this.tabPageProjects.Controls.Add(this.buttonExportData);
             this.tabPageProjects.Controls.Add(this.buttonNewProject);
             this.tabPageProjects.Controls.Add(this.buttonEditProject);
             this.tabPageProjects.Controls.Add(this.buttonDeleteProject);
@@ -100,7 +103,7 @@
             this.buttonDeleteProject.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonDeleteProject.Name = "buttonDeleteProject";
             this.buttonDeleteProject.Size = new System.Drawing.Size(60, 28);
-            this.buttonDeleteProject.TabIndex = 7;
+            this.buttonDeleteProject.TabIndex = 8;
             this.buttonDeleteProject.Text = "Delete";
             this.buttonDeleteProject.UseVisualStyleBackColor = true;
             this.buttonDeleteProject.Click += new System.EventHandler(this.ButtonDelete_Click);
@@ -167,7 +170,7 @@
             this.columnHeaderInitialDuration,
             this.columnHeaderTotalDuration});
             this.listViewProjects.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listViewProjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.listViewProjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.listViewProjects.FullRowSelect = true;
             this.listViewProjects.GridLines = true;
             this.listViewProjects.HideSelection = false;
@@ -177,7 +180,7 @@
             this.listViewProjects.Name = "listViewProjects";
             this.listViewProjects.Size = new System.Drawing.Size(668, 214);
             this.listViewProjects.SmallImageList = this.imageList1;
-            this.listViewProjects.TabIndex = 8;
+            this.listViewProjects.TabIndex = 9;
             this.listViewProjects.UseCompatibleStateImageBehavior = false;
             this.listViewProjects.View = System.Windows.Forms.View.Details;
             this.listViewProjects.SelectedIndexChanged += new System.EventHandler(this.ListViewProjects_SelectedIndexChanged);
@@ -195,17 +198,17 @@
             // columnHeaderDate
             // 
             this.columnHeaderDate.Text = "Register Date";
-            this.columnHeaderDate.Width = 142;
+            this.columnHeaderDate.Width = 240;
             // 
             // columnHeaderInitialDuration
             // 
             this.columnHeaderInitialDuration.Text = "Initial Duration";
-            this.columnHeaderInitialDuration.Width = 156;
+            this.columnHeaderInitialDuration.Width = 110;
             // 
             // columnHeaderTotalDuration
             // 
             this.columnHeaderTotalDuration.Text = "Total Duration";
-            this.columnHeaderTotalDuration.Width = 151;
+            this.columnHeaderTotalDuration.Width = 110;
             // 
             // imageList1
             // 
@@ -217,7 +220,7 @@
             // buttonSubmitProject
             // 
             this.buttonSubmitProject.Enabled = false;
-            this.buttonSubmitProject.Location = new System.Drawing.Point(306, 38);
+            this.buttonSubmitProject.Location = new System.Drawing.Point(275, 38);
             this.buttonSubmitProject.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonSubmitProject.Name = "buttonSubmitProject";
             this.buttonSubmitProject.Size = new System.Drawing.Size(64, 28);
@@ -257,6 +260,23 @@
             this.buttonNewProject.Text = "New";
             this.buttonNewProject.UseVisualStyleBackColor = true;
             this.buttonNewProject.Click += new System.EventHandler(this.buttonNewProject_Click);
+            // 
+            // buttonExportData
+            // 
+            this.buttonExportData.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.buttonExportData.Location = new System.Drawing.Point(343, 38);
+            this.buttonExportData.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonExportData.Name = "buttonExportData";
+            this.buttonExportData.Size = new System.Drawing.Size(59, 28);
+            this.buttonExportData.TabIndex = 7;
+            this.buttonExportData.Text = "Export";
+            this.buttonExportData.UseVisualStyleBackColor = true;
+            this.buttonExportData.Click += new System.EventHandler(this.buttonExportData_Click);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.FileName = "exportData";
+            this.saveFileDialog1.Filter = "Text file|*.txt";
             // 
             // FormProjects
             // 
@@ -298,5 +318,7 @@
         private System.Windows.Forms.Button buttonDeleteProject;
         private System.Windows.Forms.Button buttonNewProject;
         private System.Windows.Forms.Button buttonEditProject;
+        private System.Windows.Forms.Button buttonExportData;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using WorkingHour.Assets;
@@ -35,6 +36,30 @@ namespace WorkingHour.Data.Services
             }
             SaveChanges();
             ProjectService.CalculateTotalDuration(project.Id.ToString());
+        }
+
+        public static List<TimeModel> SelectAllByProjectId(string projectId)
+        {
+            var elements = GetDataBaseXDocumentInstance
+                .Descendants(Constants.TimeNodeName)
+                .Where(q => q.HasAttributes &&
+                                     q.Attribute(nameof(TimeModel.ProjectId)) != null &&
+                                     q.Attribute(nameof(TimeModel.ProjectId)).Value.Equals(projectId, StringComparison.InvariantCultureIgnoreCase))
+                .ToList();
+            var times = new List<TimeModel>();
+            foreach (var xElement in elements)
+            {
+                times.Add(new TimeModel
+                {
+                    Id = Guid.Parse(xElement.Attribute(nameof(TimeModel.Id)).Value),
+                    ProjectId = int.Parse(xElement.Attribute(nameof(TimeModel.ProjectId)).Value),
+                    StartDateTime = DateTime.Parse(xElement.Attribute(nameof(TimeModel.StartDateTime)).Value),
+                    StopDateTime = DateTime.Parse(xElement.Attribute(nameof(TimeModel.StopDateTime)).Value),
+                    Duration = xElement.Attribute(nameof(TimeModel.Duration)).Value.StandardTimeSpanParse(),
+                    RegisterDateTime = DateTime.Parse(xElement.Attribute(nameof(TimeModel.RegisterDateTime)).Value)
+                });
+            }
+            return times;
         }
 
         private static XElement GetElement(string id)

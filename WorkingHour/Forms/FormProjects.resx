@@ -167,4 +167,7 @@
         AQgEAAGDAcAB/wGQBAABBwHgAf8B4AQAAY8B8AH/AeAEAAHfAfkB/wHxBAAL
 </value>
   </data>
+  <metadata name="saveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>257, 17</value>
+  </metadata>
 </root>

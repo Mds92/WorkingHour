@@ -47,10 +47,11 @@ namespace WorkingHour.Data.Services
             if (xelement == null) return null;
             return new ProjectModel
             {
-                Id = int.Parse(xelement.Attribute("Id").Value),
-                Title = xelement.Attribute("Title").Value,
-                TotalDuration = xelement.Attribute("TotalDuration").Value.StandardTimeSpanParse(),
-                RegisterDateTime = DateTime.Parse(xelement.Attribute("RegisterDateTime").Value)
+                Id = int.Parse(xelement.Attribute(nameof(ProjectModel.Id)).Value),
+                Title = xelement.Attribute(nameof(ProjectModel.Title)).Value,
+                InitialDuration = xelement.Attribute(nameof(ProjectModel.InitialDuration)).Value.StandardTimeSpanParse(),
+                TotalDuration = xelement.Attribute(nameof(ProjectModel.TotalDuration)).Value.StandardTimeSpanParse(),
+                RegisterDateTime = DateTime.Parse(xelement.Attribute(nameof(ProjectModel.RegisterDateTime)).Value)
             };
         }
         public static void CalculateTotalDuration(string projectId)
