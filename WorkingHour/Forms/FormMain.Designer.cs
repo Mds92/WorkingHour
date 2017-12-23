@@ -167,7 +167,6 @@
             this.Controls.Add(this.labelDuration);
             this.Name = "FormMain";
             this.Text = "Working Hour";
-            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

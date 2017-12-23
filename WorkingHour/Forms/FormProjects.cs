@@ -72,6 +72,12 @@ namespace WorkingHour.Forms
             {
                 ShowErrorMessage(exception.Message);
             }
+            finally
+            {
+                maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = false;
+                buttonSubmitProject.Enabled = false;
+                buttonNewProject.Enabled = buttonEditProject.Enabled = true;
+            }
         }
 
         private void TabPageProjects_Enter(object sender, EventArgs e)
@@ -81,12 +87,17 @@ namespace WorkingHour.Forms
 
         private void ListViewProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
+            buttonNewProject.Enabled = true;
+            buttonSubmitProject.Enabled = false;
+            maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = false;
+            buttonEditProject.Enabled = buttonDeleteProject.Enabled = false;
             if (listViewProjects.SelectedItems.Count <= 0) return;
             var selectedItem = listViewProjects.SelectedItems[0];
             if(selectedItem == null) return;
             maskedTextBoxId.Text = selectedItem.SubItems[0].Text;
             textBoxTitle.Text = selectedItem.SubItems[1].Text;
             maskedTextBoxInitialTimeDuration.Text = selectedItem.SubItems[3].Text;
+            buttonEditProject.Enabled = buttonDeleteProject.Enabled = true;
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e)
@@ -107,6 +118,21 @@ namespace WorkingHour.Forms
             {
                 ShowErrorMessage(exception.Message);
             }
+        }
+
+        private void buttonNewProject_Click(object sender, EventArgs e)
+        {
+            maskedTextBoxId.Text = textBoxTitle.Text = maskedTextBoxInitialTimeDuration.Text = "";
+            maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = true;
+            buttonSubmitProject.Enabled = true;
+            buttonNewProject.Enabled = buttonEditProject.Enabled = buttonDeleteProject.Enabled = false;
+        }
+
+        private void buttonEditProject_Click(object sender, EventArgs e)
+        {
+            buttonSubmitProject.Enabled = true;
+            maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = true;
+            buttonNewProject.Enabled = buttonEditProject.Enabled = false;
         }
     }
 }

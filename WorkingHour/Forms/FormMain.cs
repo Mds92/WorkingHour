@@ -17,6 +17,11 @@ namespace WorkingHour
         public FormMain()
         {
             InitializeComponent();
+
+#if !DEBUG
+            TopMost = true;
+#endif
+
             LoadProjectComboBox();
 
             #region Form Events
