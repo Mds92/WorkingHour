@@ -27,7 +27,7 @@ namespace WorkingHour.Data.Services
                 var title = projectNode.Attribute(nameof(ProjectModel.Title))?.Value;
                 var initialDuration = projectNode.Attribute(nameof(ProjectModel.InitialDuration))?.Value.StandardTimeSpanParse() ?? new TimeSpan(0, 0, 0, 0);
                 var totalDuration = projectNode.Attribute(nameof(ProjectModel.TotalDuration))?.Value.StandardTimeSpanParse() ?? new TimeSpan(0, 0, 0, 0);
-                DateTime.TryParse(projectNode.Attribute(nameof(ProjectModel.RegisterDateTime))?.Value, out DateTime registerDateTime);
+                DateTime.TryParse(projectNode.Attribute(nameof(ProjectModel.RegisterDateTime))?.Value, out var registerDateTime);
 
                 projects.Add(new ProjectModel
                 {
