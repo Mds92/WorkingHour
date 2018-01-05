@@ -135,11 +135,6 @@ namespace WorkingHour
             StaticAssets.Duration = StaticAssets.Duration.Add(new TimeSpan(0, 0, 5, 0));
 #endif
             SetLabelDurationText();
-            DraftService.Save(new DraftModel
-            {
-                StartDateTime = StaticAssets.StartDateTime,
-                Duration = StaticAssets.Duration
-            });
         }
 
         private void TimerIdleTick(object sender, EventArgs e)
@@ -152,9 +147,13 @@ namespace WorkingHour
         {
             _backupTimeSpan = _backupTimeSpan.Add(new TimeSpan(0, 0, 0, 1));
             if (!(_backupTimeSpan.TotalMinutes > 10)) return;
+            DraftService.Save(new DraftModel
+            {
+                StartDateTime = StaticAssets.StartDateTime,
+                Duration = StaticAssets.Duration
+            });
             BackupService.GetBackup();
             _backupTimeSpan = new TimeSpan(0, 0, 0, 0);
-
         }
 
         #endregion
