@@ -91,14 +91,14 @@ namespace WorkingHour.Forms
         private void ListViewProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
             maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = false;
-            buttonNewProject.Enabled = buttonSubmitProject.Enabled = buttonEditProject.Enabled = buttonDeleteProject.Enabled = false;
+            buttonSubmitProject.Enabled = buttonEditProject.Enabled = buttonDeleteProject.Enabled = false;
             if (listViewProjects.SelectedItems.Count <= 0) return;
             var selectedItem = listViewProjects.SelectedItems[0];
             if (selectedItem == null) return;
             maskedTextBoxId.Text = selectedItem.SubItems[0].Text;
             textBoxTitle.Text = selectedItem.SubItems[1].Text;
             maskedTextBoxInitialTimeDuration.Text = selectedItem.SubItems[3].Text;
-            buttonEditProject.Enabled = buttonDeleteProject.Enabled = buttonExportData.Enabled = true;
+            buttonEditProject.Enabled = buttonDeleteProject.Enabled = buttonExportData.Enabled = buttonNewProject.Enabled = true;
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e)
@@ -114,7 +114,7 @@ namespace WorkingHour.Forms
             {
                 ProjectService.Delete(id);
                 LoadListViewProjects();
-                buttonNewProject_Click(null, null);
+                ButtonNewProject_Click(null, null);
             }
             catch (Exception exception)
             {
@@ -122,7 +122,7 @@ namespace WorkingHour.Forms
             }
         }
 
-        private void buttonNewProject_Click(object sender, EventArgs e)
+        private void ButtonNewProject_Click(object sender, EventArgs e)
         {
             maskedTextBoxId.Text = textBoxTitle.Text = maskedTextBoxInitialTimeDuration.Text = "";
             maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = true;
@@ -130,14 +130,15 @@ namespace WorkingHour.Forms
             buttonNewProject.Enabled = buttonEditProject.Enabled = buttonDeleteProject.Enabled = buttonExportData.Enabled = false;
         }
 
-        private void buttonEditProject_Click(object sender, EventArgs e)
+        private void ButtonEditProject_Click(object sender, EventArgs e)
         {
-            buttonSubmitProject.Enabled = true;
-            maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = buttonExportData.Enabled = true;
-            buttonNewProject.Enabled = buttonEditProject.Enabled = false;
+            buttonNewProject.Enabled = buttonSubmitProject.Enabled =
+            maskedTextBoxId.Enabled = textBoxTitle.Enabled =
+            maskedTextBoxInitialTimeDuration.Enabled = buttonExportData.Enabled = true;
+            buttonEditProject.Enabled = false;
         }
 
-        private void buttonExportData_Click(object sender, EventArgs e)
+        private void ButtonExportData_Click(object sender, EventArgs e)
         {
             int.TryParse(maskedTextBoxId.Text, out var projectId);
 

@@ -248,7 +248,7 @@
             this.buttonEditProject.TabIndex = 5;
             this.buttonEditProject.Text = "Edit";
             this.buttonEditProject.UseVisualStyleBackColor = true;
-            this.buttonEditProject.Click += new System.EventHandler(this.buttonEditProject_Click);
+            this.buttonEditProject.Click += new System.EventHandler(this.ButtonEditProject_Click);
             // 
             // buttonNewProject
             // 
@@ -259,7 +259,7 @@
             this.buttonNewProject.TabIndex = 4;
             this.buttonNewProject.Text = "New";
             this.buttonNewProject.UseVisualStyleBackColor = true;
-            this.buttonNewProject.Click += new System.EventHandler(this.buttonNewProject_Click);
+            this.buttonNewProject.Click += new System.EventHandler(this.ButtonNewProject_Click);
             // 
             // buttonExportData
             // 
@@ -271,7 +271,7 @@
             this.buttonExportData.TabIndex = 7;
             this.buttonExportData.Text = "Export";
             this.buttonExportData.UseVisualStyleBackColor = true;
-            this.buttonExportData.Click += new System.EventHandler(this.buttonExportData_Click);
+            this.buttonExportData.Click += new System.EventHandler(this.ButtonExportData_Click);
             // 
             // saveFileDialog1
             // 
