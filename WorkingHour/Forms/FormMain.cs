@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -146,6 +145,16 @@ namespace WorkingHour
             CheckCursorPosition();
         }
 
+        private TimeSpan _backupTimeSpan = new TimeSpan(0, 0, 0, 0);
+        private void TimerBackup_Tick(object sender, EventArgs e)
+        {
+            _backupTimeSpan = _backupTimeSpan.Add(new TimeSpan(0, 0, 0, 1));
+            if (!(_backupTimeSpan.TotalMinutes > 10)) return;
+            BackupService.GetBackup();
+            _backupTimeSpan = new TimeSpan(0, 0, 0, 0);
+
+        }
+
         #endregion
 
         #region Dropdown
@@ -284,5 +293,7 @@ namespace WorkingHour
         }
 
         #endregion
+
+
     }
 }

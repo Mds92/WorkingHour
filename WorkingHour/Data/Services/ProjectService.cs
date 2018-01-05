@@ -95,8 +95,8 @@ namespace WorkingHour.Data.Services
 
             // 
             SaveChanges();
-
             CalculateTotalDuration(projectModel.Id.ToString());
+            BackupService.GetBackup();
         }
         private static XElement GetElement(string projectId)
         {

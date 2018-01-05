@@ -42,6 +42,7 @@
             this.buttonSaveTime = new System.Windows.Forms.Button();
             this.buttonProjects = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
+            this.timerBackup = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // labelDuration
@@ -164,6 +165,11 @@
             this.buttonSettings.UseVisualStyleBackColor = true;
             this.buttonSettings.Click += new System.EventHandler(this.ButtonSettings_Click);
             // 
+            // timerBackup
+            // 
+            this.timerBackup.Interval = 1000;
+            this.timerBackup.Tick += new System.EventHandler(this.TimerBackup_Tick);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -200,6 +206,7 @@
         private System.Windows.Forms.ComboBox comboBoxProjects;
         private System.Windows.Forms.Button buttonSaveTime;
         private System.Windows.Forms.Button buttonSettings;
+        private System.Windows.Forms.Timer timerBackup;
     }
 }
 

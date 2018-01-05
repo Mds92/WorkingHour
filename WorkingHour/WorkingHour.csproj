@@ -61,6 +61,7 @@
     <Compile Include="Data\Models\SettingsModel.cs" />
     <Compile Include="Data\Models\TimeModel.cs" />
     <Compile Include="Data\Models\ProjectModel.cs" />
+    <Compile Include="Data\Services\BackupService.cs" />
     <Compile Include="Data\Services\DraftService.cs" />
     <Compile Include="Data\Services\SettingService.cs" />
     <Compile Include="Data\Services\TimeService.cs" />
