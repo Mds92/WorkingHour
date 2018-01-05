@@ -10,6 +10,8 @@ namespace WorkingHour.Data.Services
         {
             var backupPathAttribute = GetRootElement().Attribute(nameof(SettingsModel.BackupPath));
             if (string.IsNullOrWhiteSpace(backupPathAttribute?.Value)) return false;
+            var backupPath = backupPathAttribute.Value;
+            if (!ZlpIOHelper.DirectoryExists(backupPath)) return false;
             var persianDateTimeNow = PersianDateTime.Now;
             var backupFileName = $"WorkingHourDb {persianDateTimeNow.ToShortDateInt()}.xml";
             var dataBaseBackupPath = ZlpPathHelper.Combine(backupPathAttribute.Value, $"/{backupFileName}");

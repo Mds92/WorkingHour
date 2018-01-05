@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -111,6 +112,7 @@ namespace WorkingHour
             SetLabelStartFromText();
             timerWorking.Start();
             timerIdle.Start();
+            timerBackup.Start();
             _isTimerStarted = true;
             ChangeButtonStatus();
         }
@@ -120,8 +122,8 @@ namespace WorkingHour
             timerWorking.Stop();
             _isTimerStarted = false;
             timerIdle.Stop();
+            timerBackup.Stop();
             ChangeButtonStatus();
-            DraftService.Clear();
         }
 
         private void TimerWorkingTick(object sender, EventArgs e)
@@ -246,6 +248,7 @@ namespace WorkingHour
                     StartDateTime = StaticAssets.StartDateTime
                 });
                 ShowSuccessMessage("Time saved successfully");
+                DraftService.Clear();
             }
             catch (Exception exception)
             {

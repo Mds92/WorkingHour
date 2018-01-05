@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using WorkingHour.Data.Models;
 using WorkingHour.Data.Services;
 
@@ -30,7 +31,15 @@ namespace WorkingHour.Forms
                 BackupPath = textBoxBackupPath.Text.Trim()
             };
             SettingService.Save(model);
+            BackupService.GetBackup();
             ButtonCancel_Click(null, null);
+        }
+
+        private void ButtonSelectFolder_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog1.SelectedPath = textBoxBackupPath.Text;
+            if (folderBrowserDialog1.ShowDialog() != DialogResult.OK) return;
+            textBoxBackupPath.Text = folderBrowserDialog1.SelectedPath;
         }
     }
 }
