@@ -117,6 +117,7 @@ namespace WorkingHour.Data.Services
                 .Where(q => q.HasAttributes && q.Attribute(nameof(TimeModel.ProjectId)) != null &&
                             q.Attribute(nameof(TimeModel.ProjectId)).Value.Equals(idString));
             times.Remove();
+            projectElement.Remove();
             SaveChanges();
         }
     }

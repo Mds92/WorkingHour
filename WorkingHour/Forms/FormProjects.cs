@@ -114,6 +114,7 @@ namespace WorkingHour.Forms
             {
                 ProjectService.Delete(id);
                 LoadListViewProjects();
+                buttonNewProject_Click(null, null);
             }
             catch (Exception exception)
             {
@@ -126,13 +127,13 @@ namespace WorkingHour.Forms
             maskedTextBoxId.Text = textBoxTitle.Text = maskedTextBoxInitialTimeDuration.Text = "";
             maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = true;
             buttonSubmitProject.Enabled = true;
-            buttonNewProject.Enabled = buttonEditProject.Enabled = buttonDeleteProject.Enabled = false;
+            buttonNewProject.Enabled = buttonEditProject.Enabled = buttonDeleteProject.Enabled = buttonExportData.Enabled = false;
         }
 
         private void buttonEditProject_Click(object sender, EventArgs e)
         {
             buttonSubmitProject.Enabled = true;
-            maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = true;
+            maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = buttonExportData.Enabled = true;
             buttonNewProject.Enabled = buttonEditProject.Enabled = false;
         }
 

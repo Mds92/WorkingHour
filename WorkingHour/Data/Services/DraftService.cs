@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Xml.Linq;
 using WorkingHour.Assets;
 using WorkingHour.Data.Models;
 
@@ -46,9 +45,6 @@ namespace WorkingHour.Data.Services
             SaveChanges();
         }
 
-        private static XElement GetRootElement()
-        {
-            return GetDataBaseXDocumentInstance.Descendants(Constants.RootNodeName).First();
-        }
+        
     }
 }

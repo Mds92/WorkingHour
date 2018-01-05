@@ -65,7 +65,17 @@ namespace WorkingHour.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap cogwheel_outline_24 {
             get {
-                object obj = ResourceManager.GetObject("cogwheel-outline_24", resourceCulture);
+                object obj = ResourceManager.GetObject("cogwheel_outline_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap projector_screen {
+            get {
+                object obj = ResourceManager.GetObject("projector_screen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

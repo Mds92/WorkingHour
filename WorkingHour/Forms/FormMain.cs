@@ -170,7 +170,7 @@ namespace WorkingHour
 
         private void ChangeButtonStatus()
         {
-            buttonSettings.Enabled = buttonStart.Enabled = !_isTimerStarted;
+            buttonProjects.Enabled = buttonStart.Enabled = !_isTimerStarted;
             buttonStop.Enabled = _isTimerStarted;
             comboBoxProjects.Enabled = buttonSaveTime.Enabled = !_isTimerStarted;
             buttonReset.Enabled = StaticAssets.Duration > TimeSpan.MinValue;
@@ -203,12 +203,19 @@ namespace WorkingHour
             DraftService.Clear();
         }
 
-        private void ButtonSettings_Click(object sender, EventArgs e)
+        private void ButtonProjects_Click(object sender, EventArgs e)
         {
             DisableDeactivateOperation = true;
             var formProjects = new FormProjects();
             formProjects.Closed += FormProjects_Closed;
             formProjects.ShowDialog(this);
+        }
+
+        private void ButtonSettings_Click(object sender, EventArgs e)
+        {
+            DisableDeactivateOperation = true;
+            var form = new FormSettings();
+            form.ShowDialog(this);
         }
 
         private void FormProjects_Closed(object sender, EventArgs e)
