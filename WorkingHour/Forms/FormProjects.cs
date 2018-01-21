@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using MD.PersianDateTime;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using WorkingHour.Assets;
 using WorkingHour.Data.Models;
 using WorkingHour.Data.Services;
@@ -46,7 +50,7 @@ namespace WorkingHour.Forms
             var projects = ProjectService.SelectAll();
             foreach (var project in projects)
             {
-                var comboboxItem = new ComboboxItem
+                var comboboxItem = new ComboBoxItem
                 {
                     Value = project.Id.ToString(),
                     Text = project.Title
@@ -57,7 +61,7 @@ namespace WorkingHour.Forms
 
         private void ComboBoxProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedItem = comboBoxProjects.SelectedItem as ComboboxItem;
+            var selectedItem = comboBoxProjects.SelectedItem as ComboBoxItem;
             if (string.IsNullOrWhiteSpace(selectedItem?.Value)) return;
             LoadListViewTimes(selectedItem.Value);
         }
@@ -103,40 +107,61 @@ namespace WorkingHour.Forms
             buttonEditProject.Enabled = false;
         }
 
+        private readonly Font _font = new Font("Segoe UI", 10);
+        private void FormatExcelRange(ExcelRange excelRange)
+        {
+            excelRange.Style.Font.SetFromFont(_font);
+            excelRange.Style.Border.BorderAround(ExcelBorderStyle.Thin);
+            excelRange.Style.Fill.PatternType = ExcelFillStyle.Solid;
+            excelRange.Style.Fill.BackgroundColor.SetColor(Color.White);
+            excelRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            excelRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+        }
+
         private void ButtonExportData_Click(object sender, EventArgs e)
         {
             int.TryParse(maskedTextBoxId.Text, out var projectId);
 
             if (projectId <= 0) return;
+            saveFileDialog1.FileName = PersianDateTime.Now.ToString("yyyy-MM-dd");
             if (saveFileDialog1.ShowDialog() != DialogResult.OK) return;
-
-            var spacer1 = $"{new string('-', 50)}{Environment.NewLine}";
-
             var fileName = saveFileDialog1.FileName;
-            var fileInfo = new ZlpFileInfo(fileName);
-
             var project = ProjectService.SelectById(projectId.ToString());
-            var totalDurationString = project.TotalDuration.ToStandardString();
-            var initialDurationString = project.InitialDuration.ToStandardString();
-
             var times = TimeService.SelectAllByProjectId(projectId.ToString());
-
-            var stringBuilder = new StringBuilder($"\t{project.Title}{Environment.NewLine}");
-            stringBuilder.Append(spacer1);
-
-            stringBuilder.Append($"\t{initialDurationString}\t<=>\tمتفرقه{Environment.NewLine}");
-
-            foreach (var timeModel in times)
+            if (times.Count <= 0) return;
+            using (var excelPackage = new ExcelPackage(new FileInfo(fileName)))
             {
-                var startPersianDateTime = new PersianDateTime(timeModel.StartDateTime);
-                var durationString = timeModel.Duration.ToStandardString();
-                stringBuilder.Append($"\t{durationString}\t<=>\t{startPersianDateTime.ToLongDateString()}{Environment.NewLine}");
+                var worksheet = excelPackage.Workbook.Worksheets["Working Hour"] ?? excelPackage.Workbook.Worksheets.Add("Working Hour");
+
+                worksheet.Column(1).Width = 20;
+                worksheet.Column(2).Width = 20;
+                worksheet.Column(3).Width = 20;
+
+                worksheet.Row(1).Height = 25;
+
+                worksheet.Cells["A1:C1"].Merge = true;
+                worksheet.Cells["A1:C1"].Value = $"{project.Title}, {project.RegisterPersianDateTime.ToLongDateTimeString()}";
+                FormatExcelRange(worksheet.Cells["A1:C1"]);
+                worksheet.Cells["A1:C1"].Style.Font.Bold = true;
+                worksheet.Cells["A1:C1"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(237, 237, 237));
+
+                // initial Duration
+                worksheet.Cells["A2"].Value = "";
+                FormatExcelRange(worksheet.Cells["A2"]);
+
+                worksheet.Cells["B2"].Value = project.InitialDuration;
+                worksheet.Cells["B2"].Style.Numberformat.Format = "hhhh:mm";
+                FormatExcelRange(worksheet.Cells["B2"]);
+
+                worksheet.Cells["C2"].Value = "متفرقه";
+                FormatExcelRange(worksheet.Cells["C2"]);
+
+
+
+
+
+                excelPackage.Save();
             }
-
-            stringBuilder.Append(spacer1);
-            stringBuilder.Append($"\t{totalDurationString}");
-
-            fileInfo.WriteAllText(stringBuilder.ToString(), Encoding.UTF8);
         }
 
         private void ButtonSubmit_Click(object sender, EventArgs e)
@@ -224,7 +249,8 @@ namespace WorkingHour.Forms
                     timeModel.Duration.ToStandardString(),
                     timeModel.StartPersianDateTime.ToString(),
                     timeModel.StopPersianDateTime.ToString(),
-                    timeModel.RegisterPersianDateTime.ToString()
+                    timeModel.RegisterPersianDateTime.ToString(),
+                    timeModel.Description
                 })
                 {
                     Name = $@"Item_{counter}"
@@ -259,7 +285,5 @@ namespace WorkingHour.Forms
         }
 
         #endregion
-
-
     }
 }

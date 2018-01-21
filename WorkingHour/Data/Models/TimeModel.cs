@@ -7,6 +7,7 @@ namespace WorkingHour.Data.Models
     {
         public Guid Id { get; set; }
         public int ProjectId { get; set; }
+        public string Description { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime StopDateTime { get; set; }
         public TimeSpan Duration { get; set; }

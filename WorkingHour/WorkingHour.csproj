@@ -38,6 +38,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="MD.PersianDateTime, Version=3.7.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MD.PersianDateTime.3.7.4.0\lib\MD.PersianDateTime.dll</HintPath>
     </Reference>
@@ -54,10 +57,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ComboboxItem.cs" />
     <Compile Include="Assets\Constants.cs" />
     <Compile Include="Assets\ExtensionMethods.cs" />
-    <Compile Include="Data\Models\ComboboxItem.cs" />
+    <Compile Include="Data\Models\ComboBoxItem.cs" />
     <Compile Include="Data\Models\DraftModel.cs" />
     <Compile Include="Data\Models\SettingsModel.cs" />
     <Compile Include="Data\Models\TimeModel.cs" />
@@ -87,6 +89,12 @@
     <Compile Include="Forms\FormProjects.Designer.cs">
       <DependentUpon>FormProjects.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormSave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSave.Designer.cs">
+      <DependentUpon>FormSave.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormProjects.resx">
       <DependentUpon>FormProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSave.resx">
+      <DependentUpon>FormSave.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>

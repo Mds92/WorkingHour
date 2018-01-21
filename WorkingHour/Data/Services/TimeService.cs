@@ -24,7 +24,8 @@ namespace WorkingHour.Data.Services
                     new XAttribute(nameof(TimeModel.StartDateTime), timeModel.StartDateTime.ToStandardString()),
                     new XAttribute(nameof(TimeModel.StopDateTime), timeModel.StopDateTime.ToStandardString()),
                     new XAttribute(nameof(TimeModel.Duration), timeModel.Duration.ToStandardString()),
-                    new XAttribute(nameof(TimeModel.RegisterDateTime), DateTime.Now.ToStandardString()));
+                    new XAttribute(nameof(TimeModel.RegisterDateTime), DateTime.Now.ToStandardString()),
+                    new XAttribute(nameof(TimeModel.Description), timeModel.Description));
                 xDocument.Descendants(Constants.TimesNodeName).First().Add(xElement);
             }
             else
@@ -53,6 +54,7 @@ namespace WorkingHour.Data.Services
                 {
                     Id = Guid.Parse(xElement.Attribute(nameof(TimeModel.Id)).Value),
                     ProjectId = int.Parse(xElement.Attribute(nameof(TimeModel.ProjectId)).Value),
+                    Description = xElement.Attribute(nameof(TimeModel.Description)).Value,
                     StartDateTime = DateTime.Parse(xElement.Attribute(nameof(TimeModel.StartDateTime)).Value),
                     StopDateTime = DateTime.Parse(xElement.Attribute(nameof(TimeModel.StopDateTime)).Value),
                     Duration = xElement.Attribute(nameof(TimeModel.Duration)).Value.StandardTimeSpanParse(),

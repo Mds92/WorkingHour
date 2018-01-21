@@ -169,7 +169,7 @@ namespace WorkingHour
                 comboBoxProjects.Items.Add(new ComboBoxItem
                 {
                     Text = project.Title,
-                    Value = project.Id
+                    Value = project.Id.ToString()
                 });
             }
         }
@@ -186,11 +186,6 @@ namespace WorkingHour
             buttonReset.Enabled = StaticAssets.Duration > TimeSpan.MinValue;
         }
 
-        private void PublicActionsInButtonClick()
-        {
-            DisableDeactivateOperation = true;
-        }
-
         private void ButtonStart_Click(object sender, EventArgs e)
         {
             StartTimers();
@@ -198,14 +193,14 @@ namespace WorkingHour
 
         private void ButtonStop_Click(object sender, EventArgs e)
         {
-            PublicActionsInButtonClick();
+            DisableDeactivateOperation = true;
             if (MessageBox.Show(this, @"Are you sure to stop timer?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             StopTimers();
         }
 
         private void ButtonReset_Click(object sender, EventArgs e)
         {
-            PublicActionsInButtonClick();
+            DisableDeactivateOperation = true;
             if (MessageBox.Show(this, @"Are you sure to reset timer?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             StaticAssets.Duration = new TimeSpan(0, 0, 0, 0);
             labelDuration.Text = "00:00:00";
@@ -236,23 +231,10 @@ namespace WorkingHour
         private void ButtonSaveTime_Click(object sender, EventArgs e)
         {
             if (!(comboBoxProjects.SelectedItem is ComboBoxItem project)) return;
-            PublicActionsInButtonClick();
-            try
-            {
-                TimeService.Save(new TimeModel
-                {
-                    ProjectId = int.Parse(project.Value.ToString()),
-                    Duration = StaticAssets.Duration,
-                    StopDateTime = StaticAssets.StopDateTime,
-                    StartDateTime = StaticAssets.StartDateTime
-                });
-                ShowSuccessMessage("Time saved successfully");
-                DraftService.Clear();
-            }
-            catch (Exception exception)
-            {
-                ShowErrorMessage(exception.Message);
-            }
+            DisableDeactivateOperation = true;
+            var projectId = project.Value;
+            var form = new FormSave(projectId);
+            form.ShowDialog(this);
         }
 
         #endregion
