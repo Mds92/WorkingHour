@@ -180,7 +180,7 @@ namespace WorkingHour
 
         private void ChangeButtonStatus()
         {
-            buttonProjects.Enabled = buttonStart.Enabled = !_isTimerStarted;
+            buttonProjects.Enabled = buttonSettings.Enabled = buttonStart.Enabled = !_isTimerStarted;
             buttonStop.Enabled = _isTimerStarted;
             comboBoxProjects.Enabled = buttonSaveTime.Enabled = !_isTimerStarted;
             buttonReset.Enabled = StaticAssets.Duration > TimeSpan.MinValue;
