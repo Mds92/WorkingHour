@@ -108,14 +108,18 @@ namespace WorkingHour.Forms
         }
 
         private readonly Font _font = new Font("Segoe UI", 10);
-        private void FormatExcelRange(ExcelRange excelRange)
+        private readonly Color _borderColor = Color.FromArgb(161, 161, 161);
+        private void FormatExcelRange(ExcelRange excelRange, bool setBackgroundColor = false)
         {
             excelRange.Style.Font.SetFromFont(_font);
-            excelRange.Style.Border.BorderAround(ExcelBorderStyle.Thin);
+            excelRange.Style.Border.BorderAround(ExcelBorderStyle.Thin, _borderColor);
             excelRange.Style.Fill.PatternType = ExcelFillStyle.Solid;
             excelRange.Style.Fill.BackgroundColor.SetColor(Color.White);
             excelRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             excelRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            excelRange.Style.WrapText = true;
+            if (setBackgroundColor)
+                excelRange.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(237, 237, 237));
         }
 
         private void ButtonExportData_Click(object sender, EventArgs e)
@@ -128,37 +132,62 @@ namespace WorkingHour.Forms
             var fileName = saveFileDialog1.FileName;
             var project = ProjectService.SelectById(projectId.ToString());
             var times = TimeService.SelectAllByProjectId(projectId.ToString());
+            const string timeFormat = "[h]:mm:ss";
             if (times.Count <= 0) return;
             using (var excelPackage = new ExcelPackage(new FileInfo(fileName)))
             {
                 var worksheet = excelPackage.Workbook.Worksheets["Working Hour"] ?? excelPackage.Workbook.Worksheets.Add("Working Hour");
 
-                worksheet.Column(1).Width = 20;
+                worksheet.Column(1).Width = 30;
                 worksheet.Column(2).Width = 20;
-                worksheet.Column(3).Width = 20;
+                worksheet.Column(3).Width = 40;
 
                 worksheet.Row(1).Height = 25;
 
+                // عنوان بالا
                 worksheet.Cells["A1:C1"].Merge = true;
                 worksheet.Cells["A1:C1"].Value = $"{project.Title}, {project.RegisterPersianDateTime.ToLongDateTimeString()}";
-                FormatExcelRange(worksheet.Cells["A1:C1"]);
+                FormatExcelRange(worksheet.Cells["A1:C1"], true);
                 worksheet.Cells["A1:C1"].Style.Font.Bold = true;
-                worksheet.Cells["A1:C1"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(237, 237, 237));
 
-                // initial Duration
-                worksheet.Cells["A2"].Value = "";
-                FormatExcelRange(worksheet.Cells["A2"]);
+                // عناوین هر ستون
+                worksheet.Cells["A2"].Value = "Date";
+                worksheet.Cells["B2"].Value = "Time";
+                worksheet.Cells["C2"].Value = "Description";
+                FormatExcelRange(worksheet.Cells["A2"], true);
+                FormatExcelRange(worksheet.Cells["B2"], true);
+                FormatExcelRange(worksheet.Cells["C2"], true);
+                worksheet.Cells["A2:C2"].Style.Font.Bold = true;
 
-                worksheet.Cells["B2"].Value = project.InitialDuration;
-                worksheet.Cells["B2"].Style.Numberformat.Format = "hhhh:mm";
-                FormatExcelRange(worksheet.Cells["B2"]);
+                // ساعات ماه های قبل
+                worksheet.Cells["A3"].Value = "";
+                worksheet.Cells["B3"].Value = project.InitialDuration;
+                worksheet.Cells["C3"].Value = "از ماه های قبل";
+                FormatExcelRange(worksheet.Cells["A3"]);
+                FormatExcelRange(worksheet.Cells["B3"]);
+                FormatExcelRange(worksheet.Cells["C3"]);
+                worksheet.Cells["A3:C3"].Style.Numberformat.Format = timeFormat;
 
-                worksheet.Cells["C2"].Value = "متفرقه";
-                FormatExcelRange(worksheet.Cells["C2"]);
+                var row = 4;
+                foreach (var timeModel in times)
+                {
+                    var cellName1 = $"A{row}";
+                    var cellName2 = $"B{row}";
+                    var cellName3 = $"C{row}";
+                    worksheet.Cells[cellName1].Value = timeModel.RegisterPersianDateTime.ToLongDateString();
+                    worksheet.Cells[cellName2].Value = timeModel.Duration;
+                    worksheet.Cells[cellName3].Value = timeModel.Description;
+                    FormatExcelRange(worksheet.Cells[cellName1]);
+                    FormatExcelRange(worksheet.Cells[cellName2]);
+                    FormatExcelRange(worksheet.Cells[cellName3]);
+                    worksheet.Cells[cellName2].Style.Numberformat.Format = timeFormat;
+                    row++;
+                }
 
-
-
-
+                var sumCellName = $"B{row}";
+                worksheet.Cells[sumCellName].Formula = $"SUM(B3:B{row - 1})";
+                FormatExcelRange(worksheet.Cells[sumCellName], true);
+                worksheet.Cells[sumCellName].Style.Numberformat.Format = timeFormat;
 
                 excelPackage.Save();
             }

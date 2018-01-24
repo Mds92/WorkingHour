@@ -5,18 +5,18 @@
     <Project Id="1" Title="VistaBest" InitialDuration="0067:00:00" TotalDuration="0110:35:28" RegisterDateTime="2018-01-05 07:42:01" />
   </Projects>
   <Times>
-    <Time Id="1e98ae28-5133-46e1-8f3d-d5661324c39b" ProjectId="1" StartDateTime="2018-01-05 08:57:23" StopDateTime="2018-01-05 09:52:28" Duration="0000:34:54" RegisterDateTime="2018-01-05 09:52:42" Descroption="" />
-    <Time Id="c6cd7d0c-e195-427e-9ddf-198509b77a90" ProjectId="1" StartDateTime="2018-01-05 11:23:01" StopDateTime="2018-01-05 14:20:46" Duration="0002:15:16" RegisterDateTime="2018-01-05 14:20:47" Descroption="" />
-    <Time Id="81abccef-d9eb-44b5-9506-96c1c77da211" ProjectId="1" StartDateTime="2018-01-05 14:21:20" StopDateTime="2018-01-05 23:22:52" Duration="0005:38:20" RegisterDateTime="2018-01-05 23:22:55" Descroption="" />
-    <Time Id="6276fef2-335f-47a6-98d4-29ffb9866b64" ProjectId="1" StartDateTime="2018-01-07 21:26:06" StopDateTime="2018-01-07 22:17:29" Duration="0000:51:06" RegisterDateTime="2018-01-07 22:17:31" Descroption="" />
-    <Time Id="79d1a427-4570-4ac3-aa25-746aa5ff5cd5" ProjectId="1" StartDateTime="2018-01-09 21:27:27" StopDateTime="2018-01-09 23:21:04" Duration="0001:38:01" RegisterDateTime="2018-01-09 23:21:06" Descroption="" />
-    <Time Id="4ba03f51-6ee7-41fc-97cf-e5948614e126" ProjectId="1" StartDateTime="2018-01-11 08:44:13" StopDateTime="2018-01-11 23:42:27" Duration="0007:52:50" RegisterDateTime="2018-01-11 23:42:29" Descroption="" />
-    <Time Id="e0b6b7dc-848a-4f5b-aa35-f2f59b6437b0" ProjectId="1" StartDateTime="2018-01-12 06:10:22" StopDateTime="2018-01-12 11:26:29" Duration="0003:08:11" RegisterDateTime="2018-01-12 11:26:35" Descroption="" />
-    <Time Id="98bb5f97-93d1-40bc-be15-ac1557de85ff" ProjectId="1" StartDateTime="2018-01-12 14:15:54" StopDateTime="2018-01-13 01:24:03" Duration="0006:14:31" RegisterDateTime="2018-01-13 01:24:06" Descroption="" />
-    <Time Id="c1e2fabe-83ff-4bd8-b0b8-fe79b2fdc7ca" ProjectId="1" StartDateTime="2018-01-18 12:57:18" StopDateTime="2018-01-18 17:11:12" Duration="0003:01:48" RegisterDateTime="2018-01-18 17:11:14" Descroption="" />
-    <Time Id="653a4b2e-d88f-4adb-82a9-79d71b5f3d7b" ProjectId="1" StartDateTime="2018-01-18 19:09:11" StopDateTime="2018-01-18 23:59:20" Duration="0003:35:03" RegisterDateTime="2018-01-18 23:59:23" Descroption="" />
-    <Time Id="831fee2b-b236-4b5b-9f21-3e8fdfd69eaa" ProjectId="1" StartDateTime="2018-01-19 07:18:03" StopDateTime="2018-01-19 11:55:38" Duration="0003:56:01" RegisterDateTime="2018-01-19 11:55:40" Descroption="" />
-    <Time Id="75693fb3-a04c-4769-bccf-7a498ba9fd05" ProjectId="1" StartDateTime="2018-01-19 14:10:32" StopDateTime="2018-01-20 00:26:05" Duration="0004:05:01" RegisterDateTime="2018-01-20 00:26:07" Descroption="" />
-    <Time Id="833d8474-f4cf-4fff-ae95-f2593a1bc415" ProjectId="1" StartDateTime="2018-01-20 21:51:27" StopDateTime="2018-01-20 22:43:10" Duration="0000:44:26" RegisterDateTime="2018-01-20 22:43:12" Descroption="" />
+    <Time Id="1e98ae28-5133-46e1-8f3d-d5661324c39b" ProjectId="1" StartDateTime="2018-01-05 08:57:23" StopDateTime="2018-01-05 09:52:28" Duration="0000:34:54" RegisterDateTime="2018-01-05 09:52:42" Description="عکاسی حرفه ای با گوشی های هوشمند Huawei و همکاری شرکت Lieca" />
+    <Time Id="c6cd7d0c-e195-427e-9ddf-198509b77a90" ProjectId="1" StartDateTime="2018-01-05 11:23:01" StopDateTime="2018-01-05 14:20:46" Duration="0002:15:16" RegisterDateTime="2018-01-05 14:20:47" Description="" />
+    <Time Id="81abccef-d9eb-44b5-9506-96c1c77da211" ProjectId="1" StartDateTime="2018-01-05 14:21:20" StopDateTime="2018-01-05 23:22:52" Duration="0005:38:20" RegisterDateTime="2018-01-05 23:22:55" Description="" />
+    <Time Id="6276fef2-335f-47a6-98d4-29ffb9866b64" ProjectId="1" StartDateTime="2018-01-07 21:26:06" StopDateTime="2018-01-07 22:17:29" Duration="0000:51:06" RegisterDateTime="2018-01-07 22:17:31" Description="" />
+    <Time Id="79d1a427-4570-4ac3-aa25-746aa5ff5cd5" ProjectId="1" StartDateTime="2018-01-09 21:27:27" StopDateTime="2018-01-09 23:21:04" Duration="0001:38:01" RegisterDateTime="2018-01-09 23:21:06" Description="" />
+    <Time Id="4ba03f51-6ee7-41fc-97cf-e5948614e126" ProjectId="1" StartDateTime="2018-01-11 08:44:13" StopDateTime="2018-01-11 23:42:27" Duration="0007:52:50" RegisterDateTime="2018-01-11 23:42:29" Description="" />
+    <Time Id="e0b6b7dc-848a-4f5b-aa35-f2f59b6437b0" ProjectId="1" StartDateTime="2018-01-12 06:10:22" StopDateTime="2018-01-12 11:26:29" Duration="0003:08:11" RegisterDateTime="2018-01-12 11:26:35" Description="" />
+    <Time Id="98bb5f97-93d1-40bc-be15-ac1557de85ff" ProjectId="1" StartDateTime="2018-01-12 14:15:54" StopDateTime="2018-01-13 01:24:03" Duration="0006:14:31" RegisterDateTime="2018-01-13 01:24:06" Description="" />
+    <Time Id="c1e2fabe-83ff-4bd8-b0b8-fe79b2fdc7ca" ProjectId="1" StartDateTime="2018-01-18 12:57:18" StopDateTime="2018-01-18 17:11:12" Duration="0003:01:48" RegisterDateTime="2018-01-18 17:11:14" Description="" />
+    <Time Id="653a4b2e-d88f-4adb-82a9-79d71b5f3d7b" ProjectId="1" StartDateTime="2018-01-18 19:09:11" StopDateTime="2018-01-18 23:59:20" Duration="0003:35:03" RegisterDateTime="2018-01-18 23:59:23" Description="" />
+    <Time Id="831fee2b-b236-4b5b-9f21-3e8fdfd69eaa" ProjectId="1" StartDateTime="2018-01-19 07:18:03" StopDateTime="2018-01-19 11:55:38" Duration="0003:56:01" RegisterDateTime="2018-01-19 11:55:40" Description="" />
+    <Time Id="75693fb3-a04c-4769-bccf-7a498ba9fd05" ProjectId="1" StartDateTime="2018-01-19 14:10:32" StopDateTime="2018-01-20 00:26:05" Duration="0004:05:01" RegisterDateTime="2018-01-20 00:26:07" Description="" />
+    <Time Id="833d8474-f4cf-4fff-ae95-f2593a1bc415" ProjectId="1" StartDateTime="2018-01-20 21:51:27" StopDateTime="2018-01-20 22:43:10" Duration="0000:44:26" RegisterDateTime="2018-01-20 22:43:12" Description="" />
   </Times>
 </Database>
