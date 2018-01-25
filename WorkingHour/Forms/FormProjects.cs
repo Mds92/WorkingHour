@@ -124,8 +124,8 @@ namespace WorkingHour.Forms
 
         private void ButtonExportData_Click(object sender, EventArgs e)
         {
-            int.TryParse(maskedTextBoxId.Text, out var projectId);
-
+            if (!(comboBoxProjects.SelectedItem is ComboBoxItem selectedItem)) return;
+            int.TryParse(selectedItem.Value, out var projectId);
             if (projectId <= 0) return;
             saveFileDialog1.FileName = PersianDateTime.Now.ToString("yyyy-MM-dd");
             if (saveFileDialog1.ShowDialog() != DialogResult.OK) return;
