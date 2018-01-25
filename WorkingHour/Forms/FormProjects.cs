@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 using MD.PersianDateTime;
 using OfficeOpenXml;
@@ -9,7 +8,6 @@ using OfficeOpenXml.Style;
 using WorkingHour.Assets;
 using WorkingHour.Data.Models;
 using WorkingHour.Data.Services;
-using ZetaLongPaths;
 
 namespace WorkingHour.Forms
 {
