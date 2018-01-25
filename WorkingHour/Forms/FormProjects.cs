@@ -172,7 +172,7 @@ namespace WorkingHour.Forms
                     var cellName1 = $"A{row}";
                     var cellName2 = $"B{row}";
                     var cellName3 = $"C{row}";
-                    worksheet.Cells[cellName1].Value = timeModel.RegisterPersianDateTime.ToLongDateString();
+                    worksheet.Cells[cellName1].Value = timeModel.StartPersianDateTime.ToLongDateString();
                     worksheet.Cells[cellName2].Value = timeModel.Duration;
                     worksheet.Cells[cellName3].Value = timeModel.Description;
                     FormatExcelRange(worksheet.Cells[cellName1]);
