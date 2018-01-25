@@ -41,7 +41,7 @@
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxDescription.Size = new System.Drawing.Size(380, 80);
+            this.textBoxDescription.Size = new System.Drawing.Size(481, 80);
             this.textBoxDescription.TabIndex = 0;
             // 
             // buttonSave
@@ -56,7 +56,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(303, 111);
+            this.buttonCancel.Location = new System.Drawing.Point(407, 111);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 2;
@@ -78,7 +78,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 141);
+            this.ClientSize = new System.Drawing.Size(484, 141);
             this.Controls.Add(this.labelProjectInfo);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);

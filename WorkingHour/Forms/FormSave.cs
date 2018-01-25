@@ -22,7 +22,6 @@ namespace WorkingHour.Forms
             labelProjectInfo.Text = $"Project: {project.Title}   Duration: {StaticAssets.Duration.ToStandardString()}";
         }
 
-
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
             Close();

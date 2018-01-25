@@ -122,7 +122,6 @@ namespace WorkingHour
             timerWorking.Stop();
             _isTimerStarted = false;
             timerIdle.Stop();
-            timerBackup.Stop();
             ChangeButtonStatus();
         }
 
