@@ -1,4 +1,5 @@
 ﻿using System;
+using MD.PersianDateTime;
 
 namespace WorkingHour.Assets
 {
@@ -13,6 +14,12 @@ namespace WorkingHour.Assets
         public static string ToStandardString(this DateTime dateTime)
         {
             return dateTime.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        public static string ToStandardString(this PersianDateTime dateTime)
+        {
+            dateTime.EnglishNumber = true;
+            return dateTime.ToString("yyyy-MM-dd   HH:mm:ss");
         }
 
         public static TimeSpan StandardTimeSpanParse(this string inputString)

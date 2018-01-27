@@ -23,7 +23,7 @@ namespace WorkingHour.Data.Services
             var projects = new List<ProjectModel>();
             foreach (var projectNode in projectNodes)
             {
-                int.TryParse(projectNode.Attribute(nameof(ProjectModel.Id))?.Value, out int id);
+                int.TryParse(projectNode.Attribute(nameof(ProjectModel.Id))?.Value, out var id);
                 var title = projectNode.Attribute(nameof(ProjectModel.Title))?.Value;
                 var initialDuration = projectNode.Attribute(nameof(ProjectModel.InitialDuration))?.Value.StandardTimeSpanParse() ?? new TimeSpan(0, 0, 0, 0);
                 var totalDuration = projectNode.Attribute(nameof(ProjectModel.TotalDuration))?.Value.StandardTimeSpanParse() ?? new TimeSpan(0, 0, 0, 0);
@@ -39,7 +39,7 @@ namespace WorkingHour.Data.Services
                 });
             }
 
-            return projects;
+            return projects.OrderByDescending(q => q.RegisterDateTime).ToList();
         }
         public static ProjectModel SelectById(string projectId)
         {
@@ -110,7 +110,7 @@ namespace WorkingHour.Data.Services
         {
             var idString = id.ToString();
             var projectElement = GetElement(idString);
-            if(projectElement == null)
+            if (projectElement == null)
                 throw new Exception($"Project with {id} Id is not exist in DataBase");
             projectElement.RemoveAll();
             var times = GetDataBaseXDocumentInstance.Descendants(Constants.TimeNodeName)

@@ -16,6 +16,8 @@ namespace WorkingHour.Forms
         public FormProjects()
         {
             InitializeComponent();
+
+            ChangeProjectFormStatus(FormStatusEnum.None);
         }
 
         #region TabPage
@@ -24,11 +26,13 @@ namespace WorkingHour.Forms
         {
             LoadListViewProjects();
             FillComboBoxProjects();
+            ChangeProjectFormStatus(FormStatusEnum.None);
         }
 
         private void TabPageTimes_Enter(object sender, EventArgs e)
         {
             FillComboBoxProjects();
+            ChangeTimesFormStatus(FormStatusEnum.None);
         }
 
         #endregion
@@ -55,6 +59,7 @@ namespace WorkingHour.Forms
                 };
                 comboBoxProjects.Items.Add(comboboxItem);
             }
+            listViewTimes.Items.Clear();
         }
 
         private void ComboBoxProjects_SelectedIndexChanged(object sender, EventArgs e)
@@ -68,42 +73,245 @@ namespace WorkingHour.Forms
 
         #region Button
 
-        private void ButtonDelete_Click(object sender, EventArgs e)
+        #region Projects
+
+        private void ChangeProjectFormStatus(FormStatusEnum status)
         {
-            if (MessageBox.Show(this, @"Are you sure to delete project?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
-            int.TryParse(maskedTextBoxId.Text, out var id);
-            if (id <= 0)
+            switch (status)
             {
-                errorProvider1.SetError(maskedTextBoxId, "Enter valid Id");
-                return;
+                case FormStatusEnum.None:
+                    buttonProjectNew.Visible = true;
+                    buttonProjectCancel.Visible = buttonProjectSubmit.Visible = buttonDeleteProject.Visible = false;
+                    maskedTextBoxProjectId.Enabled = textBoxProjectTitle.Enabled = maskedTextBoxProjectInitialTimeDuration.Enabled = false;
+                    maskedTextBoxProjectId.Text = textBoxProjectTitle.Text = maskedTextBoxProjectInitialTimeDuration.Text = "";
+                    break;
+
+                case FormStatusEnum.New:
+                    buttonProjectNew.Visible = buttonDeleteProject.Visible = false;
+                    buttonProjectCancel.Visible = buttonProjectSubmit.Visible = true;
+                    maskedTextBoxProjectId.Enabled = textBoxProjectTitle.Enabled = maskedTextBoxProjectInitialTimeDuration.Enabled = true;
+                    maskedTextBoxProjectId.Text = textBoxProjectTitle.Text = maskedTextBoxProjectInitialTimeDuration.Text = "";
+                    break;
+
+                case FormStatusEnum.Edit:
+                    buttonProjectNew.Visible = buttonProjectCancel.Visible = true;
+                    buttonProjectSubmit.Visible = buttonDeleteProject.Visible = true;
+                    maskedTextBoxProjectId.Enabled = textBoxProjectTitle.Enabled = maskedTextBoxProjectInitialTimeDuration.Enabled = true;
+                    break;
             }
+        }
+
+        private void ButtonProjectDelete_Click(object sender, EventArgs e)
+        {
+            if (listViewProjects.SelectedItems.Count <= 0) return;
+            var selectedListViewItem = listViewProjects.SelectedItems[0];
+            if (selectedListViewItem == null || !int.TryParse(selectedListViewItem.SubItems[0].Text, out var id)) return;
+            if (MessageBox.Show(this, @"Are you sure to delete project?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             try
             {
                 ProjectService.Delete(id);
-                LoadListViewProjects();
-                ButtonNewProject_Click(null, null);
+                selectedListViewItem.Remove();
+                ChangeTimesFormStatus(FormStatusEnum.None);
             }
             catch (Exception exception)
             {
                 ShowErrorMessage(exception.Message);
             }
         }
-
-        private void ButtonNewProject_Click(object sender, EventArgs e)
+        private void ButtonProjectNew_Click(object sender, EventArgs e)
         {
-            maskedTextBoxId.Text = textBoxTitle.Text = maskedTextBoxInitialTimeDuration.Text = "";
-            maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = true;
-            buttonSubmitProject.Enabled = true;
-            buttonNewProject.Enabled = buttonEditProject.Enabled = buttonDeleteProject.Enabled = buttonExportData.Enabled = false;
+            ChangeProjectFormStatus(FormStatusEnum.New);
+            listViewProjects.SelectedItems.Clear();
+        }
+        private void ButtonProjectCancel_Click(object sender, EventArgs e)
+        {
+            ChangeProjectFormStatus(FormStatusEnum.None);
+        }
+        private void ButtonProjectSubmit_Click(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+            int.TryParse(maskedTextBoxProjectId.Text, out var id);
+            if (id <= 0)
+            {
+                errorProvider1.SetError(maskedTextBoxProjectId, "Enter valid Id");
+                return;
+            }
+
+            var title = textBoxProjectTitle.Text.Trim();
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                errorProvider1.SetError(textBoxProjectTitle, "Enter valid Title");
+                return;
+            }
+
+            var timeDuration = maskedTextBoxProjectInitialTimeDuration.Text.Trim().StandardTimeSpanParse();
+            if (timeDuration <= TimeSpan.MinValue)
+            {
+                errorProvider1.SetError(textBoxProjectTitle, "Enter valid Time duration");
+                return;
+            }
+
+            var projectModel = new ProjectModel
+            {
+                Id = id,
+                Title = title,
+                InitialDuration = timeDuration
+            };
+            try
+            {
+                ProjectService.Save(projectModel);
+                LoadListViewProjects();
+            }
+            catch (Exception exception)
+            {
+                ShowErrorMessage(exception.Message);
+            }
+            finally
+            {
+                ChangeProjectFormStatus(FormStatusEnum.None);
+            }
         }
 
-        private void ButtonEditProject_Click(object sender, EventArgs e)
+        #endregion
+
+        #region Times
+
+        private void ChangeTimesFormStatus(FormStatusEnum status)
         {
-            buttonNewProject.Enabled = buttonSubmitProject.Enabled =
-            maskedTextBoxId.Enabled = textBoxTitle.Enabled =
-            maskedTextBoxInitialTimeDuration.Enabled = buttonExportData.Enabled = true;
-            buttonEditProject.Enabled = false;
+            switch (status)
+            {
+                case FormStatusEnum.None:
+                    buttonTimeNew.Visible = true;
+                    buttonTimeCancel.Visible = buttonTimeSubmit.Visible = buttonDeleteTime.Visible = false;
+                    maskedTextBoxTimeDuration.Enabled = maskedTextBoxTimeStartDateTime.Enabled = maskedTextBoxTimeStopDateTime.Enabled = textBoxTimeDescription.Enabled = false;
+                    maskedTextBoxTimeDuration.Text = maskedTextBoxTimeStartDateTime.Text = maskedTextBoxTimeStopDateTime.Text = textBoxTimeDescription.Text = "";
+                    break;
+
+                case FormStatusEnum.New:
+                    buttonTimeNew.Visible = buttonDeleteTime.Visible = false;
+                    buttonTimeCancel.Visible = buttonTimeSubmit.Visible = true;
+                    maskedTextBoxTimeDuration.Enabled = maskedTextBoxTimeStartDateTime.Enabled = maskedTextBoxTimeStopDateTime.Enabled = textBoxTimeDescription.Enabled = true;
+                    maskedTextBoxTimeDuration.Text = maskedTextBoxTimeStartDateTime.Text = maskedTextBoxTimeStopDateTime.Text = textBoxTimeDescription.Text = "";
+                    break;
+
+                case FormStatusEnum.Edit:
+                    buttonTimeNew.Visible = buttonTimeCancel.Visible = true;
+                    buttonTimeSubmit.Visible = buttonDeleteTime.Visible = true;
+                    maskedTextBoxTimeDuration.Enabled = maskedTextBoxTimeStartDateTime.Enabled = maskedTextBoxTimeStopDateTime.Enabled = textBoxTimeDescription.Enabled = true;
+                    break;
+            }
         }
+
+        private void ButtonTimeDelete_Click(object sender, EventArgs e)
+        {
+            if (listViewTimes.SelectedItems.Count <= 0) return;
+            var selectedListViewItem = listViewTimes.SelectedItems[0];
+            if (selectedListViewItem == null || !Guid.TryParse(selectedListViewItem.Tag.ToString(), out var id)) return;
+            if (MessageBox.Show(this, @"Are you sure to delete time?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            try
+            {
+                TimeService.Delete(id);
+                selectedListViewItem.Remove();
+                ChangeTimesFormStatus(FormStatusEnum.None);
+            }
+            catch (Exception exception)
+            {
+                ShowErrorMessage(exception.Message);
+            }
+        }
+        private void ButtonTimeNew_Click(object sender, EventArgs e)
+        {
+            ChangeTimesFormStatus(FormStatusEnum.New);
+            listViewTimes.SelectedItems.Clear();
+            var persianDateTimeNow = PersianDateTime.Now;
+            var persianDateTime2HoursBefore = PersianDateTime.Now.AddHours(-2);
+            maskedTextBoxTimeStartDateTime.Text = persianDateTime2HoursBefore.ToStandardString();
+            maskedTextBoxTimeStopDateTime.Text = persianDateTimeNow.ToStandardString();
+            maskedTextBoxTimeDuration.Text = "0001:00:00";
+        }
+        private void ButtonTimeCancel_Click(object sender, EventArgs e)
+        {
+            ChangeTimesFormStatus(FormStatusEnum.None);
+        }
+        private void ButtonTimeSubmit_Click(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+
+            var id = Guid.NewGuid();
+            var description = textBoxTimeDescription.Text.Trim();
+            var editModel = false;
+            var registerDateTime = PersianDateTime.Now;
+            if (listViewTimes.SelectedItems.Count > 0)
+            {
+                var selectedListViewItem = listViewTimes.SelectedItems[0];
+                if (selectedListViewItem != null)
+                {
+                    if (!Guid.TryParse(selectedListViewItem.Tag.ToString(), out id)) return;
+                    editModel = true;
+                    if (!PersianDateTime.TryParse(selectedListViewItem.SubItems[4].Text.Trim(), out registerDateTime))
+                    {
+                        ShowErrorMessage("Register date time is invalid");
+                        return;
+                    }
+                }
+            }
+
+            if (!(comboBoxProjects.SelectedItem is ComboBoxItem selectedProjectItem))
+            {
+                errorProvider1.SetError(comboBoxProjects, "Select a project");
+                return;
+            }
+            int.TryParse(selectedProjectItem.Value, out var projectId);
+            if (projectId <= 0) return;
+
+            var timeDuration = maskedTextBoxTimeDuration.Text.Trim().StandardTimeSpanParse();
+            if (timeDuration <= new TimeSpan(0, 0, 0, 0))
+            {
+                errorProvider1.SetError(maskedTextBoxTimeDuration, "Enter valid Time duration");
+                return;
+            }
+
+            if (!PersianDateTime.TryParse(maskedTextBoxTimeStartDateTime.Text.Trim(), out var startDateTime))
+            {
+                errorProvider1.SetError(maskedTextBoxTimeStartDateTime, "Enter valid persian date time");
+                return;
+            }
+
+            if (!PersianDateTime.TryParse(maskedTextBoxTimeStopDateTime.Text.Trim(), out var stopDateTime))
+            {
+                errorProvider1.SetError(maskedTextBoxTimeStopDateTime, "Enter valid persian date time");
+                return;
+            }
+
+            var timeModel = new TimeModel
+            {
+                Id = id,
+                Description = description,
+                Duration = timeDuration,
+                StartDateTime = startDateTime,
+                ProjectId = projectId,
+                StopDateTime = stopDateTime,
+                RegisterDateTime = editModel ? registerDateTime : DateTime.Now
+            };
+            try
+            {
+                TimeService.Save(timeModel);
+                LoadListViewTimes(projectId.ToString());
+            }
+            catch (Exception exception)
+            {
+                ShowErrorMessage(exception.Message);
+            }
+            finally
+            {
+                ChangeTimesFormStatus(FormStatusEnum.None);
+            }
+        }
+
+        #endregion
+
+        #region Export
 
         private readonly Font _font = new Font("Segoe UI", 10);
         private readonly Color _borderColor = Color.FromArgb(161, 161, 161);
@@ -119,7 +327,6 @@ namespace WorkingHour.Forms
             if (setBackgroundColor)
                 excelRange.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(237, 237, 237));
         }
-
         private void ButtonExportData_Click(object sender, EventArgs e)
         {
             if (!(comboBoxProjects.SelectedItem is ComboBoxItem selectedItem)) return;
@@ -191,55 +398,13 @@ namespace WorkingHour.Forms
             }
         }
 
-        private void ButtonSubmit_Click(object sender, EventArgs e)
-        {
-            int.TryParse(maskedTextBoxId.Text, out int id);
-            if (id <= 0)
-            {
-                errorProvider1.SetError(maskedTextBoxId, "Enter valid Id");
-                return;
-            }
-
-            var title = textBoxTitle.Text.Trim();
-            if (string.IsNullOrWhiteSpace(title))
-            {
-                errorProvider1.SetError(textBoxTitle, "Enter valid Title");
-                return;
-            }
-
-            var timeDuration = maskedTextBoxInitialTimeDuration.Text.Trim().StandardTimeSpanParse();
-            if (timeDuration <= TimeSpan.MinValue)
-            {
-                errorProvider1.SetError(textBoxTitle, "Enter valid Time duration");
-                return;
-            }
-
-            var projectModel = new ProjectModel
-            {
-                Id = id,
-                Title = title,
-                InitialDuration = timeDuration
-            };
-            try
-            {
-                ProjectService.Save(projectModel);
-                LoadListViewProjects();
-            }
-            catch (Exception exception)
-            {
-                ShowErrorMessage(exception.Message);
-            }
-            finally
-            {
-                maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = false;
-                buttonSubmitProject.Enabled = false;
-                buttonNewProject.Enabled = buttonEditProject.Enabled = true;
-            }
-        }
+        #endregion
 
         #endregion
 
         #region ListView
+
+        #region Projects
 
         private void LoadListViewProjects()
         {
@@ -251,7 +416,7 @@ namespace WorkingHour.Forms
                 {
                     project.Id.ToString(),
                     project.Title,
-                    project.RegisterPersianDateTime.ToString(),
+                    project.RegisterPersianDateTime.ToStandardString(),
                     project.InitialDuration.ToStandardString(),
                     project.TotalDuration.ToStandardString(),
                 })
@@ -262,41 +427,15 @@ namespace WorkingHour.Forms
             }
         }
 
-        private void LoadListViewTimes(string projectId)
-        {
-            listViewTimes.Items.Clear();
-            var counter = 0;
-            var times = TimeService.SelectAllByProjectId(projectId);
-            foreach (var timeModel in times)
-            {
-                counter++;
-                var listViewItem = new ListViewItem(new[]
-                {
-                    counter.ToString(),
-                    timeModel.Duration.ToStandardString(),
-                    timeModel.StartPersianDateTime.ToString(),
-                    timeModel.StopPersianDateTime.ToString(),
-                    timeModel.RegisterPersianDateTime.ToString(),
-                    timeModel.Description
-                })
-                {
-                    Name = $@"Item_{counter}"
-                };
-                listViewTimes.Items.Add(listViewItem);
-            }
-        }
-
         private void ListViewProjects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            maskedTextBoxId.Enabled = textBoxTitle.Enabled = maskedTextBoxInitialTimeDuration.Enabled = false;
-            buttonSubmitProject.Enabled = buttonEditProject.Enabled = buttonDeleteProject.Enabled = false;
             if (listViewProjects.SelectedItems.Count <= 0) return;
             var selectedItem = listViewProjects.SelectedItems[0];
             if (selectedItem == null) return;
-            maskedTextBoxId.Text = selectedItem.SubItems[0].Text;
-            textBoxTitle.Text = selectedItem.SubItems[1].Text;
-            maskedTextBoxInitialTimeDuration.Text = selectedItem.SubItems[3].Text;
-            buttonEditProject.Enabled = buttonDeleteProject.Enabled = buttonExportData.Enabled = buttonNewProject.Enabled = true;
+            maskedTextBoxProjectId.Text = selectedItem.SubItems[0].Text;
+            textBoxProjectTitle.Text = selectedItem.SubItems[1].Text;
+            maskedTextBoxProjectInitialTimeDuration.Text = selectedItem.SubItems[3].Text;
+            ChangeProjectFormStatus(FormStatusEnum.Edit);
         }
 
         private void ListViewProjects_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -310,6 +449,49 @@ namespace WorkingHour.Forms
             _ignoreFillComboBoxProjects = true;
             tabControl.SelectTab(nameof(tabPageTimes));
         }
+
+        #endregion
+
+        #region Times
+
+        private void LoadListViewTimes(string projectId)
+        {
+            listViewTimes.Items.Clear();
+            var counter = 0;
+            var times = TimeService.SelectAllByProjectId(projectId);
+            foreach (var timeModel in times)
+            {
+                counter++;
+                var listViewItem = new ListViewItem(new[]
+                {
+                    counter.ToString(),
+                    timeModel.Duration.ToStandardString(),
+                    timeModel.StartPersianDateTime.ToStandardString(),
+                    timeModel.StopPersianDateTime.ToStandardString(),
+                    timeModel.RegisterPersianDateTime.ToStandardString(),
+                    timeModel.Description
+                })
+                {
+                    Name = $@"Item_{counter}",
+                    Tag = timeModel.Id
+                };
+                listViewTimes.Items.Add(listViewItem);
+            }
+        }
+
+        private void ListViewTimes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listViewTimes.SelectedItems.Count <= 0) return;
+            var selectedItem = listViewTimes.SelectedItems[0];
+            if (selectedItem == null) return;
+            maskedTextBoxTimeDuration.Text = selectedItem.SubItems[1].Text;
+            maskedTextBoxTimeStartDateTime.Text = selectedItem.SubItems[2].Text;
+            maskedTextBoxTimeStopDateTime.Text = selectedItem.SubItems[3].Text;
+            textBoxTimeDescription.Text = selectedItem.SubItems[5].Text;
+            ChangeTimesFormStatus(FormStatusEnum.Edit);
+        }
+
+        #endregion
 
         #endregion
     }

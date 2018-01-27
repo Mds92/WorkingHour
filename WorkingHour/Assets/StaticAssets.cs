@@ -20,8 +20,7 @@ namespace WorkingHour.Assets
 
         public static Size OriginalWindowSize { get; set; }
 
-        public static List<string> ForbiddinApps = 
-            new List<string>
+        public static List<string> ForbiddinApps = new List<string>
             {
                 "Telegram",
                 "دیجی کالا",
@@ -32,6 +31,5 @@ namespace WorkingHour.Assets
                 "باشگاه خبرنگاران",
                 "دنیای اقتصاد"
             };
-
     }
 }

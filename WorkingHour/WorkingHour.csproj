@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Assets\Constants.cs" />
     <Compile Include="Assets\ExtensionMethods.cs" />
+    <Compile Include="Assets\FormStatusEnum.cs" />
     <Compile Include="Data\Models\ComboBoxItem.cs" />
     <Compile Include="Data\Models\DraftModel.cs" />
     <Compile Include="Data\Models\SettingsModel.cs" />
@@ -153,8 +154,12 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Resources\projector-screen.png" />
+    <None Include="Resources\ic_add_black_24dp_1x.png" />
+    <None Include="Resources\ic_edit_black_24dp_1x.png" />
+    <None Include="Resources\ic_cancel_black_24dp_1x.png" />
+    <None Include="Resources\ic_done_black_24dp_1x.png" />
+    <None Include="Resources\ic_clear_black_24dp_1x.png" />
     <Content Include="stopwatch.png.ico" />
-    <None Include="Resources\delete-24.png" />
     <Content Include="stopwatch-black.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

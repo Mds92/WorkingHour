@@ -33,12 +33,23 @@ namespace WorkingHour.Data.Services
                 xElement.SetAttributeValue(nameof(TimeModel.StartDateTime), timeModel.StartDateTime.ToStandardString());
                 xElement.SetAttributeValue(nameof(TimeModel.StopDateTime), timeModel.StopDateTime.ToStandardString());
                 xElement.SetAttributeValue(nameof(TimeModel.Duration), timeModel.Duration.ToStandardString());
-
+                xElement.SetAttributeValue(nameof(TimeModel.Description), timeModel.Description);
             }
             SaveChanges();
             ProjectService.CalculateTotalDuration(project.Id.ToString());
         }
-
+        public static void Delete(Guid id)
+        {
+            var idString = id.ToString();
+            var timElement = GetElement(idString);
+            if (timElement == null)
+                throw new Exception($"Time with `{id}` Id is not exist in DataBase");
+            timElement.RemoveAll();
+            SaveChanges();
+            var projectIdAttribute = timElement.Attribute(nameof(TimeModel.ProjectId));
+            var projectId = projectIdAttribute?.Value ?? "";
+            ProjectService.CalculateTotalDuration(projectId);
+        }
         public static List<TimeModel> SelectAllByProjectId(string projectId)
         {
             var elements = GetDataBaseXDocumentInstance
@@ -61,22 +72,21 @@ namespace WorkingHour.Data.Services
                     RegisterDateTime = DateTime.Parse(xElement.Attribute(nameof(TimeModel.RegisterDateTime)).Value)
                 });
             }
-            return times;
+            return times.OrderByDescending(q => q.RegisterDateTime).ToList();
         }
-
         private static XElement GetElement(string id)
         {
             return GetDataBaseXDocumentInstance
                 .Descendants(Constants.TimeNodeName)
-                .FirstOrDefault(q => q.HasAttributes && 
-                    q.Attribute(nameof(TimeModel.Id)) != null && 
+                .FirstOrDefault(q => q.HasAttributes &&
+                    q.Attribute(nameof(TimeModel.Id)) != null &&
                     q.Attribute(nameof(TimeModel.Id)).Value.Equals(id, StringComparison.InvariantCultureIgnoreCase));
         }
         private static XElement GetElement(string startDateTime, string stopDateTime)
         {
             return GetDataBaseXDocumentInstance
                 .Descendants(Constants.TimeNodeName)
-                .FirstOrDefault(q => q.HasAttributes && 
+                .FirstOrDefault(q => q.HasAttributes &&
                     q.Attribute(nameof(TimeModel.StartDateTime)) != null && q.Attribute(nameof(TimeModel.StartDateTime)).Value.Equals(startDateTime, StringComparison.InvariantCultureIgnoreCase) &&
                     q.Attribute(nameof(TimeModel.StopDateTime)) != null && q.Attribute(nameof(TimeModel.StopDateTime)).Value.Equals(stopDateTime, StringComparison.InvariantCultureIgnoreCase));
         }
