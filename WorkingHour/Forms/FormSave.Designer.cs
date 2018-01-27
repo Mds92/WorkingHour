@@ -83,6 +83,7 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxDescription);
+            this.MinimizeBox = false;
             this.Name = "FormSave";
             this.Text = "Save Details";
             this.ResumeLayout(false);

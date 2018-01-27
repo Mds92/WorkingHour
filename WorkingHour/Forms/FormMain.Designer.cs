@@ -40,9 +40,12 @@
             this.timerIdle = new System.Windows.Forms.Timer(this.components);
             this.comboBoxProjects = new System.Windows.Forms.ComboBox();
             this.buttonSaveTime = new System.Windows.Forms.Button();
-            this.buttonProjects = new System.Windows.Forms.Button();
-            this.buttonSettings = new System.Windows.Forms.Button();
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.buttonSettings = new System.Windows.Forms.Button();
+            this.buttonProjects = new System.Windows.Forms.Button();
+            this.buttonSystemTray = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // labelDuration
@@ -143,38 +146,60 @@
             this.buttonSaveTime.UseVisualStyleBackColor = false;
             this.buttonSaveTime.Click += new System.EventHandler(this.ButtonSaveTime_Click);
             // 
-            // buttonProjects
-            // 
-            this.buttonProjects.BackgroundImage = global::WorkingHour.Properties.Resources.projector_screen;
-            this.buttonProjects.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.buttonProjects.Location = new System.Drawing.Point(424, 9);
-            this.buttonProjects.Name = "buttonProjects";
-            this.buttonProjects.Size = new System.Drawing.Size(32, 32);
-            this.buttonProjects.TabIndex = 5;
-            this.buttonProjects.UseVisualStyleBackColor = true;
-            this.buttonProjects.Click += new System.EventHandler(this.ButtonProjects_Click);
-            // 
-            // buttonSettings
-            // 
-            this.buttonSettings.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonSettings.BackgroundImage")));
-            this.buttonSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.buttonSettings.Location = new System.Drawing.Point(386, 9);
-            this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Size = new System.Drawing.Size(32, 32);
-            this.buttonSettings.TabIndex = 4;
-            this.buttonSettings.UseVisualStyleBackColor = true;
-            this.buttonSettings.Click += new System.EventHandler(this.ButtonSettings_Click);
-            // 
             // timerBackup
             // 
             this.timerBackup.Interval = 1000;
             this.timerBackup.Tick += new System.EventHandler(this.TimerBackup_Tick);
+            // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "notifyIcon Tooltip";
+            this.notifyIcon.Visible = true;
+            this.notifyIcon.DoubleClick += new System.EventHandler(this.NotifyIcon_MouseDoubleClick);
+            // 
+            // buttonSettings
+            // 
+            this.buttonSettings.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonSettings.BackgroundImage")));
+            this.buttonSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonSettings.Location = new System.Drawing.Point(388, 12);
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(32, 32);
+            this.buttonSettings.TabIndex = 4;
+            this.toolTip.SetToolTip(this.buttonSettings, "Settings");
+            this.buttonSettings.UseVisualStyleBackColor = true;
+            this.buttonSettings.Click += new System.EventHandler(this.ButtonSettings_Click);
+            // 
+            // buttonProjects
+            // 
+            this.buttonProjects.BackgroundImage = global::WorkingHour.Properties.Resources.projector_screen;
+            this.buttonProjects.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonProjects.Location = new System.Drawing.Point(424, 12);
+            this.buttonProjects.Name = "buttonProjects";
+            this.buttonProjects.Size = new System.Drawing.Size(32, 32);
+            this.buttonProjects.TabIndex = 5;
+            this.toolTip.SetToolTip(this.buttonProjects, "Projects");
+            this.buttonProjects.UseVisualStyleBackColor = true;
+            this.buttonProjects.Click += new System.EventHandler(this.ButtonProjects_Click);
+            // 
+            // buttonSystemTray
+            // 
+            this.buttonSystemTray.BackgroundImage = global::WorkingHour.Properties.Resources.minimize;
+            this.buttonSystemTray.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonSystemTray.Location = new System.Drawing.Point(354, 14);
+            this.buttonSystemTray.Name = "buttonSystemTray";
+            this.buttonSystemTray.Size = new System.Drawing.Size(28, 28);
+            this.buttonSystemTray.TabIndex = 8;
+            this.toolTip.SetToolTip(this.buttonSystemTray, "Minimize To System Tray");
+            this.buttonSystemTray.UseVisualStyleBackColor = true;
+            this.buttonSystemTray.Click += new System.EventHandler(this.ButtonSystemTray_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(468, 131);
+            this.Controls.Add(this.buttonSystemTray);
             this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.buttonSaveTime);
             this.Controls.Add(this.comboBoxProjects);
@@ -207,6 +232,9 @@
         private System.Windows.Forms.Button buttonSaveTime;
         private System.Windows.Forms.Button buttonSettings;
         private System.Windows.Forms.Timer timerBackup;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.Button buttonSystemTray;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 

@@ -54,7 +54,7 @@
             // 
             // buttonSubmit
             // 
-            this.buttonSubmit.Location = new System.Drawing.Point(468, 76);
+            this.buttonSubmit.Location = new System.Drawing.Point(459, 45);
             this.buttonSubmit.Name = "buttonSubmit";
             this.buttonSubmit.Size = new System.Drawing.Size(49, 23);
             this.buttonSubmit.TabIndex = 2;
@@ -64,7 +64,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(523, 76);
+            this.buttonCancel.Location = new System.Drawing.Point(514, 45);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(49, 23);
             this.buttonCancel.TabIndex = 3;
@@ -86,12 +86,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 111);
+            this.ClientSize = new System.Drawing.Size(584, 71);
             this.Controls.Add(this.buttonSelectFolder);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSubmit);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxBackupPath);
+            this.MinimizeBox = false;
             this.Name = "FormSettings";
             this.Text = "Settings";
             this.ResumeLayout(false);

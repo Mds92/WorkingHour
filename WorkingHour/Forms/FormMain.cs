@@ -21,7 +21,6 @@ namespace WorkingHour
 #if !DEBUG
             TopMost = true;
 #endif
-
             LoadProjectComboBox();
 
             #region Form Events
@@ -93,7 +92,8 @@ namespace WorkingHour
 
         private void SetLabelDurationText()
         {
-            labelDuration.Text = $@"{StaticAssets.Duration.Hours:00}:{StaticAssets.Duration.Minutes:00}:{StaticAssets.Duration.Seconds:00}";
+            var labelString = $@"{StaticAssets.Duration.Hours:00}:{StaticAssets.Duration.Minutes:00}:{StaticAssets.Duration.Seconds:00}";
+            labelDuration.Text = notifyIcon.Text = labelString;
         }
         private void SetLabelStartFromText()
         {
@@ -236,6 +236,13 @@ namespace WorkingHour
             form.ShowDialog(this);
         }
 
+        private void ButtonSystemTray_Click(object sender, EventArgs e)
+        {
+            //WindowState = FormWindowState.Minimized;
+            notifyIcon.Visible = true;
+            Hide();
+        }
+
         #endregion
 
         #region Form
@@ -273,6 +280,18 @@ namespace WorkingHour
                 SetLabelDurationText();
             }
             ChangeButtonStatus();
+        }
+
+        #endregion
+
+        #region Notify Icon
+
+        private void NotifyIcon_MouseDoubleClick(object sender, EventArgs e)
+        {
+            //WindowState = FormWindowState.Minimized;
+            WindowState = FormWindowState.Normal;
+            notifyIcon.Visible = false;
+            Show();
         }
 
         #endregion

@@ -159,6 +159,7 @@
     <None Include="Resources\ic_cancel_black_24dp_1x.png" />
     <None Include="Resources\ic_done_black_24dp_1x.png" />
     <None Include="Resources\ic_clear_black_24dp_1x.png" />
+    <None Include="Resources\minimize.png" />
     <Content Include="stopwatch.png.ico" />
     <Content Include="stopwatch-black.ico" />
   </ItemGroup>

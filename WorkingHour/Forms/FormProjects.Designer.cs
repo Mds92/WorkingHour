@@ -553,6 +553,7 @@
             this.Controls.Add(this.tabControl);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimizeBox = false;
             this.Name = "FormProjects";
             this.Text = "Projects";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

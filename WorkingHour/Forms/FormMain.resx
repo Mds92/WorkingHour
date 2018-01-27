@@ -123,7 +123,37 @@
   <metadata name="timerIdle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>163, 16</value>
   </metadata>
+  <metadata name="timerBackup.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>271, 16</value>
+  </metadata>
+  <metadata name="notifyIcon.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>391, 16</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="notifyIcon.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAD///8B////AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wL///8BAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAA////AQAAAAD///8k////g////7T///+0////gv///yMAAAAA////AQAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///+F/////v///+D////C////wv///+H////9////gwAA
+        AAD///8BAAAAAAAAAAAAAAAAAAAAAAAAAAD///+R/////f///3D///8NAAAAAAAAAAD///8N////cf//
+        //7///+PAAAAAP///wEAAAAA////AwAAAAD///9L/////////1QAAAAA////Af///wb///8G////AQAA
+        AAD///9W/////////0oAAAAA////AwAAAAAAAAAA////tv///70AAAAA////Av///wIAAAAAAAAAAP//
+        /wL///8CAAAAAP///7////+zAAAAAAAAAAAAAAAA////A/////n///9pAAAAAP///wQAAAAA////Pf//
+        /z0AAAAA////BAAAAAD///9q////9////wMAAAAAAAAAAP///wX/////////VwAAAAD///8IAAAAAP//
+        /77///++AAAAAP///wgAAAAA////WP////////8FAAAAAAAAAAD///8B////6v///3wAAAAA////CAAA
+        AAD///+3////twAAAAD///8IAAAAAP///37////p////AQAAAAD///8BAAAAAP///5b////f////BP//
+        /wUAAAAA////vv///74AAAAA////BP///wb////j////lAAAAAD///8B////AgAAAAD///8o////8v//
+        /5n///8CAAAAAP///37///9+AAAAAP///wP///+b////6////yEAAAAA////AgAAAAD///8CAAAAAP//
+        /1T/////////xP///0n///8G////Bv///0r////E/////////+v///83AAAAAP///wIAAAAAAAAAAP//
+        /wEAAAAA////Pf///8n////1/////v////7////3////xv///0f///+m////TgAAAAD///8CAAAAAAAA
+        AAAAAAAA////AQAAAAD///8E////OP///1j///9Y////OP///wMAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAA////DP////D////3////9/////D///8LAAAAAP///wIAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wT///9Y////Xv///17///9Y////BAAAAAAAAAAAAAAAAAAA
+        AAAAAAAA//8AAPw/AADwDwAA5+cAAO/3AADP8wAA3/sAAN57AADeewAAznMAAOfnAADzxwAA+BcAAP//
+        AAD8PwAA//8AAA==
+</value>
+  </data>
   <data name="buttonSettings.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
@@ -138,8 +168,8 @@
         y5UR0q70zNhczpb8ZA6e/C/ktMLJKEy1MxoKRlUqfTJOnXIxXfcLTKZbqO/hqagAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="timerBackup.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>271, 16</value>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>497, 16</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>56</value>
