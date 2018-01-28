@@ -31,7 +31,6 @@ namespace WorkingHour.Forms
                 BackupPath = textBoxBackupPath.Text.Trim()
             };
             SettingService.Save(model);
-            BackupService.GetBackup();
             ButtonCancel_Click(null, null);
         }
 

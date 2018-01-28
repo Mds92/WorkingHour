@@ -163,6 +163,7 @@ namespace WorkingHour.Forms
             {
                 ProjectService.Save(projectModel);
                 LoadListViewProjects();
+                FillComboBoxProjects();
             }
             catch (Exception exception)
             {
@@ -266,13 +267,6 @@ namespace WorkingHour.Forms
             int.TryParse(selectedProjectItem.Value, out var projectId);
             if (projectId <= 0) return;
 
-            var timeDuration = maskedTextBoxTimeDuration.Text.Trim().StandardTimeSpanParse();
-            if (timeDuration <= new TimeSpan(0, 0, 0, 0))
-            {
-                errorProvider1.SetError(maskedTextBoxTimeDuration, "Enter valid Time duration");
-                return;
-            }
-
             if (!PersianDateTime.TryParse(maskedTextBoxTimeStartDateTime.Text.Trim(), out var startDateTime))
             {
                 errorProvider1.SetError(maskedTextBoxTimeStartDateTime, "Enter valid persian date time");
@@ -282,6 +276,24 @@ namespace WorkingHour.Forms
             if (!PersianDateTime.TryParse(maskedTextBoxTimeStopDateTime.Text.Trim(), out var stopDateTime))
             {
                 errorProvider1.SetError(maskedTextBoxTimeStopDateTime, "Enter valid persian date time");
+                return;
+            }
+
+            if (stopDateTime <= startDateTime)
+            {
+                errorProvider1.SetError(maskedTextBoxTimeStopDateTime, "Stop time must be bigger than start time");
+                return;
+            }
+
+            var timeDuration = maskedTextBoxTimeDuration.Text.Trim().StandardTimeSpanParse();
+            if (timeDuration <= new TimeSpan(0, 0, 0, 0))
+            {
+                errorProvider1.SetError(maskedTextBoxTimeDuration, "Enter valid Time duration");
+                return;
+            }
+            if (timeDuration > stopDateTime - startDateTime)
+            {
+                errorProvider1.SetError(maskedTextBoxTimeDuration, "TimeDuration must be bigger than duration between start and stop time");
                 return;
             }
 
@@ -443,7 +455,6 @@ namespace WorkingHour.Forms
                         timeModel.ProjectId = projectOfCurrentDatabase.Id;
                         TimeService.Save(timeModel);
                     }
-                    ProjectService.CalculateTotalDuration(projectOfCurrentDatabase.Id);
                 }
                 ShowSuccessMessage("The databases merged successfully");
             }

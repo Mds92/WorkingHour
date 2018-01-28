@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
-using WorkingHour.Assets;
-using WorkingHour.Data.Models;
+﻿using WorkingHour.Data.Models;
 
 namespace WorkingHour.Data.Services
 {

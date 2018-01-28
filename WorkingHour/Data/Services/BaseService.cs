@@ -39,6 +39,7 @@ namespace WorkingHour.Data.Services
         {
             GetDataBaseXDocumentInstance.Save(DataBasePath);
             _xDocument = null;
+            BackupService.GetBackup();
         }
     }
 }

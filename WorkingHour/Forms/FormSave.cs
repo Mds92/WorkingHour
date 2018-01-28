@@ -42,7 +42,6 @@ namespace WorkingHour.Forms
                 ShowSuccessMessage("Time saved successfully");
                 StaticAssets.Duration = new TimeSpan(0, 0, 0, 0, 0);
                 DraftService.Clear();
-                BackupService.GetBackup();
                 Close();
             }
             catch (Exception exception)

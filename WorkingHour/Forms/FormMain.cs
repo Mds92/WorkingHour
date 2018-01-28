@@ -151,7 +151,6 @@ namespace WorkingHour
                 StartDateTime = StaticAssets.StartDateTime,
                 Duration = StaticAssets.Duration
             });
-            BackupService.GetBackup();
             _backupTimeSpan = new TimeSpan(0, 0, 0, 0);
         }
 
