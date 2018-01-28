@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MD.PersianDateTime;
 
 namespace WorkingHour.Data.Models
@@ -21,5 +22,7 @@ namespace WorkingHour.Data.Models
                 return _registerPersianDateTime;
             }
         }
+
+        public List<TimeModel> Times { get; set; }
     }
 }

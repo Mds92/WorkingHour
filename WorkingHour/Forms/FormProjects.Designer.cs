@@ -71,12 +71,23 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPageDataBase = new System.Windows.Forms.TabPage();
+            this.buttonMerge = new System.Windows.Forms.Button();
+            this.labelMegingInfo = new System.Windows.Forms.Label();
+            this.labelProjectNumber = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.buttonSelectDataBase = new System.Windows.Forms.Button();
+            this.textBoxDatabaseFilePath = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.openFileDialogForXml = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageProjects.SuspendLayout();
             this.tabPageTimes.SuspendLayout();
+            this.tabPageDataBase.SuspendLayout();
             this.SuspendLayout();
             // 
             // errorProvider1
@@ -87,6 +98,7 @@
             // 
             this.tabControl.Controls.Add(this.tabPageProjects);
             this.tabControl.Controls.Add(this.tabPageTimes);
+            this.tabControl.Controls.Add(this.tabPageDataBase);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Margin = new System.Windows.Forms.Padding(4);
@@ -321,7 +333,7 @@
             this.textBoxTimeDescription.Name = "textBoxTimeDescription";
             this.textBoxTimeDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxTimeDescription.Size = new System.Drawing.Size(777, 47);
-            this.textBoxTimeDescription.TabIndex = 25;
+            this.textBoxTimeDescription.TabIndex = 10;
             // 
             // label4
             // 
@@ -341,7 +353,7 @@
             this.maskedTextBoxTimeStopDateTime.Mask = "0000-00-00   00:00:00";
             this.maskedTextBoxTimeStopDateTime.Name = "maskedTextBoxTimeStopDateTime";
             this.maskedTextBoxTimeStopDateTime.Size = new System.Drawing.Size(133, 23);
-            this.maskedTextBoxTimeStopDateTime.TabIndex = 23;
+            this.maskedTextBoxTimeStopDateTime.TabIndex = 5;
             this.maskedTextBoxTimeStopDateTime.Text = "00000000000000";
             // 
             // label3
@@ -362,7 +374,7 @@
             this.maskedTextBoxTimeStartDateTime.Mask = "0000-00-00   00:00:00";
             this.maskedTextBoxTimeStartDateTime.Name = "maskedTextBoxTimeStartDateTime";
             this.maskedTextBoxTimeStartDateTime.Size = new System.Drawing.Size(133, 23);
-            this.maskedTextBoxTimeStartDateTime.TabIndex = 21;
+            this.maskedTextBoxTimeStartDateTime.TabIndex = 4;
             this.maskedTextBoxTimeStartDateTime.Text = "00000000000000";
             // 
             // label1
@@ -393,7 +405,7 @@
             this.maskedTextBoxTimeDuration.Mask = "0000:00:00";
             this.maskedTextBoxTimeDuration.Name = "maskedTextBoxTimeDuration";
             this.maskedTextBoxTimeDuration.Size = new System.Drawing.Size(77, 23);
-            this.maskedTextBoxTimeDuration.TabIndex = 20;
+            this.maskedTextBoxTimeDuration.TabIndex = 3;
             this.maskedTextBoxTimeDuration.Text = "00000000";
             this.maskedTextBoxTimeDuration.ValidatingType = typeof(int);
             // 
@@ -405,7 +417,7 @@
             this.buttonTimeCancel.Margin = new System.Windows.Forms.Padding(4);
             this.buttonTimeCancel.Name = "buttonTimeCancel";
             this.buttonTimeCancel.Size = new System.Drawing.Size(24, 24);
-            this.buttonTimeCancel.TabIndex = 14;
+            this.buttonTimeCancel.TabIndex = 7;
             this.toolTip1.SetToolTip(this.buttonTimeCancel, "Cancel");
             this.buttonTimeCancel.UseVisualStyleBackColor = true;
             this.buttonTimeCancel.Visible = false;
@@ -419,7 +431,7 @@
             this.buttonTimeNew.Margin = new System.Windows.Forms.Padding(4);
             this.buttonTimeNew.Name = "buttonTimeNew";
             this.buttonTimeNew.Size = new System.Drawing.Size(24, 24);
-            this.buttonTimeNew.TabIndex = 11;
+            this.buttonTimeNew.TabIndex = 6;
             this.toolTip1.SetToolTip(this.buttonTimeNew, "New");
             this.buttonTimeNew.UseVisualStyleBackColor = true;
             this.buttonTimeNew.Visible = false;
@@ -434,7 +446,7 @@
             this.buttonDeleteTime.Margin = new System.Windows.Forms.Padding(4);
             this.buttonDeleteTime.Name = "buttonDeleteTime";
             this.buttonDeleteTime.Size = new System.Drawing.Size(24, 24);
-            this.buttonDeleteTime.TabIndex = 13;
+            this.buttonDeleteTime.TabIndex = 8;
             this.toolTip1.SetToolTip(this.buttonDeleteTime, "Delete");
             this.buttonDeleteTime.UseVisualStyleBackColor = false;
             this.buttonDeleteTime.Visible = false;
@@ -449,7 +461,7 @@
             this.buttonTimeSubmit.Margin = new System.Windows.Forms.Padding(4);
             this.buttonTimeSubmit.Name = "buttonTimeSubmit";
             this.buttonTimeSubmit.Size = new System.Drawing.Size(24, 24);
-            this.buttonTimeSubmit.TabIndex = 12;
+            this.buttonTimeSubmit.TabIndex = 9;
             this.toolTip1.SetToolTip(this.buttonTimeSubmit, "Submit");
             this.buttonTimeSubmit.UseVisualStyleBackColor = false;
             this.buttonTimeSubmit.Visible = false;
@@ -505,7 +517,7 @@
             this.listViewTimes.Margin = new System.Windows.Forms.Padding(4);
             this.listViewTimes.Name = "listViewTimes";
             this.listViewTimes.Size = new System.Drawing.Size(876, 305);
-            this.listViewTimes.TabIndex = 3;
+            this.listViewTimes.TabIndex = 11;
             this.listViewTimes.UseCompatibleStateImageBehavior = false;
             this.listViewTimes.View = System.Windows.Forms.View.Details;
             this.listViewTimes.SelectedIndexChanged += new System.EventHandler(this.ListViewTimes_SelectedIndexChanged);
@@ -540,10 +552,116 @@
             this.columnHeader6.Text = "Description";
             this.columnHeader6.Width = 186;
             // 
+            // tabPageDataBase
+            // 
+            this.tabPageDataBase.Controls.Add(this.buttonMerge);
+            this.tabPageDataBase.Controls.Add(this.labelMegingInfo);
+            this.tabPageDataBase.Controls.Add(this.labelProjectNumber);
+            this.tabPageDataBase.Controls.Add(this.label7);
+            this.tabPageDataBase.Controls.Add(this.label6);
+            this.tabPageDataBase.Controls.Add(this.buttonSelectDataBase);
+            this.tabPageDataBase.Controls.Add(this.textBoxDatabaseFilePath);
+            this.tabPageDataBase.Controls.Add(this.label5);
+            this.tabPageDataBase.Location = new System.Drawing.Point(4, 25);
+            this.tabPageDataBase.Name = "tabPageDataBase";
+            this.tabPageDataBase.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDataBase.Size = new System.Drawing.Size(876, 432);
+            this.tabPageDataBase.TabIndex = 2;
+            this.tabPageDataBase.Text = "Merge";
+            this.tabPageDataBase.UseVisualStyleBackColor = true;
+            // 
+            // buttonMerge
+            // 
+            this.buttonMerge.BackColor = System.Drawing.Color.Red;
+            this.buttonMerge.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.buttonMerge.Location = new System.Drawing.Point(746, 123);
+            this.buttonMerge.Name = "buttonMerge";
+            this.buttonMerge.Size = new System.Drawing.Size(75, 31);
+            this.buttonMerge.TabIndex = 0;
+            this.buttonMerge.Text = "Merge";
+            this.buttonMerge.UseVisualStyleBackColor = false;
+            this.buttonMerge.Visible = false;
+            this.buttonMerge.Click += new System.EventHandler(this.ButtonMerge_Click);
+            // 
+            // labelMegingInfo
+            // 
+            this.labelMegingInfo.AutoSize = true;
+            this.labelMegingInfo.ForeColor = System.Drawing.Color.Blue;
+            this.labelMegingInfo.Location = new System.Drawing.Point(14, 123);
+            this.labelMegingInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelMegingInfo.Name = "labelMegingInfo";
+            this.labelMegingInfo.Size = new System.Drawing.Size(86, 17);
+            this.labelMegingInfo.TabIndex = 0;
+            this.labelMegingInfo.Text = "Merging info";
+            // 
+            // labelProjectNumber
+            // 
+            this.labelProjectNumber.AutoSize = true;
+            this.labelProjectNumber.Location = new System.Drawing.Point(139, 83);
+            this.labelProjectNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelProjectNumber.Name = "labelProjectNumber";
+            this.labelProjectNumber.Size = new System.Drawing.Size(32, 17);
+            this.labelProjectNumber.TabIndex = 0;
+            this.labelProjectNumber.Text = "000";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(14, 82);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(117, 17);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Project Numbers:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Maroon;
+            this.label6.Location = new System.Drawing.Point(287, 7);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(295, 17);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Merging two database, base on Project Name";
+            // 
+            // buttonSelectDataBase
+            // 
+            this.buttonSelectDataBase.Location = new System.Drawing.Point(826, 39);
+            this.buttonSelectDataBase.Name = "buttonSelectDataBase";
+            this.buttonSelectDataBase.Size = new System.Drawing.Size(28, 23);
+            this.buttonSelectDataBase.TabIndex = 2;
+            this.buttonSelectDataBase.Text = "...";
+            this.toolTip1.SetToolTip(this.buttonSelectDataBase, "Select Database File");
+            this.buttonSelectDataBase.UseVisualStyleBackColor = true;
+            this.buttonSelectDataBase.Click += new System.EventHandler(this.ButtonSelectDataBase_Click);
+            // 
+            // textBoxDatabaseFilePath
+            // 
+            this.textBoxDatabaseFilePath.Location = new System.Drawing.Point(119, 39);
+            this.textBoxDatabaseFilePath.Name = "textBoxDatabaseFilePath";
+            this.textBoxDatabaseFilePath.Size = new System.Drawing.Size(702, 23);
+            this.textBoxDatabaseFilePath.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(14, 41);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(106, 17);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Database Path:";
+            // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.FileName = "exportData";
             this.saveFileDialog1.Filter = "Excel file|*.xlsx";
+            // 
+            // openFileDialogForXml
+            // 
+            this.openFileDialogForXml.FileName = "openFileDialog1";
+            this.openFileDialogForXml.Filter = "Xml File|*.xml";
             // 
             // FormProjects
             // 
@@ -562,6 +680,8 @@
             this.tabPageProjects.PerformLayout();
             this.tabPageTimes.ResumeLayout(false);
             this.tabPageTimes.PerformLayout();
+            this.tabPageDataBase.ResumeLayout(false);
+            this.tabPageDataBase.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -612,5 +732,15 @@
         private System.Windows.Forms.MaskedTextBox maskedTextBoxTimeStopDateTime;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.MaskedTextBox maskedTextBoxTimeStartDateTime;
+        private System.Windows.Forms.TabPage tabPageDataBase;
+        private System.Windows.Forms.Button buttonSelectDataBase;
+        private System.Windows.Forms.TextBox textBoxDatabaseFilePath;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.OpenFileDialog openFileDialogForXml;
+        private System.Windows.Forms.Label labelMegingInfo;
+        private System.Windows.Forms.Label labelProjectNumber;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button buttonMerge;
     }
 }

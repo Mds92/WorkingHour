@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using MD.PersianDateTime;
 using OfficeOpenXml;
@@ -395,6 +396,60 @@ namespace WorkingHour.Forms
                 worksheet.Cells[sumCellName].Style.Numberformat.Format = timeFormat;
 
                 excelPackage.Save();
+            }
+        }
+
+        #endregion
+
+        #region Merge
+
+        private void ButtonSelectDataBase_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogForXml.ShowDialog() != DialogResult.OK) return;
+            labelProjectNumber.Text = "";
+            labelMegingInfo.Text = "";
+            try
+            {
+                var databaseFilePath = openFileDialogForXml.FileName;
+                textBoxDatabaseFilePath.Text = databaseFilePath;
+                var mergingService = new MerginService(databaseFilePath);
+                var theSameProjectsCount = mergingService.GetTheSameProjectsCount(ProjectService.SelectAll());
+                labelMegingInfo.Text = $"Found {theSameProjectsCount} project(s) with the same name";
+                if (theSameProjectsCount <= 0)
+                    labelMegingInfo.Text += $"{Environment.NewLine}There are nothing to merge";
+                buttonMerge.Visible = theSameProjectsCount > 0;
+            }
+            catch (Exception exception)
+            {
+                ShowErrorMessage($"Selected Database is invalid {Environment.NewLine} {exception.Message}");
+            }
+        }
+
+        private void ButtonMerge_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(this, @"Are you sure to want merge?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            try
+            {
+                var databaseFilePath = textBoxDatabaseFilePath.Text.Trim();
+                var mergingService = new MerginService(databaseFilePath);
+                var projectsOfCurrentDataBase = ProjectService.SelectAll();
+                var theSameProjects = mergingService.GetTheSameProjects(projectsOfCurrentDataBase);
+                foreach (var theSameProject in theSameProjects)
+                {
+                    var projectOfCurrentDatabase = projectsOfCurrentDataBase.FirstOrDefault(q => q.Title.Equals(theSameProject.Title, StringComparison.InvariantCultureIgnoreCase));
+                    if(projectOfCurrentDatabase == null) continue;
+                    foreach (var timeModel in theSameProject.Times)
+                    {
+                        timeModel.ProjectId = projectOfCurrentDatabase.Id;
+                        TimeService.Save(timeModel);
+                    }
+                    ProjectService.CalculateTotalDuration(projectOfCurrentDatabase.Id);
+                }
+                ShowSuccessMessage("The databases merged successfully");
+            }
+            catch (Exception exception)
+            {
+                ShowErrorMessage(exception.Message);
             }
         }
 

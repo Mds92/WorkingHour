@@ -73,6 +73,10 @@ namespace WorkingHour.Data.Services
             xelement.SetAttributeValue(nameof(ProjectModel.TotalDuration), totalTimeSpan.ToStandardString());
             SaveChanges();
         }
+        public static void CalculateTotalDuration(int projectId)
+        {
+            CalculateTotalDuration(projectId.ToString());
+        }
         public static void Save(ProjectModel projectModel)
         {
             var xDocument = GetDataBaseXDocumentInstance;
@@ -95,7 +99,7 @@ namespace WorkingHour.Data.Services
 
             // 
             SaveChanges();
-            CalculateTotalDuration(projectModel.Id.ToString());
+            CalculateTotalDuration(projectModel.Id);
             BackupService.GetBackup();
         }
         private static XElement GetElement(string projectId)

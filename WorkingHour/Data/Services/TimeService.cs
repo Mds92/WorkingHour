@@ -36,7 +36,7 @@ namespace WorkingHour.Data.Services
                 xElement.SetAttributeValue(nameof(TimeModel.Description), timeModel.Description);
             }
             SaveChanges();
-            ProjectService.CalculateTotalDuration(project.Id.ToString());
+            ProjectService.CalculateTotalDuration(project.Id);
         }
         public static void Delete(Guid id)
         {
@@ -52,14 +52,14 @@ namespace WorkingHour.Data.Services
         }
         public static List<TimeModel> SelectAllByProjectId(string projectId)
         {
-            var elements = GetDataBaseXDocumentInstance
+            var timeNodes = GetDataBaseXDocumentInstance
                 .Descendants(Constants.TimeNodeName)
                 .Where(q => q.HasAttributes &&
                                      q.Attribute(nameof(TimeModel.ProjectId)) != null &&
                                      q.Attribute(nameof(TimeModel.ProjectId)).Value.Equals(projectId, StringComparison.InvariantCultureIgnoreCase))
                 .ToList();
             var times = new List<TimeModel>();
-            foreach (var xElement in elements)
+            foreach (var xElement in timeNodes)
             {
                 times.Add(new TimeModel
                 {

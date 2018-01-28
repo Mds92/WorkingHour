@@ -67,6 +67,7 @@
     <Compile Include="Data\Models\ProjectModel.cs" />
     <Compile Include="Data\Services\BackupService.cs" />
     <Compile Include="Data\Services\DraftService.cs" />
+    <Compile Include="Data\Services\MerginService.cs" />
     <Compile Include="Data\Services\SettingService.cs" />
     <Compile Include="Data\Services\TimeService.cs" />
     <Compile Include="Data\Services\ProjectService.cs" />
