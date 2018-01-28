@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- By Mohammad Dayyan, @mdssoft -->
-<Database DraftStartDateTime="" DraftDuration="" BackupPath="C:\Users\Mohammad\OneDrive\Documents\VistaBest\WorkingHours">
+<Database DraftStartDateTime="" DraftDuration="" BackupPath="">
   <Projects>
     <Project Id="1" Title="VistaBest" InitialDuration="0067:00:00" TotalDuration="0110:35:28" RegisterDateTime="2018-01-05 07:42:01" />
   </Projects>
