@@ -126,6 +126,7 @@ namespace WorkingHour.Forms
         }
         private void ButtonProjectCancel_Click(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
             ChangeProjectFormStatus(FormStatusEnum.None);
         }
         private void ButtonProjectSubmit_Click(object sender, EventArgs e)
@@ -234,6 +235,7 @@ namespace WorkingHour.Forms
         }
         private void ButtonTimeCancel_Click(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
             ChangeTimesFormStatus(FormStatusEnum.None);
         }
         private void ButtonTimeSubmit_Click(object sender, EventArgs e)
