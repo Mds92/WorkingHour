@@ -154,15 +154,14 @@
             // notifyIcon
             // 
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
-            this.notifyIcon.Text = "notifyIcon Tooltip";
-            this.notifyIcon.Visible = true;
-            this.notifyIcon.DoubleClick += new System.EventHandler(this.NotifyIcon_MouseDoubleClick);
+            this.notifyIcon.Text = "00:00:00";
+            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseDoubleClick);
             // 
             // buttonSettings
             // 
             this.buttonSettings.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonSettings.BackgroundImage")));
             this.buttonSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonSettings.Location = new System.Drawing.Point(388, 12);
+            this.buttonSettings.Location = new System.Drawing.Point(392, 12);
             this.buttonSettings.Name = "buttonSettings";
             this.buttonSettings.Size = new System.Drawing.Size(32, 32);
             this.buttonSettings.TabIndex = 4;
@@ -186,7 +185,7 @@
             // 
             this.buttonSystemTray.BackgroundImage = global::WorkingHour.Properties.Resources.minimize;
             this.buttonSystemTray.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonSystemTray.Location = new System.Drawing.Point(354, 14);
+            this.buttonSystemTray.Location = new System.Drawing.Point(364, 14);
             this.buttonSystemTray.Name = "buttonSystemTray";
             this.buttonSystemTray.Size = new System.Drawing.Size(28, 28);
             this.buttonSystemTray.TabIndex = 8;
