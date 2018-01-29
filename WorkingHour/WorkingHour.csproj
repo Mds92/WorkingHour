@@ -72,6 +72,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\FixedSizedQueue.cs" />
+    <Compile Include="Assets\KeyLogger.cs" />
     <Compile Include="Assets\Constants.cs" />
     <Compile Include="Assets\ExtensionMethods.cs" />
     <Compile Include="Assets\FormStatusEnum.cs" />

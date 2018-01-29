@@ -209,8 +209,10 @@
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.labelDuration);
+            this.KeyPreview = true;
             this.Name = "FormMain";
             this.Text = "Working Hour";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

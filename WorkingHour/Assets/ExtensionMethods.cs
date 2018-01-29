@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using MD.PersianDateTime;
 
 namespace WorkingHour.Assets
@@ -20,6 +22,14 @@ namespace WorkingHour.Assets
         {
             dateTime.EnglishNumber = true;
             return dateTime.ToString("yyyy-MM-dd   HH:mm:ss");
+        }
+
+        public static string ToStandardString<T>(this IEnumerable<T> queue)
+        {
+            var stringBuilder = new StringBuilder("");
+            foreach (var item in queue)
+                stringBuilder.Append(item);
+            return stringBuilder.ToString();
         }
 
         public static TimeSpan StandardTimeSpanParse(this string inputString)

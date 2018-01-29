@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace WorkingHour
             Deactivate += FormDeactivate;
             Activated += FormActivated;
             LoadSavedDraft();
+            KeyLogger.Start(KeyDownAction);
 
             #endregion
         }
@@ -84,9 +86,6 @@ namespace WorkingHour
         private bool IsForbiddinWindowActive()
         {
             var activeWindowTitle = GetCaptionOfActiveWindow();
-#if DEBUG
-            Trace.WriteLine(activeWindowTitle);
-#endif
             return StaticAssets.ForbiddinApps.Any(q => activeWindowTitle.IndexOf(q, StringComparison.InvariantCultureIgnoreCase) > -1);
         }
 
@@ -97,7 +96,7 @@ namespace WorkingHour
         }
         private void SetLabelStartFromText()
         {
-            labelStartFrom.Text = $@"{StaticAssets.StartDateTime:yyyy/MM/dd hh:mm:ss}";
+            labelStartFrom.Text = StaticAssets.StartDateTime.ToStandardString();
         }
 
         #endregion
@@ -203,6 +202,11 @@ namespace WorkingHour
             StaticAssets.Duration = new TimeSpan(0, 0, 0, 0);
             labelDuration.Text = "00:00:00";
             labelStartFrom.Text = "";
+            if (_isTimerStarted)
+            {
+                StaticAssets.StartDateTime = DateTime.Now;
+                labelStartFrom.Text = StaticAssets.StartDateTime.ToStandardString();
+            }
             DraftService.Clear();
         }
 
@@ -281,6 +285,38 @@ namespace WorkingHour
             ChangeButtonStatus();
         }
 
+        private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            KeyLogger.Stop();
+        }
+
+        private readonly FixedSizedQueue<Keys> _pressedKeysQueue = new FixedSizedQueue<Keys> { Limit = 6 };
+        private void KeyDownAction(Keys key)
+        {
+            var keyCode = (int)key;
+            bool isShiftKeyPressed;
+            switch (key)
+            {
+                case Keys.Shift:
+                case Keys.ShiftKey:
+                case Keys.LShiftKey:
+                case Keys.RShiftKey:
+                    isShiftKeyPressed = true;
+                    break;
+
+                default:
+                    isShiftKeyPressed = false;
+                    break;
+            }
+            if (isShiftKeyPressed || keyCode >= (int)Keys.A && keyCode <= (int)Keys.Z) _pressedKeysQueue.Enqueue(key);
+            var pressedKeys = _pressedKeysQueue.ToString();
+            if (pressedKeys.IndexOf("Shift", StringComparison.InvariantCultureIgnoreCase) > -1 && pressedKeys.IndexOf("Start", StringComparison.InvariantCultureIgnoreCase) > -1 && !_isTimerStarted)
+                StartTimers();
+            else if (pressedKeys.IndexOf("Shift", StringComparison.InvariantCultureIgnoreCase) > -1 && pressedKeys.IndexOf("Stop", StringComparison.InvariantCultureIgnoreCase) > -1 && _isTimerStarted)
+                StopTimers();
+            Trace.WriteLine(_pressedKeysQueue.ToString());
+        }
+
         #endregion
 
         #region Notify Icon
@@ -292,6 +328,7 @@ namespace WorkingHour
             notifyIcon.Visible = false;
             Show();
         }
+
 
         #endregion
     }
