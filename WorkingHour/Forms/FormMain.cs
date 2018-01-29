@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -314,7 +312,6 @@ namespace WorkingHour
                 StartTimers();
             else if (pressedKeys.IndexOf("Shift", StringComparison.InvariantCultureIgnoreCase) > -1 && pressedKeys.IndexOf("Stop", StringComparison.InvariantCultureIgnoreCase) > -1 && _isTimerStarted)
                 StopTimers();
-            Trace.WriteLine(_pressedKeysQueue.ToString());
         }
 
         #endregion
