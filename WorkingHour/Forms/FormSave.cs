@@ -35,7 +35,7 @@ namespace WorkingHour.Forms
                 {
                     ProjectId = int.Parse(_projectId),
                     Duration = StaticAssets.Duration,
-                    StopDateTime = StaticAssets.StopDateTime,
+                    StopDateTime = StaticAssets.StopDateTime <= DateTime.MinValue ? DateTime.Now : StaticAssets.StopDateTime,
                     StartDateTime = StaticAssets.StartDateTime,
                     Description = textBoxDescription.Text.Trim()
                 });
