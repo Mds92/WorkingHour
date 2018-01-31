@@ -42,10 +42,16 @@
             this.buttonSaveTime = new System.Windows.Forms.Button();
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemWorkingHour = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemStart = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemStop = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.buttonProjects = new System.Windows.Forms.Button();
             this.buttonSystemTray = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelDuration
@@ -153,9 +159,46 @@
             // 
             // notifyIcon
             // 
+            this.notifyIcon.ContextMenuStrip = this.contextMenuStrip;
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "00:00:00";
             this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseDoubleClick);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemWorkingHour,
+            this.toolStripSeparator1,
+            this.toolStripMenuItemStart,
+            this.toolStripMenuItemStop});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(150, 76);
+            // 
+            // toolStripMenuItemWorkingHour
+            // 
+            this.toolStripMenuItemWorkingHour.Enabled = false;
+            this.toolStripMenuItemWorkingHour.Name = "toolStripMenuItemWorkingHour";
+            this.toolStripMenuItemWorkingHour.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItemWorkingHour.Text = "Working Hour";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
+            // 
+            // toolStripMenuItemStart
+            // 
+            this.toolStripMenuItemStart.Name = "toolStripMenuItemStart";
+            this.toolStripMenuItemStart.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItemStart.Text = "Start";
+            this.toolStripMenuItemStart.Click += new System.EventHandler(this.ToolStripMenuItemStart_Click);
+            // 
+            // toolStripMenuItemStop
+            // 
+            this.toolStripMenuItemStop.Name = "toolStripMenuItemStop";
+            this.toolStripMenuItemStop.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItemStop.Text = "Stop";
+            this.toolStripMenuItemStop.Click += new System.EventHandler(this.ToolStripMenuItemStop_Click);
             // 
             // buttonSettings
             // 
@@ -213,6 +256,7 @@
             this.Name = "FormMain";
             this.Text = "Working Hour";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,6 +280,11 @@
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.Button buttonSystemTray;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemStart;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemStop;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemWorkingHour;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

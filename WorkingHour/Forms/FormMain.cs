@@ -41,21 +41,15 @@ namespace WorkingHour
 
         #region Utility
 
-        private void CheckCursorPosition()
+        private void UpdateLabelIdleText()
         {
             Invoke(new MethodInvoker(delegate
             {
-                StaticAssets.LatestCursorPositionChangeTime = StaticAssets.LatestCursorPosition == Cursor.Position
-                    ? StaticAssets.LatestCursorPositionChangeTime.Add(new TimeSpan(0, 0, 0, 1))
-                    : new TimeSpan(0, 0, 0, 0);
-
-                StaticAssets.AddSecondToDuration = StaticAssets.LatestCursorPositionChangeTime < Constants.MinTimeSpanToIdentifyIdle;
                 labelIdle.Invoke(new MethodInvoker(delegate
                 {
-                    labelIdle.Text = $@"{StaticAssets.LatestCursorPositionChangeTime.Hours:00}:{StaticAssets.LatestCursorPositionChangeTime.Minutes:00}:{StaticAssets.LatestCursorPositionChangeTime.Seconds:00}";
+                    labelIdle.Text = $@"{StaticAssets.IdleTime.Hours:00}:{StaticAssets.IdleTime.Minutes:00}:{StaticAssets.IdleTime.Seconds:00}";
                 }));
             }));
-            StaticAssets.LatestCursorPosition = Cursor.Position;
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -125,17 +119,31 @@ namespace WorkingHour
         private void TimerWorkingTick(object sender, EventArgs e)
         {
             buttonReset.Enabled = StaticAssets.Duration > TimeSpan.MinValue;
-            if (!StaticAssets.AddSecondToDuration || IsForbiddinWindowActive()) return;
+            if (StaticAssets.IdleTime > Constants.MinTimeSpanToIdentifyIdle || IsForbiddinWindowActive()) return;
             StaticAssets.Duration = StaticAssets.Duration.Add(new TimeSpan(0, 0, 0, 1));
 #if DEBUG
-            StaticAssets.Duration = StaticAssets.Duration.Add(new TimeSpan(0, 0, 5, 0));
+            StaticAssets.Duration = StaticAssets.Duration.Add(new TimeSpan(0, 0, 10, 0));
 #endif
             SetLabelDurationText();
         }
 
         private void TimerIdleTick(object sender, EventArgs e)
         {
-            CheckCursorPosition();
+#if DEBUG
+
+            StaticAssets.IdleTime =
+                StaticAssets.LatestCursorPosition == Cursor.Position
+                    ? StaticAssets.IdleTime.Add(new TimeSpan(0, 0, 0, 30))
+                    : new TimeSpan(0, 0, 0, 0);
+#else
+            StaticAssets.IdleTime =
+                StaticAssets.LatestCursorPosition == Cursor.Position
+                ? StaticAssets.IdleTime.Add(new TimeSpan(0, 0, 0, 1))
+                : new TimeSpan(0, 0, 0, 0);
+#endif
+
+            UpdateLabelIdleText();
+            StaticAssets.LatestCursorPosition = Cursor.Position;
         }
 
         private TimeSpan _backupTimeSpan = new TimeSpan(0, 0, 0, 0);
@@ -288,30 +296,10 @@ namespace WorkingHour
             KeyLogger.Stop();
         }
 
-        private readonly FixedSizedQueue<Keys> _pressedKeysQueue = new FixedSizedQueue<Keys> { Limit = 6 };
         private void KeyDownAction(Keys key)
         {
-            var keyCode = (int)key;
-            bool isShiftKeyPressed;
-            switch (key)
-            {
-                case Keys.Shift:
-                case Keys.ShiftKey:
-                case Keys.LShiftKey:
-                case Keys.RShiftKey:
-                    isShiftKeyPressed = true;
-                    break;
-
-                default:
-                    isShiftKeyPressed = false;
-                    break;
-            }
-            if (isShiftKeyPressed || keyCode >= (int)Keys.A && keyCode <= (int)Keys.Z) _pressedKeysQueue.Enqueue(key);
-            var pressedKeys = _pressedKeysQueue.ToString();
-            if (pressedKeys.IndexOf("Shift", StringComparison.InvariantCultureIgnoreCase) > -1 && pressedKeys.IndexOf("Start", StringComparison.InvariantCultureIgnoreCase) > -1 && !_isTimerStarted)
-                StartTimers();
-            else if (pressedKeys.IndexOf("Shift", StringComparison.InvariantCultureIgnoreCase) > -1 && pressedKeys.IndexOf("Stop", StringComparison.InvariantCultureIgnoreCase) > -1 && _isTimerStarted)
-                StopTimers();
+            StaticAssets.IdleTime = new TimeSpan(0, 0, 0, 0);
+            UpdateLabelIdleText();
         }
 
         #endregion
@@ -326,6 +314,17 @@ namespace WorkingHour
             Show();
         }
 
+        private void ToolStripMenuItemStart_Click(object sender, EventArgs e)
+        {
+            if (_isTimerStarted) return;
+            StartTimers();
+        }
+
+        private void ToolStripMenuItemStop_Click(object sender, EventArgs e)
+        {
+            if (!_isTimerStarted) return;
+            StopTimers();
+        }
 
         #endregion
     }
