@@ -84,7 +84,7 @@ namespace WorkingHour
         private void SetLabelDurationText()
         {
             var labelString = $@"{StaticAssets.Duration.Hours:00}:{StaticAssets.Duration.Minutes:00}:{StaticAssets.Duration.Seconds:00}";
-            labelDuration.Text = notifyIcon.Text = labelString;
+            labelDuration.Text = toolStripMenuItemTime.Text = notifyIcon.Text = labelString;
         }
         private void SetLabelStartFromText()
         {
@@ -207,6 +207,7 @@ namespace WorkingHour
             if (MessageBox.Show(this, @"Are you sure to reset timer?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             StaticAssets.Duration = new TimeSpan(0, 0, 0, 0);
             labelDuration.Text = "00:00:00";
+            toolStripMenuItemTime.Text = "00:00:00";
             labelStartFrom.Text = "";
             if (_isTimerStarted)
             {

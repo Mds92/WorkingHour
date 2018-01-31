@@ -44,6 +44,7 @@
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemWorkingHour = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemTime = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemStart = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemStop = new System.Windows.Forms.ToolStripMenuItem();
@@ -168,11 +169,12 @@
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemWorkingHour,
+            this.toolStripMenuItemTime,
             this.toolStripSeparator1,
             this.toolStripMenuItemStart,
             this.toolStripMenuItemStop});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(150, 76);
+            this.contextMenuStrip.Size = new System.Drawing.Size(150, 98);
             // 
             // toolStripMenuItemWorkingHour
             // 
@@ -180,6 +182,14 @@
             this.toolStripMenuItemWorkingHour.Name = "toolStripMenuItemWorkingHour";
             this.toolStripMenuItemWorkingHour.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItemWorkingHour.Text = "Working Hour";
+            // 
+            // toolStripMenuItemTime
+            // 
+            this.toolStripMenuItemTime.Enabled = false;
+            this.toolStripMenuItemTime.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.toolStripMenuItemTime.Name = "toolStripMenuItemTime";
+            this.toolStripMenuItemTime.Size = new System.Drawing.Size(149, 22);
+            this.toolStripMenuItemTime.Text = "00:00:00";
             // 
             // toolStripSeparator1
             // 
@@ -285,6 +295,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemStop;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemWorkingHour;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTime;
     }
 }
 
