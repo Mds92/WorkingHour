@@ -183,8 +183,8 @@ namespace WorkingHour
 
         private void ChangeButtonStatus()
         {
-            buttonProjects.Enabled = buttonSettings.Enabled = buttonStart.Enabled = !_isTimerStarted;
-            buttonStop.Enabled = _isTimerStarted;
+            buttonProjects.Enabled = buttonSettings.Enabled = buttonStart.Enabled = toolStripMenuItemStart.Enabled = !_isTimerStarted;
+            buttonStop.Enabled = toolStripMenuItemStop.Enabled = _isTimerStarted;
             comboBoxProjects.Enabled = buttonSaveTime.Enabled = !_isTimerStarted;
             buttonReset.Enabled = StaticAssets.Duration > TimeSpan.MinValue;
         }
@@ -198,6 +198,11 @@ namespace WorkingHour
         {
             DisableDeactivateOperation = true;
             if (MessageBox.Show(this, @"Are you sure to stop timer?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            DraftService.Save(new DraftModel
+            {
+                StartDateTime = StaticAssets.StartDateTime,
+                Duration = StaticAssets.Duration
+            });
             StopTimers();
         }
 
