@@ -25,8 +25,8 @@ namespace WorkingHour
             #region Form Events
 
             StaticAssets.OriginalWindowSize = Size;
-            Deactivate += FormDeactivate;
-            Activated += FormActivated;
+            //Deactivate += FormDeactivate;
+            //Activated += FormActivated;
             LoadSavedDraft();
             KeyLogger.Start(KeyDownAction);
 
@@ -198,12 +198,13 @@ namespace WorkingHour
         {
             DisableDeactivateOperation = true;
             if (MessageBox.Show(this, @"Are you sure to stop timer?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            StopTimers();
             DraftService.Save(new DraftModel
             {
                 StartDateTime = StaticAssets.StartDateTime,
+                StopDateTime = StaticAssets.StopDateTime,
                 Duration = StaticAssets.Duration
             });
-            StopTimers();
         }
 
         private void ButtonReset_Click(object sender, EventArgs e)
@@ -289,6 +290,10 @@ namespace WorkingHour
                 StaticAssets.StartDateTime = draftModel.StartDateTime;
                 SetLabelStartFromText();
             }
+            if (draftModel.StopDateTime > DateTime.MinValue)
+            {
+                StaticAssets.StopDateTime = draftModel.StopDateTime;
+            }
             if (draftModel.Duration > TimeSpan.MinValue)
             {
                 StaticAssets.Duration = draftModel.Duration;
@@ -300,6 +305,14 @@ namespace WorkingHour
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             KeyLogger.Stop();
+            if (StaticAssets.StopDateTime <= DateTime.MinValue)
+                StaticAssets.StopDateTime = DateTime.Now;
+            DraftService.Save(new DraftModel
+            {
+                StartDateTime = StaticAssets.StartDateTime,
+                StopDateTime = StaticAssets.StopDateTime,
+                Duration = StaticAssets.Duration
+            });
         }
 
         private void KeyDownAction(Keys key)
