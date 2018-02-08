@@ -14,6 +14,9 @@ namespace WorkingHour.Data.Services
             var project = ProjectService.SelectById(timeModel.ProjectId.ToString());
             if (project == null)
                 throw new Exception("Project is not exist");
+            timeModel.RegisterDateTime = timeModel.RegisterDateTime > DateTime.MinValue
+                ? timeModel.RegisterDateTime
+                : DateTime.Now;
             var xDocument = GetDataBaseXDocumentInstance;
             var xElement = GetElement(timeModel.Id.ToString()) ?? GetElement(timeModel.StartDateTime.ToStandardString(), timeModel.StopDateTime.ToStandardString());
             if (xElement == null)
@@ -24,7 +27,7 @@ namespace WorkingHour.Data.Services
                     new XAttribute(nameof(TimeModel.StartDateTime), timeModel.StartDateTime.ToStandardString()),
                     new XAttribute(nameof(TimeModel.StopDateTime), timeModel.StopDateTime.ToStandardString()),
                     new XAttribute(nameof(TimeModel.Duration), timeModel.Duration.ToStandardString()),
-                    new XAttribute(nameof(TimeModel.RegisterDateTime), DateTime.Now.ToStandardString()),
+                    new XAttribute(nameof(TimeModel.RegisterDateTime), timeModel.RegisterDateTime),
                     new XAttribute(nameof(TimeModel.Description), timeModel.Description));
                 xDocument.Descendants(Constants.TimesNodeName).First().Add(xElement);
             }
