@@ -75,7 +75,7 @@ namespace WorkingHour.Data.Services
                     RegisterDateTime = DateTime.Parse(xElement.Attribute(nameof(TimeModel.RegisterDateTime)).Value)
                 });
             }
-            return times.OrderByDescending(q => q.StopDateTime).ToList();
+            return times.OrderByDescending(q => q.RegisterDateTime).ToList();
         }
         private static XElement GetElement(string id)
         {
