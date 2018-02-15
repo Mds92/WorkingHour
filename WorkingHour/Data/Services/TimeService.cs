@@ -47,10 +47,10 @@ namespace WorkingHour.Data.Services
             var timElement = GetElement(idString);
             if (timElement == null)
                 throw new Exception($"Time with `{id}` Id is not exist in DataBase");
-            timElement.RemoveAll();
-            SaveChanges();
             var projectIdAttribute = timElement.Attribute(nameof(TimeModel.ProjectId));
             var projectId = projectIdAttribute?.Value ?? "";
+            timElement.RemoveAll();
+            SaveChanges();
             ProjectService.CalculateTotalDuration(projectId);
         }
         public static List<TimeModel> SelectAllByProjectId(string projectId)
