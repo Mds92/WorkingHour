@@ -49,7 +49,7 @@ namespace WorkingHour.Data.Services
                 throw new Exception($"Time with `{id}` Id is not exist in DataBase");
             var projectIdAttribute = timElement.Attribute(nameof(TimeModel.ProjectId));
             var projectId = projectIdAttribute?.Value ?? "";
-            timElement.RemoveAll();
+            timElement.Remove();
             SaveChanges();
             ProjectService.CalculateTotalDuration(projectId);
         }
