@@ -358,54 +358,51 @@ namespace WorkingHour.Forms
             {
                 var worksheet = excelPackage.Workbook.Worksheets["Working Hour"] ?? excelPackage.Workbook.Worksheets.Add("Working Hour");
 
-                worksheet.Column(1).Width = 30;
-                worksheet.Column(2).Width = 20;
-                worksheet.Column(3).Width = 40;
+                worksheet.Column(1).Width = 40;
+                worksheet.Column(2).Width = 40;
+                worksheet.Column(3).Width = 10;
+                worksheet.Column(4).Width = 100;
 
                 worksheet.Row(1).Height = 25;
 
                 // عنوان بالا
-                worksheet.Cells["A1:C1"].Merge = true;
-                worksheet.Cells["A1:C1"].Value = $"{project.Title}, {project.RegisterPersianDateTime.ToLongDateTimeString()}";
-                FormatExcelRange(worksheet.Cells["A1:C1"], true);
-                worksheet.Cells["A1:C1"].Style.Font.Bold = true;
+                worksheet.Cells["A1:D1"].Merge = true;
+                worksheet.Cells["A1:D1"].Value = $"{project.Title}";
+                FormatExcelRange(worksheet.Cells["A1:D1"], true);
+                worksheet.Cells["A1:D1"].Style.Font.Bold = true;
 
                 // عناوین هر ستون
-                worksheet.Cells["A2"].Value = "Date";
-                worksheet.Cells["B2"].Value = "Time";
-                worksheet.Cells["C2"].Value = "Description";
+                worksheet.Cells["A2"].Value = "Start Date Time";
+                worksheet.Cells["B2"].Value = "End Date Time";
+                worksheet.Cells["C2"].Value = "Duration";
+                worksheet.Cells["D2"].Value = "Description";
                 FormatExcelRange(worksheet.Cells["A2"], true);
                 FormatExcelRange(worksheet.Cells["B2"], true);
                 FormatExcelRange(worksheet.Cells["C2"], true);
-                worksheet.Cells["A2:C2"].Style.Font.Bold = true;
+                FormatExcelRange(worksheet.Cells["D2"], true);
+                worksheet.Cells["A2:D2"].Style.Font.Bold = true;
 
-                // ساعات ماه های قبل
-                worksheet.Cells["A3"].Value = "";
-                worksheet.Cells["B3"].Value = project.InitialDuration;
-                worksheet.Cells["C3"].Value = "از ماه های قبل";
-                FormatExcelRange(worksheet.Cells["A3"]);
-                FormatExcelRange(worksheet.Cells["B3"]);
-                FormatExcelRange(worksheet.Cells["C3"]);
-                worksheet.Cells["A3:C3"].Style.Numberformat.Format = timeFormat;
-
-                var row = 4;
+                var row = 3;
                 foreach (var timeModel in times)
                 {
                     var cellName1 = $"A{row}";
                     var cellName2 = $"B{row}";
                     var cellName3 = $"C{row}";
-                    worksheet.Cells[cellName1].Value = timeModel.StartPersianDateTime.ToLongDateString();
-                    worksheet.Cells[cellName2].Value = timeModel.Duration;
-                    worksheet.Cells[cellName3].Value = timeModel.Description;
+                    var cellName4 = $"D{row}";
+                    worksheet.Cells[cellName1].Value = timeModel.StartPersianDateTime.ToLongDateTimeString();
+                    worksheet.Cells[cellName2].Value = timeModel.StopPersianDateTime.ToLongDateTimeString();
+                    worksheet.Cells[cellName3].Value = timeModel.Duration;
+                    worksheet.Cells[cellName4].Value = timeModel.Description;
                     FormatExcelRange(worksheet.Cells[cellName1]);
                     FormatExcelRange(worksheet.Cells[cellName2]);
                     FormatExcelRange(worksheet.Cells[cellName3]);
-                    worksheet.Cells[cellName2].Style.Numberformat.Format = timeFormat;
+                    FormatExcelRange(worksheet.Cells[cellName4]);
+                    worksheet.Cells[cellName3].Style.Numberformat.Format = timeFormat;
                     row++;
                 }
 
-                var sumCellName = $"B{row}";
-                worksheet.Cells[sumCellName].Formula = $"SUM(B3:B{row - 1})";
+                var sumCellName = $"C{row}";
+                worksheet.Cells[sumCellName].Formula = $"SUM(C3:C{row - 1})";
                 FormatExcelRange(worksheet.Cells[sumCellName], true);
                 worksheet.Cells[sumCellName].Style.Numberformat.Format = timeFormat;
 
