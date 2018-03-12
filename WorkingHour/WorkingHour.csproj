@@ -56,8 +56,8 @@
     <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
     </Reference>
-    <Reference Include="MD.PersianDateTime, Version=3.7.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MD.PersianDateTime.3.7.4.0\lib\MD.PersianDateTime.dll</HintPath>
+    <Reference Include="MD.PersianDateTime, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MD.PersianDateTime.3.8.1\lib\MD.PersianDateTime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
