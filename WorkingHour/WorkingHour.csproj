@@ -53,8 +53,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EPPlus, Version=4.5.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.5.1\lib\net40\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="MD.PersianDateTime, Version=3.8.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MD.PersianDateTime.3.8.3\lib\MD.PersianDateTime.dll</HintPath>
@@ -70,8 +70,8 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="ZetaLongPaths, Version=1.0.0.23, Culture=neutral, PublicKeyToken=b764f59068f31f38, processorArchitecture=MSIL">
-      <HintPath>..\packages\ZetaLongPaths.1.0.0.23\lib\net40-full\ZetaLongPaths.dll</HintPath>
+    <Reference Include="ZetaLongPaths, Version=1.0.0.27, Culture=neutral, PublicKeyToken=b764f59068f31f38, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZetaLongPaths.1.0.0.27\lib\net452-full\ZetaLongPaths.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -8,8 +8,12 @@ namespace WorkingHour.Data.Services
         {
             var xElement = GetRootElement();
             var backupPathAttribute = xElement.Attribute(nameof(SettingsModel.BackupPath));
+            var restTimeInMinutesAttribute = xElement.Attribute(nameof(SettingsModel.RestTimeInMinutes));
+            int.TryParse(restTimeInMinutesAttribute?.Value, out var restTimeInMinutes);
+            if (restTimeInMinutes <= 0) restTimeInMinutes = 1;
             var model = new SettingsModel
             {
+                RestTimeInMinutes = restTimeInMinutes,
                 BackupPath = string.IsNullOrWhiteSpace(backupPathAttribute?.Value) ? "" : backupPathAttribute.Value.Trim()
             };
             return model;
@@ -18,6 +22,7 @@ namespace WorkingHour.Data.Services
         {
             if (string.IsNullOrEmpty(model.BackupPath)) model.BackupPath = "";
             var xElement = GetRootElement();
+            xElement.SetAttributeValue(nameof(SettingsModel.RestTimeInMinutes), model.RestTimeInMinutes);
             xElement.SetAttributeValue(nameof(SettingsModel.BackupPath), model.BackupPath);
             SaveChanges();
         }

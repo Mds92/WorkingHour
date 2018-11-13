@@ -8,5 +8,6 @@
         }
 
         public string BackupPath { get; set; }
+        public int RestTimeInMinutes { get; set; }
     }
 }

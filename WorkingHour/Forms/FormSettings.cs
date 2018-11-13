@@ -17,6 +17,7 @@ namespace WorkingHour.Forms
         {
             var model = SettingService.GetSettings();
             textBoxBackupPath.Text = model.BackupPath;
+            numericUpDownRestTime.Value = model.RestTimeInMinutes;
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
@@ -28,7 +29,8 @@ namespace WorkingHour.Forms
         {
             var model = new SettingsModel
             {
-                BackupPath = textBoxBackupPath.Text.Trim()
+                BackupPath = textBoxBackupPath.Text.Trim(),
+                RestTimeInMinutes = (int)numericUpDownRestTime.Value
             };
             SettingService.Save(model);
             ButtonCancel_Click(null, null);

@@ -31,10 +31,12 @@ namespace WorkingHour.Forms
         {
             try
             {
+                var setting = SettingService.GetSettings();
+                var restMinutes = (int)(StaticAssets.Duration.TotalMinutes * setting.RestTimeInMinutes / 60);
                 TimeService.Save(new TimeModel
                 {
                     ProjectId = int.Parse(_projectId),
-                    Duration = StaticAssets.Duration,
+                    Duration = StaticAssets.Duration.Add(new TimeSpan(0,0, restMinutes,0)),
                     StopDateTime = StaticAssets.StopDateTime <= DateTime.MinValue ? DateTime.Now : StaticAssets.StopDateTime,
                     StartDateTime = StaticAssets.StartDateTime,
                     Description = textBoxDescription.Text.Trim()

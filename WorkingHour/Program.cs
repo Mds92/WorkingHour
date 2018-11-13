@@ -14,11 +14,13 @@ namespace WorkingHour
         {
             try
             {
+#if !DEBUG
                 if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
                 {
                     MessageBox.Show("Instance already running", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+#endif
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new FormMain());
