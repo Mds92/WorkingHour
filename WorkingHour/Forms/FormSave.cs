@@ -33,11 +33,14 @@ namespace WorkingHour.Forms
             {
                 var setting = SettingService.GetSettings();
                 var restMinutes = (int)(StaticAssets.Duration.TotalMinutes * setting.RestTimeInMinutes / 60);
+                var stopDateTimeNow = StaticAssets.StopDateTime <= DateTime.MinValue
+                    ? DateTime.Now.AddMinutes(restMinutes)
+                    : StaticAssets.StopDateTime.AddMinutes(restMinutes);
                 TimeService.Save(new TimeModel
                 {
                     ProjectId = int.Parse(_projectId),
                     Duration = StaticAssets.Duration.Add(new TimeSpan(0,0, restMinutes,0)),
-                    StopDateTime = StaticAssets.StopDateTime <= DateTime.MinValue ? DateTime.Now : StaticAssets.StopDateTime,
+                    StopDateTime = stopDateTimeNow,
                     StartDateTime = StaticAssets.StartDateTime,
                     Description = textBoxDescription.Text.Trim()
                 });
