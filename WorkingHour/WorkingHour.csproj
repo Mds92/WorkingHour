@@ -194,7 +194,6 @@
     <None Include="Resources\minimize.png" />
     <None Include="Resources\stopclock-enable.ico" />
     <None Include="Resources\stopclock-disable.ico" />
-    <Content Include="stopwatch-disable.ico" />
     <Content Include="stopwatch.png.ico" />
     <Content Include="stopwatch-black.ico" />
   </ItemGroup>
