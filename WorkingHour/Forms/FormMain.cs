@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using WorkingHour.Assets;
 using WorkingHour.Data.Models;
 using WorkingHour.Data.Services;
+using WorkingHour.Properties;
 
 namespace WorkingHour.Forms
 {
@@ -186,6 +187,7 @@ namespace WorkingHour.Forms
             buttonStop.Enabled = toolStripMenuItemStop.Enabled = _isTimerStarted;
             comboBoxProjects.Enabled = buttonSaveTime.Enabled = !_isTimerStarted;
             buttonReset.Enabled = StaticAssets.Duration > TimeSpan.MinValue;
+            notifyIcon.Icon = _isTimerStarted ? Resources.stopclock_enable : Resources.stopclock_disable;
         }
 
         private void ButtonStart_Click(object sender, EventArgs e)
