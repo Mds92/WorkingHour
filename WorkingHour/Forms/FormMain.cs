@@ -7,9 +7,8 @@ using System.Windows.Forms;
 using WorkingHour.Assets;
 using WorkingHour.Data.Models;
 using WorkingHour.Data.Services;
-using WorkingHour.Forms;
 
-namespace WorkingHour
+namespace WorkingHour.Forms
 {
     public partial class FormMain : FormBase
     {

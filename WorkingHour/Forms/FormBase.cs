@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace WorkingHour
+namespace WorkingHour.Forms
 {
     public partial class FormBase : Form
     {

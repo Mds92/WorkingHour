@@ -1,4 +1,4 @@
-﻿namespace WorkingHour
+﻿namespace WorkingHour.Forms
 {
     partial class FormBase
     {
