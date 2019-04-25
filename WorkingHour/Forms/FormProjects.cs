@@ -424,11 +424,13 @@ namespace WorkingHour.Forms
                 var databaseFilePath = openFileDialogForXml.FileName;
                 textBoxDatabaseFilePath.Text = databaseFilePath;
                 var mergingService = new MerginService(databaseFilePath);
-                var theSameProjectsCount = mergingService.GetTheSameProjectsCount(ProjectService.SelectAll());
-                labelMegingInfo.Text = $"Found {theSameProjectsCount} project(s) with the same name";
-                if (theSameProjectsCount <= 0)
+                var projects = ProjectService.SelectAll();
+                var theSameProjectsCount = mergingService.GetTheSameProjectsCount(projects);
+                var newProjectsCount = mergingService.GetNewProjectsCount(projects);
+                labelMegingInfo.Text = $@"Found {theSameProjectsCount} project(s) with the same name And {newProjectsCount} new project(s)";
+                if (theSameProjectsCount <= 0 && newProjectsCount <= 0)
                     labelMegingInfo.Text += $"{Environment.NewLine}There are nothing to merge";
-                buttonMerge.Visible = theSameProjectsCount > 0;
+                buttonMerge.Visible = theSameProjectsCount > 0 || newProjectsCount > 0;
             }
             catch (Exception exception)
             {
@@ -444,6 +446,7 @@ namespace WorkingHour.Forms
                 var databaseFilePath = textBoxDatabaseFilePath.Text.Trim();
                 var mergingService = new MerginService(databaseFilePath);
                 var projectsOfCurrentDataBase = ProjectService.SelectAll();
+
                 var theSameProjects = mergingService.GetTheSameProjects(projectsOfCurrentDataBase);
                 foreach (var theSameProject in theSameProjects)
                 {
@@ -455,6 +458,18 @@ namespace WorkingHour.Forms
                         TimeService.Save(timeModel);
                     }
                 }
+
+                var newProjects = mergingService.GetNewProjects(projectsOfCurrentDataBase);
+                foreach (var newProject in newProjects)
+                {
+                    var project = ProjectService.Insert(newProject);
+                    foreach (var timeModel in newProject.Times)
+                    {
+                        timeModel.ProjectId = project.Id;
+                        TimeService.Save(timeModel);
+                    }
+                }
+
                 ShowSuccessMessage("The databases merged successfully");
             }
             catch (Exception exception)

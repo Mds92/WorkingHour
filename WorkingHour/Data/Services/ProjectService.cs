@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml.Linq;
 using WorkingHour.Assets;
 using WorkingHour.Data.Models;
@@ -56,11 +57,11 @@ namespace WorkingHour.Data.Services
         }
         public static void CalculateTotalDuration(string projectId)
         {
-            var xelement = GetElement(projectId);
-            if (xelement == null) return;
-            var totalTimeSpan = xelement.Attribute(nameof(ProjectModel.InitialDuration))?.Value.StandardTimeSpanParse() ?? new TimeSpan(0, 0, 0, 0);
-            var xdocument = GetDataBaseXDocumentInstance;
-            var allProjectsTimes = xdocument.Descendants(Constants.TimeNodeName)
+            var xElement = GetElement(projectId);
+            if (xElement == null) return;
+            var totalTimeSpan = xElement.Attribute(nameof(ProjectModel.InitialDuration))?.Value.StandardTimeSpanParse() ?? new TimeSpan(0, 0, 0, 0);
+            var xDocument = GetDataBaseXDocumentInstance;
+            var allProjectsTimes = xDocument.Descendants(Constants.TimeNodeName)
                 .Where(q => q.HasAttributes &&
                     q.Attribute(nameof(TimeModel.Duration)) != null &&
                     q.Attribute(nameof(TimeModel.ProjectId)) != null &&
@@ -70,7 +71,7 @@ namespace WorkingHour.Data.Services
                 var duration = timeElement.Attribute(nameof(TimeModel.Duration))?.Value.StandardTimeSpanParse() ?? new TimeSpan(0, 0, 0, 0);
                 totalTimeSpan = totalTimeSpan.Add(duration);
             }
-            xelement.SetAttributeValue(nameof(ProjectModel.TotalDuration), totalTimeSpan.ToStandardString());
+            xElement.SetAttributeValue(nameof(ProjectModel.TotalDuration), totalTimeSpan.ToStandardString());
             SaveChanges();
         }
         public static void CalculateTotalDuration(int projectId)
@@ -101,6 +102,20 @@ namespace WorkingHour.Data.Services
             SaveChanges();
             CalculateTotalDuration(projectModel.Id);
         }
+        public static ProjectModel Insert(ProjectModel projectModel)
+        {
+            var id = GetMaxId() + 1;
+            var xDocument = GetDataBaseXDocumentInstance;
+            var xElement = new XElement(Constants.ProjectNodeName,
+                new XAttribute(nameof(ProjectModel.Id), id),
+                new XAttribute(nameof(ProjectModel.Title), projectModel.Title),
+                new XAttribute(nameof(ProjectModel.InitialDuration), projectModel.InitialDuration.ToStandardString()),
+                new XAttribute(nameof(ProjectModel.TotalDuration), "00:00:00"),
+                new XAttribute(nameof(ProjectModel.RegisterDateTime), DateTime.Now.ToStandardString()));
+            xDocument.Descendants(Constants.ProjectsNodeName).First().Add(xElement);
+            SaveChanges();
+            return SelectById(id.ToString());
+        }
         private static XElement GetElement(string projectId)
         {
             return GetDataBaseXDocumentInstance
@@ -108,6 +123,13 @@ namespace WorkingHour.Data.Services
                 .FirstOrDefault(q => q.HasAttributes &&
                     q.Attribute(nameof(ProjectModel.Id)) != null &&
                     q.Attribute(nameof(ProjectModel.Id)).Value.Equals(projectId, StringComparison.InvariantCultureIgnoreCase));
+        }
+        private static int GetMaxId()
+        {
+            return GetDataBaseXDocumentInstance
+                .Descendants(Constants.ProjectNodeName)
+                .Where(q => q.HasAttributes && q.Attribute(nameof(ProjectModel.Id)) != null)
+                .Max(q => q.Attribute(nameof(ProjectModel.Id)) == null || string.IsNullOrWhiteSpace(q.Attribute(nameof(ProjectModel.Id)).Value) ? 0 : int.Parse(q.Attribute(nameof(ProjectModel.Id)).Value));
         }
         public static void Delete(int id)
         {

@@ -95,15 +95,26 @@ namespace WorkingHour.Data.Services
                          select p1).ToList();
             return theSameProjects.Count;
         }
+        public int GetNewProjectsCount(List<ProjectModel> projectsOfCurrentDataBase)
+        {
+            var projectTitlesOfDataBase = projectsOfCurrentDataBase.Select(q => q.Title).ToList();
+            var projectTitlesOfExternalDataBase = SelectAllProjects().Select(q => q.Title).ToList();
+            return projectTitlesOfExternalDataBase.Count(q => !projectTitlesOfDataBase.Contains(q));
+        }
         public List<ProjectModel> GetTheSameProjects(List<ProjectModel> projectsOfCurrentDataBase)
         {
             var projectsOfExternalDataBase = SelectAllProjects();
-            var theSameProjects =
-                        (from p1 in projectsOfExternalDataBase
-                         from p2 in projectsOfCurrentDataBase
-                         where p1.Title.Equals(p2.Title, StringComparison.InvariantCultureIgnoreCase)
-                         select p1).ToList();
-            return theSameProjects;
+            return
+                (from p1 in projectsOfExternalDataBase
+                 from p2 in projectsOfCurrentDataBase
+                 where p1.Title.Equals(p2.Title, StringComparison.InvariantCultureIgnoreCase)
+                 select p1).ToList();
+        }
+        public List<ProjectModel> GetNewProjects(List<ProjectModel> projectsOfCurrentDataBase)
+        {
+            var projectsOfExternalDataBase = SelectAllProjects();
+            var projectTitlesOfDataBase = projectsOfCurrentDataBase.Select(q => q.Title).ToList();
+            return projectsOfExternalDataBase.Where(q => !projectTitlesOfDataBase.Contains(q.Title)).ToList();
         }
     }
 }

@@ -101,7 +101,7 @@
             this.numericUpDownRestTime.Size = new System.Drawing.Size(71, 20);
             this.numericUpDownRestTime.TabIndex = 1;
             this.numericUpDownRestTime.Value = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
