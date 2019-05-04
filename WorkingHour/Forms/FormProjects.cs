@@ -459,17 +459,20 @@ namespace WorkingHour.Forms
                     }
                 }
 
-                var newProjects = mergingService.GetNewProjects(projectsOfCurrentDataBase);
-                foreach (var newProject in newProjects)
+                if (checkBoxAddNewProjects.Checked)
                 {
-                    var project = ProjectService.Insert(newProject);
-                    foreach (var timeModel in newProject.Times)
+                    var newProjects = mergingService.GetNewProjects(projectsOfCurrentDataBase);
+                    foreach (var newProject in newProjects)
                     {
-                        timeModel.ProjectId = project.Id;
-                        TimeService.Save(timeModel);
+                        var project = ProjectService.Insert(newProject);
+                        foreach (var timeModel in newProject.Times)
+                        {
+                            timeModel.ProjectId = project.Id;
+                            TimeService.Save(timeModel);
+                        }
                     }
                 }
-
+                
                 ShowSuccessMessage("The databases merged successfully");
             }
             catch (Exception exception)

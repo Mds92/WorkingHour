@@ -83,6 +83,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialogForXml = new System.Windows.Forms.OpenFileDialog();
+            this.checkBoxAddNewProjects = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageProjects.SuspendLayout();
@@ -554,6 +555,7 @@
             // 
             // tabPageDataBase
             // 
+            this.tabPageDataBase.Controls.Add(this.checkBoxAddNewProjects);
             this.tabPageDataBase.Controls.Add(this.buttonMerge);
             this.tabPageDataBase.Controls.Add(this.labelMegingInfo);
             this.tabPageDataBase.Controls.Add(this.labelProjectNumber);
@@ -663,6 +665,16 @@
             this.openFileDialogForXml.FileName = "openFileDialog1";
             this.openFileDialogForXml.Filter = "Xml File|*.xml";
             // 
+            // checkBoxAddNewProjects
+            // 
+            this.checkBoxAddNewProjects.AutoSize = true;
+            this.checkBoxAddNewProjects.Location = new System.Drawing.Point(716, 79);
+            this.checkBoxAddNewProjects.Name = "checkBoxAddNewProjects";
+            this.checkBoxAddNewProjects.Size = new System.Drawing.Size(138, 21);
+            this.checkBoxAddNewProjects.TabIndex = 3;
+            this.checkBoxAddNewProjects.Text = "Add New Projects";
+            this.checkBoxAddNewProjects.UseVisualStyleBackColor = true;
+            // 
             // FormProjects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -742,5 +754,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonMerge;
+        private System.Windows.Forms.CheckBox checkBoxAddNewProjects;
     }
 }
