@@ -53,15 +53,15 @@ namespace WorkingHour.Forms
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern IntPtr GetForegroundWindow();
+        private static extern IntPtr GetForegroundWindow();
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern int GetWindowTextLength(IntPtr hWnd);
+        private static extern int GetWindowTextLength(IntPtr hWnd);
 
-        private string GetCaptionOfActiveWindow()
+        private static string GetCaptionOfActiveWindow()
         {
             var strTitle = string.Empty;
             var handle = GetForegroundWindow();
@@ -75,7 +75,7 @@ namespace WorkingHour.Forms
             return strTitle;
         }
 
-        private bool IsForbiddinWindowActive()
+        private static bool IsForbiddenWindowActive()
         {
             var activeWindowTitle = GetCaptionOfActiveWindow();
             return StaticAssets.ForbiddinApps.Any(q => activeWindowTitle.IndexOf(q, StringComparison.InvariantCultureIgnoreCase) > -1);
@@ -119,7 +119,7 @@ namespace WorkingHour.Forms
         private void TimerWorkingTick(object sender, EventArgs e)
         {
             buttonReset.Enabled = StaticAssets.Duration > TimeSpan.MinValue;
-            if (StaticAssets.IdleTime > Constants.MinTimeSpanToIdentifyIdle || IsForbiddinWindowActive()) return;
+            if (StaticAssets.IdleTime > Constants.MinTimeSpanToIdentifyIdle || IsForbiddenWindowActive()) return;
             StaticAssets.Duration = StaticAssets.Duration.Add(new TimeSpan(0, 0, 0, 1));
 #if DEBUG
             StaticAssets.Duration = StaticAssets.Duration.Add(new TimeSpan(0, 0, 10, 0));
