@@ -20,7 +20,6 @@ namespace WorkingHour.Assets
 
         public static string ToStandardString(this PersianDateTime dateTime)
         {
-            dateTime.EnglishNumber = true;
             return dateTime.ToString("yyyy-MM-dd   HH:mm:ss");
         }
 

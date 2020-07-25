@@ -18,7 +18,7 @@ namespace WorkingHour.Data.Models
             get
             {
                 if (_registerPersianDateTime > PersianDateTime.MinValue) return _registerPersianDateTime;
-                _registerPersianDateTime = new PersianDateTime(RegisterDateTime) { EnglishNumber = true };
+                _registerPersianDateTime = new PersianDateTime(RegisterDateTime);
                 return _registerPersianDateTime;
             }
         }

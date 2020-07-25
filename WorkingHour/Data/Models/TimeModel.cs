@@ -19,7 +19,7 @@ namespace WorkingHour.Data.Models
             get
             {
                 if (_registerPersianDateTime > PersianDateTime.MinValue) return _registerPersianDateTime;
-                _registerPersianDateTime = new PersianDateTime(RegisterDateTime) { EnglishNumber = true };
+                _registerPersianDateTime = new PersianDateTime(RegisterDateTime);
                 return _registerPersianDateTime;
             }
         }
@@ -30,7 +30,7 @@ namespace WorkingHour.Data.Models
             get
             {
                 if (_startPersianDateTime > PersianDateTime.MinValue) return _startPersianDateTime;
-                _startPersianDateTime = new PersianDateTime(StartDateTime) { EnglishNumber = true };
+                _startPersianDateTime = new PersianDateTime(StartDateTime);
                 return _startPersianDateTime;
             }
         }
@@ -41,7 +41,7 @@ namespace WorkingHour.Data.Models
             get
             {
                 if (_stopPersianDateTime > PersianDateTime.MinValue) return _stopPersianDateTime;
-                _stopPersianDateTime = new PersianDateTime(StopDateTime) { EnglishNumber = true };
+                _stopPersianDateTime = new PersianDateTime(StopDateTime);
                 return _stopPersianDateTime;
             }
         }

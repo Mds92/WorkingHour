@@ -54,11 +54,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EPPlus, Version=4.5.3.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.5.3.1\lib\net40\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=5.2.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.5.2.1\lib\net45\EPPlus.dll</HintPath>
     </Reference>
-    <Reference Include="MD.PersianDateTime, Version=3.8.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MD.PersianDateTime.3.8.3\lib\MD.PersianDateTime.dll</HintPath>
+    <Reference Include="MD.PersianDateTime, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MD.PersianDateTime.4.1.0\lib\MD.PersianDateTime.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -68,11 +68,12 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="ZetaLongPaths, Version=1.0.0.28, Culture=neutral, PublicKeyToken=b764f59068f31f38, processorArchitecture=MSIL">
-      <HintPath>..\packages\ZetaLongPaths.1.0.0.28\lib\net452-full\ZetaLongPaths.dll</HintPath>
+    <Reference Include="ZetaLongPaths, Version=1.0.0.37, Culture=neutral, PublicKeyToken=b764f59068f31f38, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZetaLongPaths.1.0.0.37\lib\net452-full\ZetaLongPaths.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
