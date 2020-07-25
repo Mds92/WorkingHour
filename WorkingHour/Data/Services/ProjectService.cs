@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml.Linq;
 using WorkingHour.Assets;
 using WorkingHour.Data.Models;
@@ -12,8 +11,8 @@ namespace WorkingHour.Data.Services
     {
         public static List<ProjectModel> SelectAll()
         {
-            var xdocument = GetDataBaseXDocumentInstance;
-            var projectNodes = xdocument.Descendants(Constants.ProjectNodeName)
+            var xDocument = GetDataBaseXDocumentInstance;
+            var projectNodes = xDocument.Descendants(Constants.ProjectNodeName)
                 .Where(q => q.HasAttributes &&
                     q.Attribute(nameof(ProjectModel.Id)) != null &&
                     q.Attribute(nameof(ProjectModel.Title)) != null &&
@@ -44,15 +43,15 @@ namespace WorkingHour.Data.Services
         }
         public static ProjectModel SelectById(string projectId)
         {
-            var xelement = GetElement(projectId);
-            if (xelement == null) return null;
+            var xElement = GetElement(projectId);
+            if (xElement == null) return null;
             return new ProjectModel
             {
-                Id = int.Parse(xelement.Attribute(nameof(ProjectModel.Id)).Value),
-                Title = xelement.Attribute(nameof(ProjectModel.Title)).Value,
-                InitialDuration = xelement.Attribute(nameof(ProjectModel.InitialDuration)).Value.StandardTimeSpanParse(),
-                TotalDuration = xelement.Attribute(nameof(ProjectModel.TotalDuration)).Value.StandardTimeSpanParse(),
-                RegisterDateTime = DateTime.Parse(xelement.Attribute(nameof(ProjectModel.RegisterDateTime)).Value)
+                Id = int.Parse(xElement.Attribute(nameof(ProjectModel.Id)).Value),
+                Title = xElement.Attribute(nameof(ProjectModel.Title)).Value,
+                InitialDuration = xElement.Attribute(nameof(ProjectModel.InitialDuration)).Value.StandardTimeSpanParse(),
+                TotalDuration = xElement.Attribute(nameof(ProjectModel.TotalDuration)).Value.StandardTimeSpanParse(),
+                RegisterDateTime = DateTime.Parse(xElement.Attribute(nameof(ProjectModel.RegisterDateTime)).Value)
             };
         }
         public static void CalculateTotalDuration(string projectId)

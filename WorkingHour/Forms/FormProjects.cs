@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using MD.PersianDateTime;
 using OfficeOpenXml;
@@ -423,7 +424,7 @@ namespace WorkingHour.Forms
             {
                 var databaseFilePath = openFileDialogForXml.FileName;
                 textBoxDatabaseFilePath.Text = databaseFilePath;
-                var mergingService = new MerginService(databaseFilePath);
+                var mergingService = new MergingService(databaseFilePath);
                 var projects = ProjectService.SelectAll();
                 var theSameProjectsCount = mergingService.GetTheSameProjectsCount(projects);
                 var newProjectsCount = mergingService.GetNewProjectsCount(projects);
@@ -444,35 +445,37 @@ namespace WorkingHour.Forms
             try
             {
                 var databaseFilePath = textBoxDatabaseFilePath.Text.Trim();
-                var mergingService = new MerginService(databaseFilePath);
+                var mergingService = new MergingService(databaseFilePath);
                 var projectsOfCurrentDataBase = ProjectService.SelectAll();
 
                 var theSameProjects = mergingService.GetTheSameProjects(projectsOfCurrentDataBase);
-                foreach (var theSameProject in theSameProjects)
+                var timeModelsToSave = new List<TimeModel>();
+                Parallel.ForEach(theSameProjects, theSameProject =>
                 {
-                    var projectOfCurrentDatabase = projectsOfCurrentDataBase.FirstOrDefault(q => q.Title.Equals(theSameProject.Title, StringComparison.InvariantCultureIgnoreCase));
-                    if(projectOfCurrentDatabase == null) continue;
+                    var projectOfCurrentDatabase = projectsOfCurrentDataBase.Find(q => q.Title.Equals(theSameProject.Title, StringComparison.InvariantCultureIgnoreCase));
+                    if (projectOfCurrentDatabase == null) return;
                     foreach (var timeModel in theSameProject.Times)
                     {
                         timeModel.ProjectId = projectOfCurrentDatabase.Id;
-                        TimeService.Save(timeModel);
+                        timeModelsToSave.Add(timeModel);
                     }
-                }
-
+                });
+                TimeService.Save(timeModelsToSave);
+                timeModelsToSave = new List<TimeModel>();
                 if (checkBoxAddNewProjects.Checked)
                 {
                     var newProjects = mergingService.GetNewProjects(projectsOfCurrentDataBase);
-                    foreach (var newProject in newProjects)
+                    Parallel.ForEach(newProjects, newProject =>
                     {
                         var project = ProjectService.Insert(newProject);
                         foreach (var timeModel in newProject.Times)
                         {
                             timeModel.ProjectId = project.Id;
-                            TimeService.Save(timeModel);
+                            timeModelsToSave.Add(timeModel);
                         }
-                    }
+                    });
                 }
-                
+                TimeService.Save(timeModelsToSave);
                 ShowSuccessMessage("The databases merged successfully");
             }
             catch (Exception exception)

@@ -7,10 +7,10 @@ using WorkingHour.Data.Models;
 
 namespace WorkingHour.Data.Services
 {
-    public class MerginService
+    public class MergingService
     {
         private readonly string _dataBaseFilePath;
-        public MerginService(string dataBaseFilePath)
+        public MergingService(string dataBaseFilePath)
         {
             _dataBaseFilePath = dataBaseFilePath;
         }
@@ -28,8 +28,8 @@ namespace WorkingHour.Data.Services
 
         public List<ProjectModel> SelectAllProjects()
         {
-            var xdocument = GetDataBaseXDocumentInstance;
-            var projectNodes = xdocument.Descendants(Constants.ProjectNodeName)
+            var xDocument = GetDataBaseXDocumentInstance;
+            var projectNodes = xDocument.Descendants(Constants.ProjectNodeName)
                 .Where(q => q.HasAttributes &&
                     q.Attribute(nameof(ProjectModel.Id)) != null &&
                     q.Attribute(nameof(ProjectModel.Title)) != null &&

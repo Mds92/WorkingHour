@@ -135,9 +135,9 @@
             // 
             this.comboBoxProjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxProjects.FormattingEnabled = true;
-            this.comboBoxProjects.Location = new System.Drawing.Point(309, 71);
+            this.comboBoxProjects.Location = new System.Drawing.Point(289, 71);
             this.comboBoxProjects.Name = "comboBoxProjects";
-            this.comboBoxProjects.Size = new System.Drawing.Size(96, 21);
+            this.comboBoxProjects.Size = new System.Drawing.Size(116, 21);
             this.comboBoxProjects.TabIndex = 6;
             // 
             // buttonSaveTime

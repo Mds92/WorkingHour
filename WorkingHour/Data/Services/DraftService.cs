@@ -13,8 +13,8 @@ namespace WorkingHour.Data.Services
 
         public static DraftModel GetDraftModel()
         {
-            var xdocument = GetDataBaseXDocumentInstance;
-            var rootNode = xdocument.Descendants(Constants.RootNodeName)
+            var xDocument = GetDataBaseXDocumentInstance;
+            var rootNode = xDocument.Descendants(Constants.RootNodeName)
                 .FirstOrDefault(q => q.HasAttributes &&
                     q.Attribute(DraftStartDateTimeAttributeName) != null &&
                     q.Attribute(DraftStopDateTimeAttributeName) != null &&

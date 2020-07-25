@@ -9,7 +9,14 @@ namespace WorkingHour.Data.Services
 {
     public class TimeService : BaseService
     {
-        public static void Save(TimeModel timeModel)
+        public static void Save(List<TimeModel> timeModels)
+        {
+            foreach (var timeModel in timeModels)
+                Save(timeModel, false);
+            foreach (var projectId in timeModels.Select(q => q.ProjectId).Distinct().ToList())
+                ProjectService.CalculateTotalDuration(projectId);
+        }
+        public static void Save(TimeModel timeModel, bool calculateTotalDuration = true)
         {
             var project = ProjectService.SelectById(timeModel.ProjectId.ToString());
             if (project == null)
@@ -39,7 +46,8 @@ namespace WorkingHour.Data.Services
                 xElement.SetAttributeValue(nameof(TimeModel.Description), timeModel.Description);
             }
             SaveChanges();
-            ProjectService.CalculateTotalDuration(project.Id);
+            if (calculateTotalDuration)
+                ProjectService.CalculateTotalDuration(project.Id);
         }
         public static void Delete(Guid id)
         {
