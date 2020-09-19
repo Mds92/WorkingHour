@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Windows.Forms;
+using OfficeOpenXml;
 using WorkingHour.Forms;
+using System.Windows.Forms;
 
 namespace WorkingHour
 {
@@ -22,6 +22,7 @@ namespace WorkingHour
                     return;
                 }
 #endif
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new FormMain());

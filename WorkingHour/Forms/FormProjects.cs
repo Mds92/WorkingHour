@@ -393,7 +393,7 @@ namespace WorkingHour.Forms
                     worksheet.Cells[cellName1].Value = timeModel.StartPersianDateTime.ToLongDateTimeString();
                     worksheet.Cells[cellName2].Value = timeModel.StopPersianDateTime.ToLongDateTimeString();
                     worksheet.Cells[cellName3].Value = timeModel.Duration;
-                    worksheet.Cells[cellName4].Value = timeModel.Description;
+                    worksheet.Cells[cellName4].Value = timeModel.Description?.Replace("\r\n", "\n");
                     FormatExcelRange(worksheet.Cells[cellName1]);
                     FormatExcelRange(worksheet.Cells[cellName2]);
                     FormatExcelRange(worksheet.Cells[cellName3]);
