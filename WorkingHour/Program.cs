@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using OfficeOpenXml;
 using WorkingHour.Forms;
 using System.Windows.Forms;
@@ -15,13 +16,11 @@ namespace WorkingHour
         {
             try
             {
-#if !DEBUG
-                if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
-                {
-                    MessageBox.Show("Instance already running", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-#endif
+                //if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
+                //{
+                //    MessageBox.Show("Instance already running", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    return;
+                //}
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
