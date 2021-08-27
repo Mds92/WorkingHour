@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using OfficeOpenXml;
 using WorkingHour.Forms;
 using System.Windows.Forms;
