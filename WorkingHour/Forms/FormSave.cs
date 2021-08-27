@@ -19,7 +19,7 @@ namespace WorkingHour.Forms
         private void LoadProjectInfo()
         {
             var project = ProjectService.SelectById(_projectId);
-            labelProjectInfo.Text = $"Project: {project.Title}   Duration: {StaticAssets.Duration.ToStandardString()}";
+            labelProjectInfo.Text = $@"Project: {project.Title}   Duration: {StaticAssets.Duration.ToStandardString()}";
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
@@ -36,6 +36,7 @@ namespace WorkingHour.Forms
                 var stopDateTimeNow = StaticAssets.StopDateTime <= DateTime.MinValue
                     ? DateTime.Now.AddMinutes(restMinutes)
                     : StaticAssets.StopDateTime.AddMinutes(restMinutes);
+                BackupService.DeleteOldFiles(setting.DeleteBackupFilesOlderThanDays);
                 TimeService.Save(new TimeModel
                 {
                     ProjectId = int.Parse(_projectId),
@@ -45,7 +46,7 @@ namespace WorkingHour.Forms
                     Description = textBoxDescription.Text.Trim()
                 });
                 ShowSuccessMessage("Time saved successfully");
-                StaticAssets.Duration = new TimeSpan(0, 0, 0, 0, 0);
+                StaticAssets.Duration = TimeSpan.Zero;
                 DraftService.Clear();
                 Close();
             }

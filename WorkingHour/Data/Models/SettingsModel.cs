@@ -9,5 +9,6 @@
 
         public string BackupPath { get; set; }
         public int RestTimeInMinutes { get; set; }
+        public int DeleteBackupFilesOlderThanDays { get; set; }
     }
 }

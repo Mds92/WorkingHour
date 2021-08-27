@@ -30,7 +30,8 @@ namespace WorkingHour.Forms
             var model = new SettingsModel
             {
                 BackupPath = textBoxBackupPath.Text.Trim(),
-                RestTimeInMinutes = (int)numericUpDownRestTime.Value
+                RestTimeInMinutes = (int)numericUpDownRestTime.Value,
+                DeleteBackupFilesOlderThanDays = (int)numericUpDownDeleteBackupFilesOlderThanDays.Value
             };
             SettingService.Save(model);
             ButtonCancel_Click(null, null);

@@ -24,6 +24,7 @@ namespace WorkingHour.Data.Services
             var xElement = GetRootElement();
             xElement.SetAttributeValue(nameof(SettingsModel.RestTimeInMinutes), model.RestTimeInMinutes);
             xElement.SetAttributeValue(nameof(SettingsModel.BackupPath), model.BackupPath);
+            xElement.SetAttributeValue(nameof(SettingsModel.DeleteBackupFilesOlderThanDays), model.DeleteBackupFilesOlderThanDays);
             SaveChanges();
         }
     }

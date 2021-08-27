@@ -149,14 +149,14 @@ namespace WorkingHour.Forms
         private TimeSpan _backupTimeSpan = new TimeSpan(0, 0, 0, 0);
         private void TimerBackup_Tick(object sender, EventArgs e)
         {
-            _backupTimeSpan = _backupTimeSpan.Add(new TimeSpan(0, 0, 0, 1));
+            _backupTimeSpan = _backupTimeSpan.Add(TimeSpan.FromSeconds(1));
             if (!(_backupTimeSpan.TotalMinutes > 10)) return;
             DraftService.Save(new DraftModel
             {
                 StartDateTime = StaticAssets.StartDateTime,
                 Duration = StaticAssets.Duration
             });
-            _backupTimeSpan = new TimeSpan(0, 0, 0, 0);
+            _backupTimeSpan = TimeSpan.Zero;
         }
 
         #endregion
